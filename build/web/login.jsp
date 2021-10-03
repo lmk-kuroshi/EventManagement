@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <a href="https://accounts.google.com/o/oauth2/auth?scope=profile%20email&redirect_uri=http://localhost:8084/EventManagement/LoginGoogleHandler&response_type=code
+        <a href="https://accounts.google.com/o/oauth2/auth?scope=profile%20email&redirect_uri=http://localhost:8080/EventManagement/LoginGoogleHandler&response_type=code
     &client_id=428640701768-fgq8e77is2ufa6l6q758mpp9262gls0e.apps.googleusercontent.com&approval_prompt=force">Login With FPT mail</a>  
         
         
