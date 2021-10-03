@@ -56,7 +56,7 @@ public class FollowupDAO {
         try {
             conn = DBUtil.getConnection();
             if (conn != null) {
-                String sql = "SELECT followupID, followupDetail, followupImage, followupVideo " 
+                String sql = "SELECT followupID, followupDetail, followupImage, followupVideo FROM tblFollowupEvent " 
                         +    " WHERE eventID = ? " ;
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, eventID);

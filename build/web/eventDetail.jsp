@@ -40,6 +40,7 @@
         %>
         
         <form action="MainController">
+            <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
             <input type="submit" name="action" value="ShowFollowup"/>
         </form>
 

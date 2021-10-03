@@ -33,9 +33,17 @@ public class ShowFollowupController extends HttpServlet {
             FollowupDAO dao = new FollowupDAO();
             List<FollowupDTO> list = dao.getListFollowup(eventID);
             
+            if (!list.isEmpty()) {
+                request.setAttribute("FOLLOWUP_LIST", list);
+
+            } else {
+                request.setAttribute("EMPTY_LIST","NO FOLLOWUP");
+            }
+                url=SUCCESS;
         } catch (Exception e) {
+            request.setAttribute("ERROR_MESSAGE", "Error at ShowFollowupController");
         } finally {
-            
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
