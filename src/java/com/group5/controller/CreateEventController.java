@@ -5,64 +5,45 @@
  */
 package com.group5.controller;
 
+import com.group5.category.CategoryDAO;
+import com.group5.category.CategoryDTO;
+import com.group5.location.LocationDAO;
+import com.group5.location.LocationDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Minh Khoa
  */
-public class MainController extends HttpServlet {
+public class CreateEventController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String LOGIN = "LoginController";
-    private static final String SEARCH = "SearchController";
-    private static final String LOGOUT = "LogoutController";
-    private static final String CREATE_EVENT = "CreateEventController";
-    private static final String CONFIRM_CREATE_EVENT = "ConfirmCreateController";
-    private static final String SHOW_LIST_EDIT_EVENT = "ShowListEditEventController";
-    private static final String EDIT_EVENT = "EditEventController";
-    private static final String CONFIRM_EDIT_EVENT = "ConfirmEditEventController";
-    private static final String ADD_FOLLOWUP = "AddFollowupController";
-    private static final String SHOW_FOLLOWUP = "ShowFollowupController";
+    private static final String SUCCESS = "createEvent.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String action = request.getParameter("action");
-            if ("Login".equals(action)) {
-                url = LOGIN;
-            } else if("Search".equals(action)){
-                url = SEARCH;
-            } else if("Logout".equals(action)){
-                url = LOGOUT;
-            } else if("CreateEvent".equals(action)){
-                url = CREATE_EVENT;
-            } else if("ConfirmCreateEvent".equals(action)){
-                url = CONFIRM_CREATE_EVENT;
-            } else if("ShowListEditEvent".equals(action)){
-                url = SHOW_LIST_EDIT_EVENT;
-            } else if("EditEvent".equals(action)){
-                url = EDIT_EVENT;
-            } else if("ConfirmEditEvent".equals(action)){
-                url = CONFIRM_EDIT_EVENT;
-            } else if("AddFollowup".equals(action)){
-                url = ADD_FOLLOWUP;
-            } else if("ShowFollowup".equals(action)){
-                url = SHOW_FOLLOWUP;
-            } else {
-                HttpSession session = request.getSession();
-                session.setAttribute("ERROR_MESSAGE", "Function is not supported!");
-            }
+            CategoryDAO catedao = new CategoryDAO();
+            List<CategoryDTO> listCategory = new ArrayList<>();
+            listCategory=catedao.getListCategory();
+            request.setAttribute("LIST_CATEGORY", listCategory);
+            
+            LocationDAO locaDAO = new LocationDAO();
+            List<LocationDTO> listLocation = new ArrayList<>();
+            listLocation=locaDAO.getListLocation();
+            request.setAttribute("LIST_LOCATION", listLocation);
+            
+            url=SUCCESS;
         } catch (Exception e) {
-            log("Error at MainController" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

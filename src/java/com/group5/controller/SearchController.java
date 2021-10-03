@@ -7,6 +7,7 @@ package com.group5.controller;
 
 import com.group5.event.EventDAO;
 import com.group5.event.EventDTO;
+import com.group5.users.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -22,18 +24,26 @@ import javax.servlet.http.HttpServletResponse;
 public class SearchController extends HttpServlet {
 
     private final static String ERROR = "index.jsp";
-    private final static String SUCCESS = "index.jsp";
+    private final static String STUDENT = "index.jsp";
+    private final static String LEADER = "leader.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             String search = request.getParameter("search");
             EventDAO dao = new EventDAO();
             List<EventDTO> list = dao.getListEvent(search);
             if (!list.isEmpty()) {
                 request.setAttribute("LIST_EVENT", list);
-                url = SUCCESS;
+                if (loginUser.getRoleID().equals("STU")) {
+                    url = STUDENT;
+                } else if (loginUser.getRoleID().equals("LD")) {
+                    url = LEADER;
+                }
             }
         } catch (Exception e) {
             log("Error at SearchController" + e.toString());

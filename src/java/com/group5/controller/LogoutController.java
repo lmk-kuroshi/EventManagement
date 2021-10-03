@@ -17,54 +17,25 @@ import javax.servlet.http.HttpSession;
  *
  * @author Minh Khoa
  */
-public class MainController extends HttpServlet {
+public class LogoutController extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
-    private static final String LOGIN = "LoginController";
-    private static final String SEARCH = "SearchController";
-    private static final String LOGOUT = "LogoutController";
-    private static final String CREATE_EVENT = "CreateEventController";
-    private static final String CONFIRM_CREATE_EVENT = "ConfirmCreateController";
-    private static final String SHOW_LIST_EDIT_EVENT = "ShowListEditEventController";
-    private static final String EDIT_EVENT = "EditEventController";
-    private static final String CONFIRM_EDIT_EVENT = "ConfirmEditEventController";
-    private static final String ADD_FOLLOWUP = "AddFollowupController";
-    private static final String SHOW_FOLLOWUP = "ShowFollowupController";
-    
+    private final static String ERROR = "login.jsp";
+    private final static String SUCCESS = "login.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String action = request.getParameter("action");
-            if ("Login".equals(action)) {
-                url = LOGIN;
-            } else if("Search".equals(action)){
-                url = SEARCH;
-            } else if("Logout".equals(action)){
-                url = LOGOUT;
-            } else if("CreateEvent".equals(action)){
-                url = CREATE_EVENT;
-            } else if("ConfirmCreateEvent".equals(action)){
-                url = CONFIRM_CREATE_EVENT;
-            } else if("ShowListEditEvent".equals(action)){
-                url = SHOW_LIST_EDIT_EVENT;
-            } else if("EditEvent".equals(action)){
-                url = EDIT_EVENT;
-            } else if("ConfirmEditEvent".equals(action)){
-                url = CONFIRM_EDIT_EVENT;
-            } else if("AddFollowup".equals(action)){
-                url = ADD_FOLLOWUP;
-            } else if("ShowFollowup".equals(action)){
-                url = SHOW_FOLLOWUP;
-            } else {
-                HttpSession session = request.getSession();
-                session.setAttribute("ERROR_MESSAGE", "Function is not supported!");
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                url = SUCCESS;
+                session.invalidate();
             }
         } catch (Exception e) {
-            log("Error at MainController" + e.toString());
+            log("Error at LogoutController" + e.toString());
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            response.sendRedirect(url);
         }
     }
 

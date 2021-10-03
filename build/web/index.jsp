@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Student Page</title>
     </head>
     <body>
         <%
@@ -45,10 +45,11 @@
                     for (EventDTO event : list) {
                 
         %>
-        <a href="eventDetail.jsp?id<%=event.getEventID()%>&name=<%=event.getEventName()%>&creatorID=<%=event.getCreatorID()%>&categoryID=<%=event.getCategoryID()%>
+        <a href="eventDetail.jsp?id=<%=event.getEventID()%>&name=<%=event.getEventName()%>&creatorID=<%=event.getCreatorID()%>&categoryID=<%=event.getCategoryID()%>
            &location=<%=event.getLocationID()%>&eventDetail=<%=event.getEventDetail()%>&seat=<%=event.getSeat()%>&startTime=<%=event.getStartTime()%>
            &endTime=<%=event.getEndTime()%>&creatTime=<%=event.getCreateTime()%>&image=<%=event.getImage()%>&video=<%=event.getVideo()%>
-           &status=<%=event.getStatus()%>"> <%=event.getEventName()%> </a>
+           &status=<%=event.getStatus()%>"> <%=event.getEventName()%> </a></br>
+
         <%
                     }
                 }

@@ -27,6 +27,8 @@ public class LoginController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
     private static final String STUDENT_PAGE = "index.jsp";
+    private static final String LEADER_PAGE = "leader.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -50,12 +52,17 @@ public class LoginController extends HttpServlet {
             HttpSession session = request.getSession();
             
             if (user == null) {
-                UserDTO newUser = new UserDTO(googleUser.getId(), googleUser.getEmail(), "Active", googleUser.getName(), "STU");
+                UserDTO newUser = new UserDTO(googleUser.getId(), googleUser.getEmail(), "ACT", googleUser.getName(), "STU");
                 dao.insertUser(newUser);
                 user = dao.checkLoginSpecial(checkID);
                 
             }
-            url = STUDENT_PAGE;
+            if(user.getRoleID().equals("STU")){
+                url = STUDENT_PAGE;
+            }
+            else if (user.getRoleID().equals("LD")) {
+                url = LEADER_PAGE;
+            }
             session.setAttribute("LOGIN_USER", user);
         } catch (Exception e) {
             log("Error at LoginController" + e.toString());

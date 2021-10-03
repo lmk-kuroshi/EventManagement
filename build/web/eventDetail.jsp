@@ -22,23 +22,27 @@
                     request.getParameter("status"));
             if (event != null) {
         %>
-        
+
         <h1>Event: <%=event.getEventName()%></h1>
         <h1> <%=event.getCategoryID()%></h1>
         <h1> Post by: <%=event.getCreatorID()%> at <%=event.getCreateTime()%></h1>
         <h1> Location: <%=event.getLocationID()%></h1>
         <h1> From <%=event.getStartTime()%> to <%=event.getEndTime()%></h1>
         <img src ="<%=event.getImage()%>"> 
-               
+
         <iframe width="560" height="315" src="<%=event.getVideo()%>" 
                 title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
         <h1> <%=event.getEventDetail()%></h1>
         <h1> <%=event.getStatus()%></h1>
-        <h1> Seat available <%=event.getSeat()%></h1>
+        <h2> Seat available <%=event.getSeat()%></h2>
         <% }
         %>
         
-        
+        <form action="MainController">
+            <input type="submit" name="action" value="ShowFollowup"/>
+        </form>
+
+
     </body>
 </html>

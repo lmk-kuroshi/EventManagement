@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : Sep 20, 2021, 2:04:14 PM
+    Document   : leader
+    Created on : Sep 29, 2021, 2:10:57 PM
     Author     : Minh Khoa
 --%>
 
@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Page</title>
+        <title>Leader Page</title>
     </head>
     <body>
         <%
@@ -45,15 +45,22 @@
                     for (EventDTO event : list) {
                 
         %>
-        <a href="eventDetail.jsp?id=<%=event.getEventID()%>&name=<%=event.getEventName()%>&creatorID=<%=event.getCreatorID()%>&categoryID=<%=event.getCategoryID()%>
+        <a href="eventDetail.jsp?id<%=event.getEventID()%>&name=<%=event.getEventName()%>&creatorID=<%=event.getCreatorID()%>&categoryID=<%=event.getCategoryID()%>
            &location=<%=event.getLocationID()%>&eventDetail=<%=event.getEventDetail()%>&seat=<%=event.getSeat()%>&startTime=<%=event.getStartTime()%>
            &endTime=<%=event.getEndTime()%>&creatTime=<%=event.getCreateTime()%>&image=<%=event.getImage()%>&video=<%=event.getVideo()%>
            &status=<%=event.getStatus()%>"> <%=event.getEventName()%> </a></br>
-
         <%
                     }
                 }
             }
         %>
+        <form action="MainController">
+            <input type="submit" name="action" value="CreateEvent"/>
+        </form>
+        
+        <form action="MainController">
+            <input type="submit" name="action" value="ShowListEditEvent"/>
+        </form>
+
     </body>
 </html>

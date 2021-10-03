@@ -16,6 +16,42 @@
         <servlet-name>SearchController</servlet-name>
         <servlet-class>com.group5.controller.SearchController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>com.group5.controller.LogoutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateEventController</servlet-name>
+        <servlet-class>com.group5.controller.CreateEventController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfirmCreateController</servlet-name>
+        <servlet-class>com.group5.controller.ConfirmCreateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowListEditEvent</servlet-name>
+        <servlet-class>com.group5.controller.ShowListEditEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowListEditEventController</servlet-name>
+        <servlet-class>com.group5.controller.ShowListEditEventController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditEventController</servlet-name>
+        <servlet-class>com.group5.controller.EditEventController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfirmEditEventController</servlet-name>
+        <servlet-class>com.group5.controller.ConfirmEditEventController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddFollowupController</servlet-name>
+        <servlet-class>com.group5.controller.AddFollowupController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowFollowupController</servlet-name>
+        <servlet-class>com.group5.controller.ShowFollowupController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginGoogleHandler</servlet-name>
         <url-pattern>/LoginGoogleHandler</url-pattern>
@@ -31,6 +67,42 @@
     <servlet-mapping>
         <servlet-name>SearchController</servlet-name>
         <url-pattern>/SearchController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/LogoutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateEventController</servlet-name>
+        <url-pattern>/CreateEventController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmCreateController</servlet-name>
+        <url-pattern>/ConfirmCreateController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowListEditEvent</servlet-name>
+        <url-pattern>/ShowListEditEvent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowListEditEventController</servlet-name>
+        <url-pattern>/ShowListEditEventController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditEventController</servlet-name>
+        <url-pattern>/EditEventController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmEditEventController</servlet-name>
+        <url-pattern>/ConfirmEditEventController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddFollowupController</servlet-name>
+        <url-pattern>/AddFollowupController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowFollowupController</servlet-name>
+        <url-pattern>/ShowFollowupController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
