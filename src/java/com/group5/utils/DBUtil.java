@@ -18,7 +18,7 @@ public class DBUtil {
         Connection conn = null;
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         String url = "jdbc:sqlserver://localhost:1433;dataBaseName=EventManagement";
-        conn = DriverManager.getConnection(url, "prjtestuser", "123456");
+        conn = DriverManager.getConnection(url, "sa", "1");
         return conn;
     }
 }
