@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:700&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.wrapper{
+    background: url(img/1.jpg) no-repeat;
+    width: 100%;
+    background-position: right;
+    background-size: cover;
+    height:100vh;
+    
+}
+.navbar{
+    position: fixed;
+    height: 80px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.4);
+}
+.navbar .logo{
+    width: 86px;
+    height: auto;
+    padding: 20px 100px; 
+}
+.navbar ul{
+    float: right;
+    margin-right: 20px;
+}
+.navbar ul li{
+    list-style: none;
+    margin: 0 8px;
+    display: inline-block;
+    line-height: 80px;
+}
+.navbar ul li a{
+    font-size: 20px;
+    font-family: 'Times New Roman', sans-serif;
+    color: black;
+    padding: 6px 13px;
+    text-decoration: none;
+    transition: .4s;
+}
+.navbar ul li a.active img{
+    position: relative;
+    height: 18px;
+    width: 18px;
+    margin: 10px 12px 0px 0px;
+    top: 3px;
+}
+.navbar ul li a.active,
+.navbar ul li a:hover{
+    background: white;
+    border-radius: 2px;
+}
+.wrapper .center{
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    font-family: sans-serif;
+    user-select: none;
+}
+.center{
+    width: 1200px;
+    height: auto;
+    margin: auto;
+    color: #fff;
+    position: relative;
+}
+.center h1{
+    font-family: 'Times New Roman';
+    font-size: 80px;
+    padding-left: 20px;
+    margin-top: 9%;
+    letter-spacing: 2px;
+}
+.center h2{
+    color: #ff7200;
+    font-size: 95px
+}
+
+
+.footer-bar {
+    position: relative;
+    height: 110px;
+    width: 100%;
+    background-color: #333333;
+    bottom:0;
+}
+
+.footer-bar p.copyright {
+    position: relative;
+    width: 100%;
+    color: #fff;
+    line-height: 40px;
+    font-size: 0.7em;
+    text-align: center;
+    bottom:0;
+}
+
+.footer-bar h2{
+    padding-top: 1.2rem;
+   text-align: center;
+}
+
+.footer-bar img{
+    display: inline-block;
+    width: 140px;
+    height: auto;
+    padding-right: .5rem;
+    vertical-align: middle;
+}
+
+.footer-bar span{
+    display: inline-block;
+    padding-right: 1rem;
+    color: white;
+}

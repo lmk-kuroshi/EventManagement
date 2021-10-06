@@ -5,12 +5,8 @@
  */
 package com.group5.controller;
 
-import com.group5.users.SpecialUserDAO;
-import com.group5.users.SpecialUserDTO;
 import com.group5.users.UserDAO;
 import com.group5.users.UserDTO;
-import google.user.UserGoogleDTO;
-import java.awt.ActiveEvent;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -21,57 +17,43 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Minh Khoa
+ * @author DELL
  */
-public class LoginController extends HttpServlet {
+public class DeleteUserController extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
-    private static final String STUDENT_PAGE = "index.jsp";
-    private static final String LEADER_PAGE = "leader.jsp";
-    private static final String ADMIN_PAGE = "admin.jsp";
-    
+    private static final String ERROR = "admin.jsp";
+    private static final String SUCCESS = "SearchUserController";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            //lay id cua uG check với hệ thống
-                //UserDAO dao = new UserDAO();
-                //UserDTO user = new UserDTO();
-                //HttpSession session = request.getSession();
-            //nếu có thì cho vô theo role
-                //role student vô student page
-                //role mentor vào mentor
-                //role admin vào admin
-                //role leader vào trang leader
-            //nếu ko có thì add vào db với role mặc định là student
-            UserGoogleDTO googleUser = (UserGoogleDTO) request.getAttribute("UserGoogle");
-            String checkID = googleUser.getId();
-
-            UserDAO dao = new UserDAO();
-            UserDTO user = dao.checkLoginSpecial(checkID);
+            String userID = request.getParameter("userID");
+//            String userName = request.getParameter("userName");
+//            String userEmail = request.getParameter("userEmail");
+//            RoleDAO ro = new RoleDAO();
+//            String roleID = ro.getRoleID(request.getParameter("roleName"));
+            String statusID = "DACT";
             HttpSession session = request.getSession();
-            
-            if (user == null) {
-                UserDTO newUser = new UserDTO(googleUser.getId(), googleUser.getEmail(), "ACT", googleUser.getName(), "STU");
-                dao.insertUser(newUser);
-                user = dao.checkLoginSpecial(checkID);
-                
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            if (userID.equals(loginUser.getId())) {
+                request.setAttribute("ERROR_MESSAGE", "User dang login, khong duoc xoa");
+                url = ERROR;
+            } else {
+                UserDAO dao = new UserDAO();
+                UserDTO user = new UserDTO(userID, "", statusID, "", "");
+                boolean check = dao.deleteUser(user);
+                if (check) {
+
+                    url = SUCCESS;
+
+                }
             }
-            if(user.getRoleID().equals("STU")){
-                url = STUDENT_PAGE;
-            }
-            else if(user.getRoleID().equals("AD")){
-                url = ADMIN_PAGE;
-            }
-            else if (user.getRoleID().equals("LD")) {
-                url = LEADER_PAGE;
-            }
-            session.setAttribute("LOGIN_USER", user);
         } catch (Exception e) {
-            log("Error at LoginController" + e.toString());
+            log("Error at UpdateController: " + e.toString());
         } finally {
-            response.sendRedirect(url);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
