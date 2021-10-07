@@ -15,6 +15,7 @@
     </head>
     <body>
         <h1>Edit Event List</h1>
+        <h1>Upcoming</h1>
         <table border="1">
             <thead>
                 <tr>
@@ -31,6 +32,7 @@
             if (list != null) {
                 if (!list.isEmpty()) {
                     for (EventDTO event : list) {
+                        if(event.getStatus().equals(("Upcoming"))){
                 
         %>
         
@@ -59,7 +61,7 @@
                         </form>
                     </td>
                 </tr>
-                <%      
+                <%      }
                     }             
                 }
             }
@@ -67,6 +69,86 @@
             </tbody>
         </table>
 
+        <h1>Ongoing</h1>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Edit</th>
+                    <th>Cancel</th>
+                    <th>Add Followup</th>
+                    <th>Edit Followup</th>
+                </tr>
+            </thead>
+            <tbody>
+        <%
+            if (list != null) {
+                if (!list.isEmpty()) {
+                    for (EventDTO event : list) {
+                        if(event.getStatus().equals(("Ongoing"))){
+                
+        %>
         
+            
+                <tr>
+                    <td><%=event.getEventName()%></td>
+                    <td>
+                        <form action="MainController">
+                            <input type="hidden" name="eventID" value="<%= event.getEventID()%>"/>                            
+                            <input type="submit" name="action" value="EditEvent"/>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="MainController">
+                            <input type="hidden" name="eventID" value="<%= event.getEventID()%>"/>                            
+                            <input type="submit" name="action" value="CancelEvent"/>
+                        </form>
+                    </td>
+                    <td>
+                        <a href="addFollowup.jsp?eventID=<%=event.getEventID()%>&eventName=<%=event.getEventName()%>">Add Followup</a>
+                    </td>
+                    <td>
+                        <form action="MainController">
+                            <input type="hidden" name="eventID" value="<%= event.getEventID()%>"/>                            
+                            <input type="submit" name="action" value="EditFollowup"/>
+                        </form>
+                    </td>
+                </tr>
+                <%      }
+                    }             
+                }
+            }
+        %>
+            </tbody>
+        </table>
+            
+        <h1>Canceled</h1>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+        <%
+            if (list != null) {
+                if (!list.isEmpty()) {
+                    for (EventDTO event : list) {
+                        if(event.getStatus().equals(("Canceled"))){
+                
+        %>
+        
+            
+                <tr>
+                    <td><%=event.getEventName()%></td>                   
+                </tr>
+                <%      }
+                    }             
+                }
+            }
+        %>
+            </tbody>
+        </table>
     </body>
 </html>

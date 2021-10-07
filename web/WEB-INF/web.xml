@@ -52,6 +52,10 @@
         <servlet-name>ShowFollowupController</servlet-name>
         <servlet-class>com.group5.controller.ShowFollowupController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CancelEventController</servlet-name>
+        <servlet-class>com.group5.controller.CancelEventController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginGoogleHandler</servlet-name>
         <url-pattern>/LoginGoogleHandler</url-pattern>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>ShowFollowupController</servlet-name>
         <url-pattern>/ShowFollowupController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelEventController</servlet-name>
+        <url-pattern>/CancelEventController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
