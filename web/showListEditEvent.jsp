@@ -15,6 +15,13 @@
     </head>
     <body>
         <h1>Edit Event List</h1>
+        <h1>Ongoing</h1>
+        <%
+            List<EventDTO> ongoingList = (List<EventDTO>) request.getAttribute("LIST_EVENT_EDIT_ONGOING");
+            if (ongoingList != null) {
+                if (!ongoingList.isEmpty()) {
+        %>
+        
         <table border="1">
             <thead>
                 <tr>
@@ -23,15 +30,12 @@
                     <th>Cancel</th>
                     <th>Add Followup</th>
                     <th>Edit Followup</th>
+                    <th>Complete Event</th>
                 </tr>
             </thead>
             <tbody>
         <%
-            List<EventDTO> list = (List<EventDTO>) request.getAttribute("LIST_EVENT_EDIT");
-            if (list != null) {
-                if (!list.isEmpty()) {
-                    for (EventDTO event : list) {
-                
+                    for (EventDTO event : ongoingList) {                              
         %>
         
             
@@ -58,15 +62,135 @@
                             <input type="submit" name="action" value="EditFollowup"/>
                         </form>
                     </td>
+                    <td>
+                        <form action="MainController">
+                            <input type="hidden" name="eventID" value="<%= event.getEventID()%>"/>                            
+                            <input type="submit" name="action" value="Complete"/>
+                        </form>
+                    </td>
                 </tr>
-                <%      
+                <%      }
                     }             
-                }
-            }
+                }            
         %>
             </tbody>
         </table>
-
+        <%
+            List<EventDTO> upcomingList = (List<EventDTO>) request.getAttribute("LIST_EVENT_EDIT_UPCOMING");
+            if (upcomingList != null) {
+                if (!upcomingList.isEmpty()) {
+        %>
+        <h1>Upcoming</h1>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Edit</th>
+                    <th>Cancel</th>
+                    <th>Add Followup</th>
+                    <th>Edit Followup</th>
+                    <th>Start Event</th>
+                </tr>
+            </thead>
+            <tbody>
+        <%
+                    for (EventDTO event : upcomingList) {                              
+        %>
         
+            
+                <tr>
+                    <td><%=event.getEventName()%></td>
+                    <td>
+                        <form action="MainController">
+                            <input type="hidden" name="eventID" value="<%= event.getEventID()%>"/>                            
+                            <input type="submit" name="action" value="EditEvent"/>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="MainController">
+                            <input type="hidden" name="eventID" value="<%= event.getEventID()%>"/>                            
+                            <input type="submit" name="action" value="CancelEvent"/>
+                        </form>
+                    </td>
+                    <td>
+                        <a href="addFollowup.jsp?eventID=<%=event.getEventID()%>&eventName=<%=event.getEventName()%>">Add Followup</a>
+                    </td>
+                    <td>
+                        <form action="MainController">
+                            <input type="hidden" name="eventID" value="<%= event.getEventID()%>"/>                            
+                            <input type="submit" name="action" value="EditFollowup"/>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="MainController">
+                            <input type="hidden" name="eventID" value="<%= event.getEventID()%>"/>                            
+                            <input type="submit" name="action" value="StartEvent"/>
+                        </form>
+                    </td>
+                </tr>
+                <%      }
+                    }             
+                }
+        %>
+            </tbody>
+        </table>
+            
+        <h1>Complete</h1>
+        <%
+            List<EventDTO> completeList = (List<EventDTO>) request.getAttribute("LIST_EVENT_EDIT_COMPLETE");
+            if (completeList != null) {
+                if (!completeList.isEmpty()) {
+        %>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+        <%
+                    for (EventDTO event : completeList) { 
+        %>
+        
+            
+                <tr>
+                    <td><%=event.getEventName()%></td>                   
+                </tr>
+                <%      }
+                    }             
+                }
+        %>
+            </tbody>
+        </table>
+            
+        <h1>Canceled</h1>
+        <%
+            List<EventDTO> cancelList = (List<EventDTO>) request.getAttribute("LIST_EVENT_EDIT_CANCELED");
+            if (cancelList != null) {
+                if (!cancelList.isEmpty()) {
+        %>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+        <%
+                    for (EventDTO event : cancelList) { 
+        %>
+        
+            
+                <tr>
+                    <td><%=event.getEventName()%></td>                   
+                </tr>
+                <%      }
+                    }             
+                }
+        %>
+            </tbody>
+        </table>    
     </body>
 </html>

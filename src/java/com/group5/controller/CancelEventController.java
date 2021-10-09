@@ -6,64 +6,36 @@
 package com.group5.controller;
 
 import com.group5.event.EventDAO;
-import com.group5.event.EventDTO;
-import com.group5.users.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Minh Khoa
  */
-public class ShowListEditEventController extends HttpServlet {
+public class CancelEventController extends HttpServlet {
 
-    private final static String ERROR = "error.jsp";
-    private final static String SUCCESS = "showListEditEvent.jsp";
-
+    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "ShowListEditEventController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String url=ERROR;
-        try {
-            HttpSession session = request.getSession();
-            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            
+        String url = ERROR;
+        try{
+            String eventID = request.getParameter("eventID");
             EventDAO dao = new EventDAO();
-            List<EventDTO> list = dao.getListEventToEdit(loginUser.getId());
-            if (!list.isEmpty()) {
-                List<EventDTO> upcomingList = new ArrayList<>();
-                List<EventDTO> ongoingList = new ArrayList<>();
-                List<EventDTO> completeList = new ArrayList<>();
-                List<EventDTO> cancelList = new ArrayList<>();
-                for(EventDTO event: list){
-                    if(event.getStatus().equals("Upcoming")){
-                        upcomingList.add(event);
-                    } else if(event.getStatus().equals("Ongoing")){
-                        ongoingList.add(event);
-                    } else if(event.getStatus().equals("Complete")){
-                        completeList.add(event);
-                    } else {
-                        cancelList.add(event);
+            
+            boolean checkUpdate = dao.cancelEvent(eventID);
+                    if (checkUpdate) {
+                        url = SUCCESS;
                     }
-                }
-                request.setAttribute("LIST_EVENT_EDIT_UPCOMING", upcomingList);
-                request.setAttribute("LIST_EVENT_EDIT_ONGOING", ongoingList);
-                request.setAttribute("LIST_EVENT_EDIT_COMPLETE", completeList);
-                request.setAttribute("LIST_EVENT_EDIT_CANCELED", cancelList);                               
-                
-            }
-            url = SUCCESS;
-        } catch (Exception e) {
-            log("Error at ShowListEditEventController" + e.toString());
-        } finally {
+        }catch (Exception e){
+            request.setAttribute("ERROR_MESSAGE","Error at CancelEventController");
+        }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
