@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPTU/Ky5/SWP391/GIT%20EVENT/EventManagement/web/editEvent.jsp</file>
-            <file>file:/D:/FPTU/Ky5/SWP391/GIT%20EVENT/EventManagement/web/css/adminStyle.css</file>
-            <file>file:/D:/FPTU/Ky5/SWP391/GIT%20EVENT/EventManagement/web/css/hompageStyle.css</file>
-            <file>file:/D:/FPTU/Ky5/SWP391/GIT%20EVENT/EventManagement/web/eventDetail.jsp</file>
-            <file>file:/D:/FPTU/Ky5/SWP391/GIT%20EVENT/EventManagement/web/css/loginStyle.css</file>
-            <file>file:/D:/FPTU/Ky5/SWP391/GIT%20EVENT/EventManagement/web/admin.jsp</file>
-            <file>file:/D:/FPTU/Ky5/SWP391/GIT%20EVENT/EventManagement/web/login.jsp</file>
-            <file>file:/D:/FPTU/Ky5/SWP391/GIT%20EVENT/EventManagement/web/index.jsp</file>
+            <file>file:/D:/FPT/Now/SWP391/clone/cloneDung/EventManagement/web/login.jsp</file>
+            <file>file:/D:/FPT/Now/SWP391/clone/cloneDung/EventManagement/web/index.jsp</file>
+            <file>file:/D:/FPT/Now/SWP391/clone/cloneDung/EventManagement/web/css/adminStyle.css</file>
+            <file>file:/D:/FPT/Now/SWP391/clone/cloneDung/EventManagement/src/java/com/group5/users/UserDAO.java</file>
         </group>
     </open-files>
 </project-private>
