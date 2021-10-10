@@ -80,6 +80,14 @@
         <servlet-name>CompleteEventController</servlet-name>
         <servlet-class>com.group5.controller.CompleteEventController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditFollowupController</servlet-name>
+        <servlet-class>com.group5.controller.EditFollowupController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfirmEditFollowupController</servlet-name>
+        <servlet-class>com.group5.controller.ConfirmEditFollowupController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginGoogleHandler</servlet-name>
         <url-pattern>/LoginGoogleHandler</url-pattern>
@@ -159,6 +167,14 @@
     <servlet-mapping>
         <servlet-name>CompleteEventController</servlet-name>
         <url-pattern>/CompleteEventController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditFollowupController</servlet-name>
+        <url-pattern>/EditFollowupController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmEditFollowupController</servlet-name>
+        <url-pattern>/ConfirmEditFollowupController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

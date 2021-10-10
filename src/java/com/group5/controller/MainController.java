@@ -37,6 +37,8 @@ public class MainController extends HttpServlet {
     private static final String CANCEL_EVENT = "CancelEventController";
     private static final String START_EVENT = "StartEventController";
     private static final String COMPLETE_EVENT = "CompleteEventController";
+    private static final String EDIT_FOLLOWUP = "EditFollowupController";
+    private static final String CONFIRM_EDIT_FOLLOWUP = "ConfirmEditFollowupController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -78,6 +80,10 @@ public class MainController extends HttpServlet {
                 url = START_EVENT;
             } else if("CompleteEvent".equals(action)){
                 url = COMPLETE_EVENT;
+            } else if("EditFollowup".equals(action)){
+                url = EDIT_FOLLOWUP;
+            } else if("ConfirmEditFollowup".equals(action)){
+                url = CONFIRM_EDIT_FOLLOWUP;
             }else {
                 HttpSession session = request.getSession();
                 session.setAttribute("ERROR_MESSAGE", "Function is not supported!");

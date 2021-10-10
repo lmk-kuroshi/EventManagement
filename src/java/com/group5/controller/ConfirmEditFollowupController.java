@@ -5,56 +5,43 @@
  */
 package com.group5.controller;
 
-import com.group5.category.CategoryDAO;
-import com.group5.category.CategoryDTO;
-import com.group5.event.EventDAO;
-import com.group5.event.EventDTO;
-import com.group5.location.LocationDAO;
-import com.group5.location.LocationDTO;
-import com.group5.users.UserDTO;
+import com.group5.event.FollowupDAO;
+import com.group5.event.FollowupDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Minh Khoa
  */
-public class EditEventController extends HttpServlet {
+public class ConfirmEditFollowupController extends HttpServlet {
 
-    private final static String ERROR = "error.jsp";
-    private final static String SUCCESS = "editEvent.jsp";
+    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "EditFollowupController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url=ERROR;
+        String url =ERROR;
         try {
+            String followupID = request.getParameter("followupID");
             String eventID = request.getParameter("eventID");
+            String followupDetail = request.getParameter("followupDetail");
+            String followupImage = request.getParameter("followupImage");
+            String followupVideo = request.getParameter("followupVideo");
             
-            EventDAO dao = new EventDAO();
-                EventDTO event = dao.getEventByID(eventID);
-            if (event != null) {
-                request.setAttribute("EVENT_EDIT", event);
-                url = SUCCESS;
-            }
-            CategoryDAO catedao = new CategoryDAO();
-            List<CategoryDTO> listCategory = new ArrayList<>();
-            listCategory=catedao.getListCategory();
-            request.setAttribute("LIST_CATEGORY", listCategory);
-            
-            LocationDAO locaDAO = new LocationDAO();
-            List<LocationDTO> listLocation = new ArrayList<>();
-            listLocation=locaDAO.getListLocation();
-            request.setAttribute("LIST_LOCATION", listLocation);
+            FollowupDTO editFollowup = new FollowupDTO(followupID, eventID, followupDetail, followupImage, followupVideo);
+            FollowupDAO dao = new FollowupDAO();
+            boolean checkUpdate = dao.updateFollowup(editFollowup);
+                    if (checkUpdate) {
+                        url = SUCCESS;
+                    }
         } catch (Exception e) {
-            log("Error at SearchController" + e.toString());
+            request.setAttribute("ERROR_MESSAGE","Error at ConfirmEditFollowupController");
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
