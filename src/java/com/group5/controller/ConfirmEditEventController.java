@@ -60,7 +60,7 @@ public class ConfirmEditEventController extends HttpServlet {
                         url = SUCCESS;
                     }
         } catch (Exception e) {
-            request.setAttribute("ERROR_MESSAGE","Error at EditEventController");
+            request.setAttribute("ERROR_MESSAGE","Error at ConfirmEditEventController");
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

@@ -85,4 +85,33 @@ public class FollowupDAO {
         }
         return list;
     }
+    
+    public boolean updateFollowup(FollowupDTO followup) throws SQLException {
+         boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtil.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE tblFollowupEvent SET followupDetail=?, followupImage=?, followupVideo=? WHERE followupID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, followup.getFollowupDetail());
+                stm.setString(2, followup.getFollowupImage());
+                stm.setString(3, followup.getFollowupVideo());
+                stm.setString(4, followup.getFollowupID());
+                check = stm.executeUpdate() > 0;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+            
+    }
 }
