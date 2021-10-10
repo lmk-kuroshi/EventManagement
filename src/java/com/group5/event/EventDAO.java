@@ -266,4 +266,54 @@ public class EventDAO {
         }
         return check;
     }
+    
+    public boolean startEvent(String eventID) throws SQLException{
+        boolean check =false;
+        Connection conn=null;
+        PreparedStatement stm = null;
+        try{
+            conn = DBUtil.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE tblEvent SET status='Ongoing' WHERE eventID=?";
+                stm = conn.prepareStatement(sql);                
+                stm.setString(1, eventID);
+                check = stm.executeUpdate() > 0;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    public boolean completeEvent(String eventID) throws SQLException{
+        boolean check =false;
+        Connection conn=null;
+        PreparedStatement stm = null;
+        try{
+            conn = DBUtil.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE tblEvent SET status='Complete' WHERE eventID=?";
+                stm = conn.prepareStatement(sql);                
+                stm.setString(1, eventID);
+                check = stm.executeUpdate() > 0;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
 }

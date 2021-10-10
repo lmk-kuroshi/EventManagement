@@ -65,7 +65,7 @@
                     <td>
                         <form action="MainController">
                             <input type="hidden" name="eventID" value="<%= event.getEventID()%>"/>                            
-                            <input type="submit" name="action" value="Complete"/>
+                            <input type="submit" name="action" value="CompleteEvent"/>
                         </form>
                     </td>
                 </tr>
@@ -145,7 +145,8 @@
             <thead>
                 <tr>
                     <th>Event Name</th>
-                    
+                    <th>Add Followup</th>
+                    <th>Edit Followup</th>
                 </tr>
             </thead>
             <tbody>
@@ -155,7 +156,16 @@
         
             
                 <tr>
-                    <td><%=event.getEventName()%></td>                   
+                    <td><%=event.getEventName()%></td>           
+                    <td>
+                        <a href="addFollowup.jsp?eventID=<%=event.getEventID()%>&eventName=<%=event.getEventName()%>">Add Followup</a>
+                    </td>
+                    <td>
+                        <form action="MainController">
+                            <input type="hidden" name="eventID" value="<%= event.getEventID()%>"/>                            
+                            <input type="submit" name="action" value="EditFollowup"/>
+                        </form>
+                    </td>
                 </tr>
                 <%      }
                     }             
