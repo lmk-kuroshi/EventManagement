@@ -29,6 +29,7 @@ public class LoginController extends HttpServlet {
     private static final String STUDENT_PAGE = "index.jsp";
     private static final String LEADER_PAGE = "leader.jsp";
     private static final String ADMIN_PAGE = "admin.jsp";
+    private static final String MENTOR_PAGE = "mentor.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -60,6 +61,9 @@ public class LoginController extends HttpServlet {
             }
             if(user.getRoleID().equals("STU")){
                 url = STUDENT_PAGE;
+            }
+            if ("MT".equals(user.getRoleID())) {
+             url = MENTOR_PAGE;
             }
             else if(user.getRoleID().equals("AD")){
                 url = ADMIN_PAGE;

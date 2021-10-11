@@ -13,13 +13,24 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  *
  * @author Minh Khoa
  */
 public class EventDAO {
-    public List<EventDTO> getListEvent(String search) throws SQLException {
+    public List<EventDTO> getListEvent(String search, String categoryName) throws SQLException {
         List<EventDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -31,9 +42,10 @@ public class EventDAO {
                         +    " WHERE tblEvent.categoryID = tblCategory.categoryID " 
                         +    " AND tblEvent.creatorID = tblUser.userID " 
                         +    " AND tblEvent.locationID = tblLocation.locationID and " 
-                        +    " eventName like ?";
+                        +    " eventName like ? AND categoryName like ? ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, "%" + search + "%");
+                stm.setString(2, "%" + categoryName + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String eventID = rs.getString("eventID");
@@ -315,5 +327,100 @@ public class EventDAO {
             }
         }
         return check;
+    }
+    public List<EventDTO> getListEventMentorAttended(String mentorId ) throws SQLException {
+        List<EventDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtil.getConnection();
+            if (conn != null) {
+                String sql = "SELECT tblEvent.eventID, eventName, userName, categoryName, locationName, eventDetail, seat, creatTime, startTime, endTime, image, video, status FROM tblEvent, tblUser, tblCategory, tblLocation,  tblMentorEvent " 
+                        +    " WHERE tblEvent.categoryID = tblCategory.categoryID " 
+                        +    " AND tblEvent.creatorID = tblUser.userID " 
+                        +    " AND tblEvent.eventID = tblMentorEvent.eventID "
+                        +    " AND tblEvent.locationID = tblLocation.locationID " 
+                        +    " AND tblMentorEvent.mentorID like ? ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, mentorId);
+                ;
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String eventID = rs.getString("eventID");
+                    String eventName = rs.getString("eventName");
+                    String creatorID = rs.getString("userName"); //act as creatorName
+                    String categoryID = rs.getString("categoryName"); //act as categoryName
+                    String locationID = rs.getString("locationName"); //act as locationName
+                    String eventDetail = rs.getString("eventDetail");
+                    int seat = rs.getInt("seat");
+                    Timestamp creaetTime = rs.getTimestamp("creatTime");
+                    Timestamp startTime = rs.getTimestamp("startTime");
+                    Timestamp endTime = rs.getTimestamp("endTime");
+                    String image = rs.getString("image");
+                    String video = rs.getString("video");
+                    String status = rs.getString("status");
+                    
+                    
+                    list.add(new EventDTO(eventID, eventName, creatorID, categoryID, locationID, eventDetail, seat, creaetTime, startTime, endTime, image, video, status));
+                
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+       
+    public boolean sendMailChangeRole(String nameRegister, String gmail, String reason) throws SQLException, ClassNotFoundException, MessagingException {
+       Properties properties = new Properties();
+        System.out.println("Prepare!");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+        
+        String myAccountEmail = "eventnotifygroup5@gmail.com";
+        String password = "eventgroup5";
+        
+        Session session = Session.getInstance(properties, new Authenticator() {
+        
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication(){
+                return new PasswordAuthentication(myAccountEmail, password);
+            }
+                    
+        });
+        String htmlCode ="Dear Admin,<br>I am " + nameRegister + "<br> I write this mail to present the contend:<br>" + reason + "." + "<br>Thank you,<br>" + nameRegister;
+        Message message = prepareMessage(session, myAccountEmail, "killua365d6h@gmail.com", htmlCode);//knguyen9047@gmail.com
+        Transport.send(message);
+        System.out.println("Message sent seccessfully!");
+        return true;
+    }
+    
+    private static Message prepareMessage(Session session, String myAccountEmail, String recepient, String htmlCode){
+        
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(myAccountEmail));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
+            message.setSubject("Request to change role");
+            
+            message.setContent(htmlCode ,"text/html");
+            return message;
+        } catch (Exception ex) {
+            Logger.getLogger(EventDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return  null;
     }
 }
