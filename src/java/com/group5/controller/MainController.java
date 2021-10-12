@@ -39,6 +39,12 @@ public class MainController extends HttpServlet {
     private static final String COMPLETE_EVENT = "CompleteEventController";
     private static final String EDIT_FOLLOWUP = "EditFollowupController";
     private static final String CONFIRM_EDIT_FOLLOWUP = "ConfirmEditFollowupController";
+    private static final String EVENTMENTORATTEND = "SearchEventMentorAttendController";
+    private static final String QANDAMENTOR = "QandAMentorController";
+    private static final String EDITANWERED = "EditAnswerController";
+    private static final String CHANGEROLE ="ChangeRoleController";
+    private static final String EDITANSWERQA = "EditQAController";
+    private static final String ANSWERQA = "AnswerQAController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -84,6 +90,23 @@ public class MainController extends HttpServlet {
                 url = EDIT_FOLLOWUP;
             } else if("ConfirmEditFollowup".equals(action)){
                 url = CONFIRM_EDIT_FOLLOWUP;
+            }
+            else if("Edit Answered".equals(action)){
+                url = EDITANWERED;
+            }else if("Confirm Resquest".equals(action)){
+                url = CHANGEROLE;
+            }
+            else if("AnswerQA".equals(action)){
+                url = ANSWERQA;
+            }
+            else if("Answered".equals(action)){
+                url = EDITANSWERQA;
+            }
+            else if("Q&A".equals(action)){
+                url = QANDAMENTOR;
+            }
+             else if("Event Attended".equals(action)){
+                url = EVENTMENTORATTEND;
             }else {
                 HttpSession session = request.getSession();
                 session.setAttribute("ERROR_MESSAGE", "Function is not supported!");

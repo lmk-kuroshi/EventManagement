@@ -4,6 +4,8 @@
     Author     : Minh Khoa
 --%>
 
+<%@page import="com.group5.category.CategoryDAO"%>
+<%@page import="com.group5.category.CategoryDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.group5.event.EventDTO"%>
 <%@page import="com.group5.users.UserDTO"%>
@@ -42,7 +44,12 @@
         </form>
         -->          
 
-
+        <%
+            List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
+            CategoryDAO catedao = new CategoryDAO();
+            categoryList = catedao.getListCategory();
+            request.setAttribute("LIST_CATEGORY", categoryList);
+        %>
 
 
         <input type="checkbox" id="nav-toggle">
@@ -101,6 +108,20 @@
                     <form action="MainController">
                         <button class="las la-search" type="submit" value="Search" name="action"></button>
                         <input type="text" name="search" value="<%= search%>" placeholder="Search here"/>
+                        <select name="categoryName">
+                            <option value="">All</option>
+                            <%
+                                if (categoryList != null) {
+                                    for (CategoryDTO category : categoryList) {
+                            %>
+
+                            <option value="<%=category.getCategoryName()%>"> <%=category.getCategoryName()%> </option>
+
+                            <%
+                                    }
+                                }
+                            %>
+                        </select>
 
                     </form>
                 </div>
@@ -114,6 +135,14 @@
             </header>
 
             <main>
+                <%
+                    String message = (String) request.getAttribute("SEARCH_EVENT_MESSAGE");
+                    if (message == null) {
+                        message = "";
+                    }
+                %>
+
+                <%= message%><br>
 
                 <%
                     List<EventDTO> list = (List<EventDTO>) request.getAttribute("LIST_EVENT");
@@ -128,9 +157,9 @@
                         <img src="css/img/TestEvent.jpg"/>
                         <div>
                             <a href="eventDetail.jsp?id=<%=event.getEventID()%>&name=<%=event.getEventName()%>&creatorID=<%=event.getCreatorID()%>&categoryID=<%=event.getCategoryID()%>
-                   &location=<%=event.getLocationID()%>&eventDetail=<%=event.getEventDetail()%>&seat=<%=event.getSeat()%>&startTime=<%=event.getStartTime()%>
-                   &endTime=<%=event.getEndTime()%>&creatTime=<%=event.getCreateTime()%>&image=<%=event.getImage()%>&video=<%=event.getVideo()%>
-                   &status=<%=event.getStatus()%>"> <%=event.getEventName()%> </a>
+                               &location=<%=event.getLocationID()%>&eventDetail=<%=event.getEventDetail()%>&seat=<%=event.getSeat()%>&startTime=<%=event.getStartTime()%>
+                               &endTime=<%=event.getEndTime()%>&creatTime=<%=event.getCreateTime()%>&image=<%=event.getImage()%>&video=<%=event.getVideo()%>
+                               &status=<%=event.getStatus()%>"> <%=event.getEventName()%> </a>
                             <span>Start Time: <%=event.getStartTime()%></span>
                             <span>End Time: <%=event.getEndTime()%></span>
                             <span>Category: <%=event.getCategoryID()%></span>
@@ -155,5 +184,6 @@
                 <p class="copyright">© 2021 GROUP 5</p>
             </footer>
         </div>
+        <a href="changeRole.jsp">Change Role</a>  
     </body>
 </html>
