@@ -27,6 +27,12 @@
         <h1> <%=event.getCategoryID()%></h1>
         <h1> Post by: <%=event.getCreatorID()%> at <%=event.getCreateTime()%></h1>
         <h1> Location: <%=event.getLocationID()%></h1>
+        
+        <form action="MainController">
+            <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
+            <input type="submit" name="action" value="FollowOrUnfollow"/>
+        </form>
+            
         <h1> From <%=event.getStartTime()%> to <%=event.getEndTime()%></h1>
         <img src ="<%=event.getImage()%>"> 
 

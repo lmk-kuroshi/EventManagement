@@ -88,6 +88,14 @@
         <servlet-name>ConfirmEditFollowupController</servlet-name>
         <servlet-class>com.group5.controller.ConfirmEditFollowupController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FollowOrUnfollowController</servlet-name>
+        <servlet-class>com.group5.controller.FollowOrUnfollowController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowFollowEventController</servlet-name>
+        <servlet-class>com.group5.controller.ShowFollowEventController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginGoogleHandler</servlet-name>
         <url-pattern>/LoginGoogleHandler</url-pattern>
@@ -175,6 +183,14 @@
     <servlet-mapping>
         <servlet-name>ConfirmEditFollowupController</servlet-name>
         <url-pattern>/ConfirmEditFollowupController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FollowOrUnfollowController</servlet-name>
+        <url-pattern>/FollowOrUnfollowController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowFollowEventController</servlet-name>
+        <url-pattern>/ShowFollowEventController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

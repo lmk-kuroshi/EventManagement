@@ -5,14 +5,13 @@
  */
 package com.group5.controller;
 
-import com.group5.event.EventDAO;
-import com.group5.event.EventDTO;
+import com.group5.follow.FollowDAO;
+import com.group5.follow.FollowDTO;
 import com.group5.users.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,48 +22,34 @@ import javax.servlet.http.HttpSession;
  *
  * @author Minh Khoa
  */
-public class ConfirmCreateController extends HttpServlet {
+public class ShowFollowEventController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "leader.jsp";
+    private static final String SUCCESS = "notification.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
-        try {
-            HttpSession session =request.getSession();
-            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
-            String eventName = request.getParameter("eventName");
-            String categoryID = request.getParameter("categoryID");
-            String locationID = request.getParameter("locationID");
-            int seat = Integer.parseInt(request.getParameter("seat"));
-            String image = request.getParameter("image");
-            String eventDetail = request.getParameter("eventDetail");
-            String video = request.getParameter("video");
+        String url=ERROR;
+        try{
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             
-            String startTimeString = request.getParameter("startTime")+":00";
-            String endTimeString = request.getParameter("endTime")+":00";
-            
-            Timestamp startTime = Timestamp.valueOf(startTimeString.replace("T", " "));
-            Timestamp endTime = Timestamp.valueOf(endTimeString.replace("T", " "));
-            
-            String eventID = "EV-" + Calendar.getInstance().get(Calendar.DATE) 
-                        + (Calendar.getInstance().get(Calendar.MONTH) + 1) 
-                        + Calendar.getInstance().get(Calendar.YEAR) + "_" 
-                        + System.currentTimeMillis();
-            
-            Date now = new Date(System.currentTimeMillis());
-            Timestamp createTime = new Timestamp(now.getTime());
-            
-            EventDTO newEvent = new EventDTO(eventID, eventName, user.getId(), categoryID, locationID, eventDetail, seat, createTime, startTime, endTime, image, video, "Upcoming");
-            EventDAO dao = new EventDAO();
-            boolean checkInsert = dao.addEvent(newEvent);
-                    if (checkInsert) {
-                        url = SUCCESS;
+            FollowDAO dao = new FollowDAO();
+            List<FollowDTO> list = dao.getListFollow(loginUser.getId());
+            if(!list.isEmpty()){
+                List<FollowDTO> followList = new ArrayList<>();
+                for(FollowDTO follow : list){
+                    if (follow.getFollowStatus().equals("followed")) {
+                        followList.add(follow);
                     }
-        } catch (Exception e) {
-            request.setAttribute("ERROR_MESSAGE","Error at ConfirmCreateEventController");
+                }
+                request.setAttribute("FOLLOW_LIST", followList);    
+            }
+            
+            url=SUCCESS;
+        } catch(Exception e) {
+            request.setAttribute("ERROR_MESSAGE","Error at ShowFollowEventController");
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
