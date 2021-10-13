@@ -6,12 +6,10 @@
 package com.group5.controller;
 
 import com.group5.event.EventDAO;
-import com.group5.event.EventDTO;
-import com.group5.users.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,48 +17,42 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Minh Khoa
+ * @author ASUS
  */
-public class SearchController extends HttpServlet {
+@WebServlet(name = "ChangeRoleController", urlPatterns = {"/ChangeRoleController"})
+public class ChangeRoleController extends HttpServlet {
 
-    private final static String ERROR = "error.jsp";
-    private final static String STUDENT = "index.jsp";
-    private final static String LEADER = "leader.jsp";
-    private final static String MENTOR = "mentor.jsp";
-
+    private final static String ERROR = "changeRole.jsp";
+    private final static String SUCCESS = "changeRole.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        boolean check = false;
+        HttpSession session = request.getSession();
         try {
-            HttpSession session = request.getSession();
-            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            String search = request.getParameter("search");
-            String categoryName = request.getParameter("categoryName");
+            String nameRegister = request.getParameter("nameRegister");
+            String gmail = request.getParameter("gmail");           
+            String reason = request.getParameter("reason");
+      
             EventDAO dao = new EventDAO();
-            List<EventDTO> list = dao.getListEvent(search, categoryName);
-            if (!list.isEmpty()) {
-                request.setAttribute("LIST_EVENT", list);
-                if (categoryName != "") {
-                    String message = "Event with category " + categoryName;
-                    request.setAttribute("SEARCH_EVENT_MESSAGE", message);
-                }
-            } else {
-                request.setAttribute("SEARCH_EVENT_MESSAGE", "No search results found");
+            check = dao.sendMailChangeRole(nameRegister, gmail, reason);
+            if (check == true) {
+                url = SUCCESS;
+                String message = "Sent seccessfully. Please wait!";
+                request.setAttribute("STUDENT_MESSAGE", message);
+                
             }
-
-            if (loginUser.getRoleID().equals("STU")) {
-                url = STUDENT;
-            } else if (loginUser.getRoleID().equals("LD")) {
-                url = LEADER;
-            } else if (loginUser.getRoleID().equals("MT")) {
-                url = MENTOR;
+            else{
+            session.setAttribute("ERROR_MESSAGE", "Error at ChangeRoleController");
             }
+            
         } catch (Exception e) {
-            log("Error at SearchController" + e.toString());
+            log("Error at ChangeRoleController" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
