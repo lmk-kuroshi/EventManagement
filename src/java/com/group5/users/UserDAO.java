@@ -63,7 +63,7 @@ public class UserDAO {
         try {
             con = DBUtil.getConnection();
             if (con != null) {
-                String sql = "INSERT INTO tblUser(userID, userEmail, statusID, userName, roleID) VALUES(?,?,?,?,?)";
+                String sql = "INSERT INTO tblUser(userID,userName, userEmail, statusID, roleID) VALUES(?,?,?,?,?)";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, user.getId());
                 stm.setString(2, user.getName());

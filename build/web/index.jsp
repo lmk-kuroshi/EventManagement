@@ -53,11 +53,11 @@
             <div class="sidebar-menu">
                 <ul>
                     <li>
-                        <!--<a href="" class="active"><span class="las la-igloo"></span> <span>Dashboard</span></a>-->
-                        <a href="index.jsp" class="active"><span class="las la-chart-line"></span> <span>Trending</span></a>
+<!--                        <a href="" class="active"><span class="las la-igloo"></span> <span>Dashboard</span></a>-->
+                        <a href="SearchController" class="active"><span class="la la-chart-line"></span> <span>Trending</span></a>
                     </li>
                     <li>
-                        <a href=""><span class="las la-users"></span> <span>Category</span></a>
+                        <a href=""><span class="lab la-buromobelexperte"></span> <span>Category</span></a>
                     </li><!--
  /*                <li>
                         <a href=""><span class="las la-clipboard-list"></span><span>Projects</span></a>
@@ -75,13 +75,14 @@
                                             <a href=""><span class="las la-clipboard-list"></span> <span>Tasks</span></a>
                                         </li>-->
                     <li>
-                        <div class="logout">
-                            <form action="MainController">
-                                <a> 
-                                    <span class="las la-door-open"></span> <span><input type="submit" name="action" value="Logout"/> </span>
-                                </a>
-                            </form>
-                        </div>
+                        <!--                        <div class="logout">
+                                                    <form action="MainController">
+                                                        <a> 
+                                                            <span class="las la-door-open"></span> <span><input type="submit" name="action" value="Logout"/> </span>
+                                                        </a>
+                                                    </form>
+                                                </div>-->
+                        <a href="LogoutController"><span class="las la-door-open"></span> <span>Logout</span></a>
                     </li>
                 </ul>
             </div>
@@ -114,29 +115,29 @@
             </header>
 
             <main>
-
-                <%
-                    List<EventDTO> list = (List<EventDTO>) request.getAttribute("LIST_EVENT");
-                    if (list != null) {
-                        if (!list.isEmpty()) {
-                            for (EventDTO event : list) {
-
-                %> 
-
                 <div class="event-card">
+                    <%
+                        List<EventDTO> list = (List<EventDTO>) request.getAttribute("LIST_EVENT");
+                        if (list != null) {
+                            if (!list.isEmpty()) {
+                                for (EventDTO event : list) {
+
+                    %> 
+
+
                     <div class="event-card-single" >
-                        <img src="css/img/TestEvent.jpg"/>
+                        <img src="<%=event.getImage()%>"/>
                         <div>
                             <a href="eventDetail.jsp?id=<%=event.getEventID()%>&name=<%=event.getEventName()%>&creatorID=<%=event.getCreatorID()%>&categoryID=<%=event.getCategoryID()%>
-                   &location=<%=event.getLocationID()%>&eventDetail=<%=event.getEventDetail()%>&seat=<%=event.getSeat()%>&startTime=<%=event.getStartTime()%>
-                   &endTime=<%=event.getEndTime()%>&creatTime=<%=event.getCreateTime()%>&image=<%=event.getImage()%>&video=<%=event.getVideo()%>
-                   &status=<%=event.getStatus()%>"> <%=event.getEventName()%> </a>
+                               &location=<%=event.getLocationID()%>&eventDetail=<%=event.getEventDetail()%>&seat=<%=event.getSeat()%>&startTime=<%=event.getStartTime()%>
+                               &endTime=<%=event.getEndTime()%>&creatTime=<%=event.getCreateTime()%>&image=<%=event.getImage()%>&video=<%=event.getVideo()%>
+                               &status=<%=event.getStatus()%>"> <%=event.getEventName()%> </a>
                             <span>Start Time: <%=event.getStartTime()%></span>
                             <span>End Time: <%=event.getEndTime()%></span>
                             <span>Category: <%=event.getCategoryID()%></span>
                         </div>
                     </div>
-                </div>
+
 
 
 <!--                <a href="eventDetail.jsp?id=<%=event.getEventID()%>&name=<%=event.getEventName()%>&creatorID=<%=event.getCreatorID()%>&categoryID=<%=event.getCategoryID()%>
@@ -144,11 +145,12 @@
                    &endTime=<%=event.getEndTime()%>&creatTime=<%=event.getCreateTime()%>&image=<%=event.getImage()%>&video=<%=event.getVideo()%>
                    &status=<%=event.getStatus()%>"> <%=event.getEventName()%> </a></br>-->
 
-                <%
+                    <%
+                                }
                             }
                         }
-                    }
-                %>
+                    %>
+                </div>
             </main>
             <footer>
                 <h2><img class="logo" src="css/img/footerLogo.svg"/></h2>

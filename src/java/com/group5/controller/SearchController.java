@@ -35,6 +35,7 @@ public class SearchController extends HttpServlet {
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             String search = request.getParameter("search");
+            if(search == null) search="";
             EventDAO dao = new EventDAO();
             List<EventDTO> list = dao.getListEvent(search);
             if (!list.isEmpty()) {

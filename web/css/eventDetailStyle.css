@@ -4,6 +4,15 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
+    Created on : Oct 13, 2021, 7:55:23 PM
+    Author     : DELL
+*/
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
     Created on : Oct 7, 2021, 12:40:15 AM
     Author     : DELL
 */
@@ -644,8 +653,8 @@ footer span{
 }
 
 .event-card-single{
-    width: 270px;
-    height: 400px;
+    width: 250px;
+    height: 350px;
     justify-content: space-between;
     background: #fff;
     padding: 0;
@@ -677,5 +686,48 @@ footer span{
     width: 100%;
 }
 
+.event-detail{
+    background: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin: 3rem;
+}
+.event-align{
+    padding: 0 4rem 3rem 4rem;
+}
 
+.event-name{
+    text-align: left;
+    line-height: 46px;
+    padding-top: 3rem;
+    margin: 35px 0;
+    color: #ff6600;
+    font-size: 40px;
+    font-family: 'Gotham', sans-serif;
+    margin-bottom: 55px;
+    margin-top: 20px;
+    font-weight: bold;
+}
 
+.event-detail img{
+    display: flex;
+    text-align: center;
+    margin-bottom: 3rem;
+    max-width: 85%;
+    height: auto;
+    float: left;
+}
+
+.event-detail iframe{
+    margin-bottom: 3rem;
+}
+
+.event-detail h3{
+    font-weight: 600;
+    font-family: 'SFUIDisplayRegular', sans-serif;
+    text-size:150px;
+}
+
+.event-detail h3 span{
+    font-weight: 200;
+    font-family: 'SFUIDisplayRegular', sans-serif;
+}
