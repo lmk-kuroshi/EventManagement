@@ -45,6 +45,8 @@ public class MainController extends HttpServlet {
     private static final String CHANGEROLE ="ChangeRoleController";
     private static final String EDITANSWERQA = "EditQAController";
     private static final String ANSWERQA = "AnswerQAController";
+    private static final String FOLLOW = "FollowOrUnfollowController";
+    private static final String SHOW_FOLLOW = "ShowFollowEventController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -105,9 +107,16 @@ public class MainController extends HttpServlet {
             else if("Q&A".equals(action)){
                 url = QANDAMENTOR;
             }
-             else if("Event Attended".equals(action)){
+             else if ("Event Attended".equals(action)) {
                 url = EVENTMENTORATTEND;
-            }else {
+            }
+             else if("FollowOrUnfollow".equals(action)){
+                url = FOLLOW;
+            }
+             else if("ShowFollowEvent".equals(action)){
+                url = SHOW_FOLLOW;
+            }
+             else {
                 HttpSession session = request.getSession();
                 session.setAttribute("ERROR_MESSAGE", "Function is not supported!");
             }

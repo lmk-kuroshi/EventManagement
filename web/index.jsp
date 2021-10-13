@@ -70,7 +70,7 @@
                         <a href=""><span class="las la-clipboard-list"></span><span>Projects</span></a>
                     </li> --*/
                     -->                 <li>
-                        <a href=""><span class="las la-bell"></span> <span>Notify</span></a>
+                        <a href="ShowFollowEventController"><span class="las la-bell"></span> <span>Notify</span></a>
                     </li><!--
                     <li>
                         <a href=""><span class="las la-receipt"></span> <span>Inventory</span></a>
