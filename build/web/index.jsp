@@ -30,21 +30,7 @@
             if (search == null) {
                 search = "";
             }
-        %>
-<!--        <h1>Hello User: <%=loginUser.getName()%></h1>
-        <h3>ID: <%=loginUser.getId()%></h3>
-        <h3>Email: <%=loginUser.getEmail()%></h3>
-        <h3>Role <%=loginUser.getRoleID()%></h3>
-        <form action="MainController">
-            <input type="submit" name="action" value="Logout"/>
-        </form>
-
-        <form action="MainController">
-            <h2>Search <input type="text" name="search" value="<%=search%>"/>
-            <input type="submit" name="action" value="Search"/>
-            </h2>
-        </form>
-        -->          
+        %>    
 
         <%
             List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
@@ -173,13 +159,6 @@
                             <span>Category: <%=event.getCategoryID()%></span>
                         </div>
                     </div>
-                
-
-
-<!--                <a href="eventDetail.jsp?id=<%=event.getEventID()%>&name=<%=event.getEventName()%>&creatorID=<%=event.getCreatorID()%>&categoryID=<%=event.getCategoryID()%>
-                   &location=<%=event.getLocationID()%>&eventDetail=<%=event.getEventDetail()%>&seat=<%=event.getSeat()%>&startTime=<%=event.getStartTime()%>
-                   &endTime=<%=event.getEndTime()%>&creatTime=<%=event.getCreateTime()%>&image=<%=event.getImage()%>&video=<%=event.getVideo()%>
-                   &status=<%=event.getStatus()%>"> <%=event.getEventName()%> </a></br>-->
 
                 <%
                             }
