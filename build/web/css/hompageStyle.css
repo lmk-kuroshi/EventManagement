@@ -638,21 +638,19 @@ footer span{
 
 .event-card{
     display: grid;
-    /*grid-template-columns: repeat(3, 1fr);*/
-    width: 250px;
-    height: 300px;
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 2rem;
-    margin-top: 1rem;
+    margin: 1rem 2rem 1rem 2rem;
 }
 
 .event-card-single{
-    display: grid;
+    width: 270px;
+    height: 400px;
     justify-content: space-between;
     background: #fff;
     padding: 0;
     border-radius: 2px;
     color: black;
-    grid-gap: .5rem;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -660,7 +658,7 @@ footer span{
     display: inline-block;
     position: relative;
     width: 100%;
-    height: auto;
+    height: 40%;
 }
 
 

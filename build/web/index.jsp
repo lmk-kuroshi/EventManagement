@@ -16,9 +16,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Page</title>
-        <link href="css/hompageStyle.css" rel="stylesheet" >
+        <link href="css/hompageStyle.css" rel="stylesheet" />
         <link rel="stylesheet"
               href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+
+        <!--        <script src="dropDownScipt.js" defer></script>-->
     </head>
     <body>
         <%
@@ -64,14 +66,34 @@
                         <a href="index.jsp" class="active"><span class="las la-chart-line"></span> <span>Trending</span></a>
                     </li>
                     <li>
-                        <a href=""><span class="las la-users"></span> <span>Category</span></a>
-                    </li><!--
+                        <a href=""><span class="lab la-buromobelexperte"></span> <span>Category</span></a>
+                        <!--<span class="las la-users"></span> <span>Category</span>-->
+                        <!--                        <div class="dropdown" data-dropdown>
+                                                    <button class="link" data-dropdown-button>Category</button>
+                                                    <div class="dropdown-menu information-grid">
+                                                        <div>
+                                                            <div class="dropdown-heading">Free Tutorials</div>
+                                                            <div class="dropdown-links">
+                                                                <a href="#" class="link">All</a>
+                                                                <a href="#" class="link">Latest</a>
+                                                                <a href="#" class="link">Popular</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
+                    </li>
+                    <!--
  /*                <li>
                         <a href=""><span class="las la-clipboard-list"></span><span>Projects</span></a>
                     </li> --*/
                     -->                 <li>
                         <a href="ShowFollowEventController"><span class="las la-bell"></span> <span>Notify</span></a>
-                    </li><!--
+                    </li>
+                    <li>
+                        <a href="changeRole.jsp"><span class="las la-scroll"></span><span>Change Role</span></a>  
+                    </li>
+                    
+                    <!--
                     <li>
                         <a href=""><span class="las la-receipt"></span> <span>Inventory</span></a>
                     </li>-->
@@ -108,20 +130,6 @@
                     <form action="MainController">
                         <button class="las la-search" type="submit" value="Search" name="action"></button>
                         <input type="text" name="search" value="<%= search%>" placeholder="Search here"/>
-                        <select name="categoryName">
-                            <option value="">All</option>
-                            <%
-                                if (categoryList != null) {
-                                    for (CategoryDTO category : categoryList) {
-                            %>
-
-                            <option value="<%=category.getCategoryName()%>"> <%=category.getCategoryName()%> </option>
-
-                            <%
-                                    }
-                                }
-                            %>
-                        </select>
 
                     </form>
                 </div>
@@ -142,19 +150,19 @@
                     }
                 %>
 
-                <%= message%><br>
-
-                <%
-                    List<EventDTO> list = (List<EventDTO>) request.getAttribute("LIST_EVENT");
-                    if (list != null) {
-                        if (!list.isEmpty()) {
-                            for (EventDTO event : list) {
-
-                %> 
-
+                <!--<%= message%><br>-->
                 <div class="event-card">
+                    <%
+                        List<EventDTO> list = (List<EventDTO>) request.getAttribute("LIST_EVENT");
+                        if (list != null) {
+                            if (!list.isEmpty()) {
+                                for (EventDTO event : list) {
+
+                    %> 
+
+
                     <div class="event-card-single" >
-                        <img src="css/img/TestEvent.jpg"/>
+                        <img src="<%=event.getImage()%>"/>
                         <div>
                             <a href="eventDetail.jsp?id=<%=event.getEventID()%>&name=<%=event.getEventName()%>&creatorID=<%=event.getCreatorID()%>&categoryID=<%=event.getCategoryID()%>
                                &location=<%=event.getLocationID()%>&eventDetail=<%=event.getEventDetail()%>&seat=<%=event.getSeat()%>&startTime=<%=event.getStartTime()%>
@@ -165,7 +173,7 @@
                             <span>Category: <%=event.getCategoryID()%></span>
                         </div>
                     </div>
-                </div>
+                
 
 
 <!--                <a href="eventDetail.jsp?id=<%=event.getEventID()%>&name=<%=event.getEventName()%>&creatorID=<%=event.getCreatorID()%>&categoryID=<%=event.getCategoryID()%>
@@ -178,12 +186,12 @@
                         }
                     }
                 %>
+                </div>
             </main>
             <footer>
                 <h2><img class="logo" src="css/img/footerLogo.svg"/></h2>
                 <p class="copyright">© 2021 GROUP 5</p>
             </footer>
         </div>
-        <a href="changeRole.jsp">Change Role</a>  
     </body>
 </html>

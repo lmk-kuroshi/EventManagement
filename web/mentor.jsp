@@ -16,6 +16,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Mentor Page</title>
+        <link href="css/hompageStyle.css" rel="stylesheet" />
+        <link rel="stylesheet"
+              href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
     </head>
     <body>
         <%
@@ -24,22 +27,106 @@
             if (search == null) {
                 search = "";
             }
+        %>    
+
+        <%
+            List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
+            CategoryDAO catedao = new CategoryDAO();
+            categoryList = catedao.getListCategory();
+            request.setAttribute("LIST_CATEGORY", categoryList);
         %>
 
-        <h1>Hello Mentor: <%=mentor.getName()%></h1>
-        <form action="MainController">
-            <input type="submit" name="action" value="Logout"/>
-        </form>
 
+        <input type="checkbox" id="nav-toggle">
+        <div class="sidebar">
+            <div class="sidebar-brand">
+                <h2><img class="logo" src="css/img/logo.png"> <span>Software</span></h2>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li>
+                        <!--<a href="" class="active"><span class="las la-igloo"></span> <span>Dashboard</span></a>-->
+                        <a href="index.jsp" class="active"><span class="las la-chart-line"></span> <span>Trending</span></a>
+                    </li>
+                    <li>
+                        <a href=""><span class="lab la-buromobelexperte"></span> <span>Category</span></a>
+                        <!--<span class="las la-users"></span> <span>Category</span>-->
+                        <!--                        <div class="dropdown" data-dropdown>
+                                                    <button class="link" data-dropdown-button>Category</button>
+                                                    <div class="dropdown-menu information-grid">
+                                                        <div>
+                                                            <div class="dropdown-heading">Free Tutorials</div>
+                                                            <div class="dropdown-links">
+                                                                <a href="#" class="link">All</a>
+                                                                <a href="#" class="link">Latest</a>
+                                                                <a href="#" class="link">Popular</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
+                    </li>
+                    <!--
+ /*                <li>
+                        <a href=""><span class="las la-clipboard-list"></span><span>Projects</span></a>
+                    </li> --*/
+                    -->                 <li>
+                        <a href="ShowFollowEventController"><span class="las la-bell"></span> <span>Notify</span></a>
+                    </li>
+                    <li>
+                        <a href="changeRole.jsp"><span class="las la-scroll"></span><span>Change Role</span></a>  
+                    </li>
+                    
+                    <!--
+                    <li>
+                        <a href=""><span class="las la-receipt"></span> <span>Inventory</span></a>
+                    </li>-->
+                    <li>
+                        <a href=""><span class="las la-user-circle"></span> <span>Accounts</span></a>
+                    </li>
+                    <!--                    <li>
+                                            <a href=""><span class="las la-clipboard-list"></span> <span>Tasks</span></a>
+                                        </li>-->
+                    <li>
+                        <div class="logout">
+                            <form action="MainController">
+                                <a> 
+                                    <span class="las la-door-open"></span> <span><input type="submit" name="action" value="Logout"/> </span>
+                                </a>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-content">
+            <header>
+                <h2>
+                    <label for="nav-toggle">
+                        <span class="las la-bars"></span>
+                    </label>
 
+                    <span>Dashboard</span>
+                </h2>
+                <div class="search-wrapper">
+                    <!--                <span class="las la-search"></span>
+                                    <input type="search" placeholder="Search here" />-->
+                    <form action="MainController">
+                        <button class="las la-search" type="submit" value="Search" name="action"></button>
+                        <input type="text" name="search" value="<%= search%>" placeholder="Search here"/>
 
-        <form action="MainController">
-            <input type="hidden" name="qaMentor"/>
+                    </form>
+                </div>
+                <div class="user-wrapper">
+                    <img src="css/img/2.jpg" width="40px" height="40px" alt="" />
+                    <div>
+                        <h4><%=mentor.getName()%></h4>
+                        <small>Mentor</small>
+                    </div>
+                </div>
+            </header>
 
-            <input type="submit" name="action" value="Q&A"/>
-
-        </form>
-        <%
+            <main>
+                <%
             List<QandADTO> listQA = (List<QandADTO>) request.getAttribute("QA_MENTOR");
             if (listQA != null) {
                 if (!listQA.isEmpty()) {
@@ -56,121 +143,19 @@
             }
 
         %>
-
-
         <form action="MainController">
-            <input type="hidden" name="editQAMentor"/>
+            <input type="hidden" name="qaMentor"/>
 
-            <input type="submit" name="action" value="Answered"/>
+            <input type="submit" name="action" value="Q&A"/>
 
         </form>
-
-        <%            List<QandADTO> listAnswered = (List<QandADTO>) request.getAttribute("EDIT_QA_MENTOR");
-
-            if (listAnswered != null) {
-                if (!listAnswered.isEmpty()) {
-                    for (QandADTO QAM : listAnswered) {
-                        if ((QAM.getReply()) != null) {
-
-        %>
-        <a href="editAnsweredQA.jsp?questionID=<%=QAM.getQuestionID()%>&mentorID=<%=QAM.getMentorID()%>&studentID=<%=QAM.getStudentID()%>&eventID=<%=QAM.getEventID()%>&eventName=<%=QAM.getEventName()%>&questionDetail=<%=QAM.getQuestionDetail()%>&reply=<%=QAM.getReply()%>"><%=QAM.getQuestionID()%>. Edit</a><br>
-
-        <%
-                        }
-                    }
-                }
-            }
-
-        %>
-
-         <%
-             
-         List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
-         CategoryDAO catedao = new CategoryDAO();
-         categoryList=catedao.getListCategory();
-         request.setAttribute("LIST_CATEGORY", categoryList);
-         %>
-
-        <form action="MainController">
-            <h2>Search <input type="text" name="search" value="<%=search%>" placeholder="Search here"/>
-                Category:
-                <select name="categoryName">
-                    <option value="">All</option>
-                    <% 
-                        if (categoryList != null) {
-                            for (CategoryDTO category : categoryList) {
-                    %>
-
-                    <option value="<%=category.getCategoryName()%>"> <%=category.getCategoryName()%> </option>
-
-                    <%
-                     }
-                        }
-                    %>
-                </select>
-                <input type="submit" name="action" value="Search"/>
-            </h2>
-        </form>
-
-        <!--        <form action="MainController">
-                    <input type="hidden" name="search" value=""/>
-                    <input type="hidden" name="categoryId" value=""/>
-                    <h2>
-                    <input type="submit" name="action" value="List Events"/>
-                    </h2>
-                </form>   -->
-        <%
-            String message = (String) request.getAttribute("SEARCH_EVENT_MESSAGE");
-            if (message == null) {
-                message = "";
-            }
-        %>
-        <%= message%> <br>       
-
-        <%
-            List<EventDTO> list = (List<EventDTO>) request.getAttribute("LIST_EVENT");
-            if (list != null) {
-                if (!list.isEmpty()) {
-                    for (EventDTO event : list) {
-
-        %>
-        <a href="eventDetail.jsp?id<%=event.getEventID()%>&name=<%=event.getEventName()%>&creatorID=<%=event.getCreatorID()%>&categoryID=<%=event.getCategoryID()%>
-           &location=<%=event.getLocationID()%>&eventDetail=<%=event.getEventDetail()%>&seat=<%=event.getSeat()%>&startTime=<%=event.getStartTime()%>
-           &endTime=<%=event.getEndTime()%>&creatTime=<%=event.getCreateTime()%>&image=<%=event.getImage()%>&video=<%=event.getVideo()%>
-           &status=<%=event.getStatus()%>"> <%=event.getEventName()%> </a><br>
-        <%
-                    }
-                }
-            }
-        %>
-
-
-        <form action="MainController">
-            <input type="hidden" name="eventMentorAttended" value="<%=mentor.getId()%>"/>
-            <h2>
-                <input type="submit" name="action" value="Event Attended"/>
-            </h2>
-        </form>
-        <%
-            List<EventDTO> listEventMentorAttended = (List<EventDTO>) request.getAttribute("LIST_EVENT_MENTOR_ATTEND");
-            if (listEventMentorAttended != null) {
-                if (!listEventMentorAttended.isEmpty()) {
-                    for (EventDTO eventMentor : listEventMentorAttended) {
-
-        %>
-        <a href="eventDetail.jsp?id<%=eventMentor.getEventID()%>&name=<%=eventMentor.getEventName()%>&creatorID=<%=eventMentor.getCreatorID()%>&categoryID=<%=eventMentor.getCategoryID()%>
-           &location=<%=eventMentor.getLocationID()%>&eventDetail=<%=eventMentor.getEventDetail()%>&seat=<%=eventMentor.getSeat()%>&startTime=<%=eventMentor.getStartTime()%>
-           &endTime=<%=eventMentor.getEndTime()%>&creatTime=<%=eventMentor.getCreateTime()%>&image=<%=eventMentor.getImage()%>&video=<%=eventMentor.getVideo()%>
-           &status=<%=eventMentor.getStatus()%>"> <%=eventMentor.getEventName()%> </a><br>
-        Category: <%=eventMentor.getCategoryID()%>
-        <%
-                    }
-                }
-            }
-        %>
-
-
-
+                
+            </main>
+            <footer>
+                <h2><img class="logo" src="css/img/footerLogo.svg"/></h2>
+                <p class="copyright">© 2021 GROUP 5</p>
+            </footer>
+        </div>
 
     </body>
 </html>
