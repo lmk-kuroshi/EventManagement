@@ -27,9 +27,9 @@ public class LoginController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
     private static final String STUDENT_PAGE = "SearchController";
-    private static final String LEADER_PAGE = "leader.jsp";
+    private static final String LEADER_PAGE = "SearchController";
     private static final String ADMIN_PAGE = "SearchUserController";
-    private static final String MENTOR_PAGE = "mentor.jsp";
+    private static final String MENTOR_PAGE = "SearchController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
