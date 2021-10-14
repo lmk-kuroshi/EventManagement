@@ -64,13 +64,15 @@
                         <a href=""><span class="las la-clipboard-list"></span> <span>Tasks</span></a>
                     </li>-->
                     <li>
-                        <div class="logout">
+<!--                        <div class="logout">
                         <form action="MainController">
                             <a> 
                                <span class="las la-door-open"></span> <span><input type="submit" name="action" value="Logout"/> </span>
                             </a>
                         </form>
-                            </div>
+                            </div>-->
+
+                        <a href="LogoutController"><span class="las la-door-open"></span> <span>Logout</span></a>
                     </li>
                 </ul>
             </div>

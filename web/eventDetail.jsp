@@ -79,7 +79,7 @@
                 </ul>
             </div>
         </div>
-        
+
         <div class="main-content">
             <header>
                 <h2>
@@ -117,6 +117,13 @@
                         <iframe width="560" height="315" src="<%=event.getVideo()%>" 
                                 title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                         </iframe>
+                        <div class="event-detail-follow">
+                            <form action="MainController">
+                                <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
+                                <button type="submit" name="action" value="FollowOrUnfollow">Follow</button>
+                            </form>
+                        </div>
+                        <br>
                         <h3> Location:<span> <%=event.getLocationID()%></span></h3>
                         <br>
                         <h3> From: <span><%=event.getStartTime()%></span></h3>

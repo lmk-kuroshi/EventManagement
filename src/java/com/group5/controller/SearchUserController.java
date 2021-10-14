@@ -30,6 +30,9 @@ public class SearchUserController extends HttpServlet {
         String url = ERROR;
         try {
             String searchUser = request.getParameter("search_user");
+            if(searchUser ==null){
+                searchUser="";
+            }
             UserDAO dao = new UserDAO();
             List<UserDTO> list = dao.getListUser(searchUser);
             if (!list.isEmpty()) {

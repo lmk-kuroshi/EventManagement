@@ -47,7 +47,7 @@
                 <ul>
                     <li>
                         <!--<a href="" class="active"><span class="las la-igloo"></span> <span>Dashboard</span></a>-->
-                        <a href="index.jsp" class="active"><span class="las la-chart-line"></span> <span>Trending</span></a>
+                        <a href="leader.jsp" class="active"><span class="las la-chart-line"></span> <span>Trending</span></a>
                     </li>
                     <li>
                         <a href=""><span class="lab la-buromobelexperte"></span> <span>Category</span></a>
@@ -128,7 +128,7 @@
                     <img src="css/img/2.jpg" width="40px" height="40px" alt="" />
                     <div>
                         <h4><%=loginUser.getName()%></h4>
-                        <small>Student</small>
+                        <small>Leader</small>
                     </div>
                 </div>
             </header>
