@@ -114,27 +114,29 @@
                         <div>
                             <img src ="<%=event.getImage()%>"> 
                         </div>
-                        <iframe width="560" height="315" src="<%=event.getVideo()%>" 
+                        <iframe src="<%=event.getVideo()%>" 
                                 title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                         </iframe>
-                        <div class="event-detail-follow">
-                            <form action="MainController">
-                                <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
-                                <button type="submit" name="action" value="FollowOrUnfollow">Follow</button>
-                            </form>
+                        <div class="event-detail-info">
+                            <div class="event-detail-follow">
+                                <form action="MainController">
+                                    <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
+                                    <button type="submit" name="action" value="FollowOrUnfollow">Follow</button>
+                                </form>
+                            </div>
+                            <br>
+                            <h3> Location:<span> <%=event.getLocationID()%></span></h3>
+                            <br>
+                            <h3> From: <span><%=event.getStartTime()%></span></h3>
+                            <br>
+                            <h3> To: <span><%=event.getEndTime()%></span></h3>
+                            <br>
+                            <h3> Description: <span><%=event.getEventDetail()%></span></h3>
+                            <br>
+            <!--                <h1> <%=event.getStatus()%></h1>-->
+                            <h3> Seat available: <span><%=event.getSeat()%></span></h3>
+                            <br>
                         </div>
-                        <br>
-                        <h3> Location:<span> <%=event.getLocationID()%></span></h3>
-                        <br>
-                        <h3> From: <span><%=event.getStartTime()%></span></h3>
-                        <br>
-                        <h3> To: <span><%=event.getEndTime()%></span></h3>
-                        <br>
-                        <h3> Description: <span><%=event.getEventDetail()%></span></h3>
-                        <br>
-        <!--                <h1> <%=event.getStatus()%></h1>-->
-                        <h3> Seat available: <span><%=event.getSeat()%></span></h3>
-                        <br>
                         <% }
                         %>
 
@@ -150,3 +152,66 @@
 
     </body>
 </html>
+
+
+
+
+
+<%-- 
+    Document   : eventDetail
+    Created on : Sep 27, 2021, 2:48:16 PM
+    Author     : Minh Khoa
+--%>
+<%-- 
+<%@page import="java.sql.Timestamp"%>
+<%@page import="com.group5.event.EventDTO"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Event Details Page</title>
+    </head>
+    <body>
+        <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0" nonce="UB5WJ2Iu"></script>
+        <%
+            EventDTO event = new EventDTO(request.getParameter("id"), request.getParameter("name"), request.getParameter("creatorID"),
+                    request.getParameter("categoryID"), request.getParameter("location"), request.getParameter("eventDetail"),
+                    Integer.parseInt(request.getParameter("seat")), Timestamp.valueOf(request.getParameter("creatTime")), Timestamp.valueOf(request.getParameter("startTime")),
+                    Timestamp.valueOf(request.getParameter("endTime")), request.getParameter("image"), request.getParameter("video"),
+                    request.getParameter("status"));
+            if (event != null) {
+        %>
+
+        <h1>Event: <%=event.getEventName()%></h1>
+        <h1> <%=event.getCategoryID()%></h1>
+        <h1> Post by: <%=event.getCreatorID()%> at <%=event.getCreateTime()%></h1>
+        <h1> Location: <%=event.getLocationID()%></h1>
+        
+        <form action="MainController">
+            <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
+            <input type="submit" name="action" value="FollowOrUnfollow"/>
+        </form>
+            
+        <h1> From <%=event.getStartTime()%> to <%=event.getEndTime()%></h1>
+        <img src ="<%=event.getImage()%>"> 
+
+        <iframe width="560" height="315" src="<%=event.getVideo()%>" 
+                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+        <h1> <%=event.getEventDetail()%></h1>
+        <h1> <%=event.getStatus()%></h1>
+        <h2> Seat available <%=event.getSeat()%></h2>
+        <% }
+        %>
+        
+        <form action="MainController">
+            <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
+            <input type="submit" name="action" value="ShowFollowup"/>
+        </form>
+
+<div class="fb-comments" data-href="http://localhost:8080/EventManagement/" data-width="500" data-numposts="5"></div>
+    </body>
+</html>
+--%>

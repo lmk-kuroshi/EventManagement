@@ -148,7 +148,7 @@
 
 
                     <div class="event-card-single" >
-                        <img src="<%=event.getImage()%>"/>
+                        <img src="<%=event.getImage()%>" alt="Image Event"/>
                         <div>
                             <a href="eventDetail.jsp?id=<%=event.getEventID()%>&name=<%=event.getEventName()%>&creatorID=<%=event.getCreatorID()%>&categoryID=<%=event.getCategoryID()%>
                                &location=<%=event.getLocationID()%>&eventDetail=<%=event.getEventDetail()%>&seat=<%=event.getSeat()%>&startTime=<%=event.getStartTime()%>

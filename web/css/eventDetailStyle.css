@@ -718,16 +718,23 @@ footer span{
 }
 
 .event-detail img{
-    display: flex;
+    display: block;
     text-align: center;
-    margin-bottom: 3rem;
-    max-width: 85%;
+    margin-bottom: 2rem;
+    max-width: 50%;
     height: auto;
     float: left;
+    margin-right: 3rem;
 }
 
 .event-detail iframe{
     margin-bottom: 3rem;
+    display: block;
+    text-align: center;
+    margin-bottom: 2rem;
+    width: 43%;
+    height: 280px;
+    float: left;
 }
 
 .event-detail h3{
@@ -746,5 +753,10 @@ footer span{
     background: var(--main-color);
     color: white;
     padding: 10px 25px;
+}
+
+.event-detail-info{
+    display: inline-block;
+    
 }
 
