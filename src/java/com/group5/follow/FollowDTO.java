@@ -15,7 +15,7 @@ public class FollowDTO {
     private String studentID;
     private String followStatus;
     private String eventName;
-
+    
     public FollowDTO() {
     }
 
@@ -74,6 +74,6 @@ public class FollowDTO {
     public void setEventName(String eventName) {
         this.eventName = eventName;
     }
-    
+
     
 }

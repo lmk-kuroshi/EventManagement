@@ -5,6 +5,7 @@
  */
 package com.group5.controller;
 
+import com.group5.event.EventDAO;
 import com.group5.event.FollowupDAO;
 import com.group5.event.FollowupDTO;
 import java.io.IOException;
@@ -30,7 +31,9 @@ public class EditFollowupController extends HttpServlet {
         String url = ERROR;
         try {
             String eventID = request.getParameter("eventID");
+            String notification = request.getParameter("notification");
             FollowupDAO dao = new FollowupDAO();
+             EventDAO daos = new EventDAO();
             List<FollowupDTO> list = dao.getListFollowup(eventID);
             
             if (!list.isEmpty()) {
@@ -40,6 +43,8 @@ public class EditFollowupController extends HttpServlet {
                 request.setAttribute("EMPTY_LIST","NO FOLLOWUP");
             }
                 url=SUCCESS;
+                daos.sendMailNotification(notification, eventID);
+                
         } catch (Exception e) {
             request.setAttribute("ERROR_MESSAGE", "Error at EditFollowupController");
         } finally {

@@ -52,12 +52,14 @@ public class ConfirmEditEventController extends HttpServlet {
             String eventID = request.getParameter("eventID");
             Timestamp createTime = Timestamp.valueOf(request.getParameter("creatTime"));
             String status = request.getParameter("status");
+            String notification = request.getParameter("notification");
                     
             EventDTO editEvent = new EventDTO(eventID, eventName, user.getId(), categoryID, locationID, eventDetail, seat, createTime, startTime, endTime, image, video, status);
             EventDAO dao = new EventDAO();
             boolean checkUpdate = dao.updateEvent(editEvent);
                     if (checkUpdate) {
                         url = SUCCESS;
+                        checkUpdate = dao.sendMailNotification(notification, eventID);
                     }
         } catch (Exception e) {
             request.setAttribute("ERROR_MESSAGE","Error at ConfirmEditEventController");
