@@ -2,39 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/web/answerQuestion.jsp</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/src/java/com/group5/event/FollowupDAO.java</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/web/changeRole.jsp</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/web/showListEditEvent.jsp</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/web/admin.jsp</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/src/java/com/group5/event/EventDAO.java</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/web/createEvent.jsp</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/src/java/com/group5/follow/FollowDAO.java</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/web/error.jsp</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/src/java/com/group5/controller/CancelEventController.java</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/src/java/com/group5/controller/LogoutController.java</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/src/java/com/group5/controller/ConfirmEditEventController.java</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/web/login.jsp</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/src/java/com/group5/controller/MainController.java</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/web/addFollowup.jsp</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/src/java/com/group5/event/EventDTO.java</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/web/index.html</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/web/followupDetail.jsp</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/src/java/com/group5/controller/EditFollowupController.java</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/src/java/com/group5/controller/AddFollowupController.java</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/src/java/com/group5/controller/StartEventController.java</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/web/eventDetail.jsp</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/web/leader.jsp</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/web/mentor.jsp</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/web/editAnsweredQA.jsp</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/web/editEvent.jsp</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/src/java/com/group5/follow/FollowDTO.java</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/web/notification.jsp</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/web/editFollowup.jsp</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/src/java/com/group5/follow/FollowerDTO.java</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/src/java/com/group5/controller/EditEventController.java</file>
-            <file>file:/D:/Documents/HK5/SWP391/TestCode/Project/EventManagement/src/java/com/group5/controller/ChangeRoleController.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

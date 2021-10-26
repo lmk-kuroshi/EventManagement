@@ -108,8 +108,7 @@
                     </td>
                     <td>
                         <form action="MainController">
-                            <input type="hidden" name="eventID" value="<%= event.getEventID()%>"/>       
-                            <input type="hidden" name="notification" value="Cancel"/>
+                            <input type="hidden" name="eventID" value="<%= event.getEventID()%>"/>                            
                             <input type="submit" name="action" value="CancelEvent"/>
                         </form>
                     </td>
@@ -124,8 +123,7 @@
                     </td>
                     <td>
                         <form action="MainController">
-                            <input type="hidden" name="eventID" value="<%= event.getEventID()%>"/>
-                            <input type="hidden" name="notification" value="started"/>
+                            <input type="hidden" name="eventID" value="<%= event.getEventID()%>"/>                            
                             <input type="submit" name="action" value="StartEvent"/>
                         </form>
                     </td>

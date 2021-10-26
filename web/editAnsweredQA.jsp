@@ -39,7 +39,6 @@
              Your Answered: <%=QAM.getReply()%><br>
              
              <input type="text" name="editAnsweredQA" value="<%=editAnsweredQA%>"/>
-             <input type="hidden" name="notification" value="new update"/>
              <input type="submit" name="action" value="Edit Answered"/>
                     
          </form> 

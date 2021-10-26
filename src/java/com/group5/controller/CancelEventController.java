@@ -27,13 +27,11 @@ public class CancelEventController extends HttpServlet {
         String url = ERROR;
         try{
             String eventID = request.getParameter("eventID");
-            String notification = request.getParameter("notification");
             EventDAO dao = new EventDAO();
             
             boolean checkUpdate = dao.cancelEvent(eventID);
                     if (checkUpdate) {
                         url = SUCCESS;
-                        checkUpdate = dao.sendMailNotification(notification, eventID);
                     }
         }catch (Exception e){
             request.setAttribute("ERROR_MESSAGE","Error at CancelEventController");

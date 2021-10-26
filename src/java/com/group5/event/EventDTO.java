@@ -26,7 +26,6 @@ public class EventDTO {
     private String image;
     private String video;
     private String status;
-    private String notification;
 
     public EventDTO() {
     }
@@ -47,24 +46,6 @@ public class EventDTO {
         this.status = status;
     }
 
-    public EventDTO(String eventID, String eventName, String creatorID, String categoryID, String locationID, String eventDetail, int seat, Timestamp createTime, Timestamp startTime, Timestamp endTime, String image, String video, String status, String notification) {
-        this.eventID = eventID;
-        this.eventName = eventName;
-        this.creatorID = creatorID;
-        this.categoryID = categoryID;
-        this.locationID = locationID;
-        this.eventDetail = eventDetail;
-        this.seat = seat;
-        this.createTime = createTime;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.image = image;
-        this.video = video;
-        this.status = status;
-        this.notification = notification;
-    }
-
-    
     public String getEventID() {
         return eventID;
     }
@@ -167,14 +148,6 @@ public class EventDTO {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getNotification() {
-        return notification;
-    }
-
-    public void setNotification(String notification) {
-        this.notification = notification;
     }
 
     

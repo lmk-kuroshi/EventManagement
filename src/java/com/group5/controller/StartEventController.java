@@ -29,12 +29,11 @@ public class StartEventController extends HttpServlet {
         String url = ERROR;
         try{
             String eventID = request.getParameter("eventID");
-            String notification = request.getParameter("notification");
             EventDAO dao = new EventDAO();
             
             boolean checkUpdate = dao.startEvent(eventID);
                     if (checkUpdate) {
-                        url = SUCCESS;                    
+                        url = SUCCESS;
                     }
         }catch (Exception e){
             request.setAttribute("ERROR_MESSAGE","Error at CancelEventController");
