@@ -47,6 +47,7 @@ public class MainController extends HttpServlet {
     private static final String ANSWERQA = "AnswerQAController";
     private static final String FOLLOW = "FollowOrUnfollowController";
     private static final String SHOW_FOLLOW = "ShowFollowEventController";
+    private static final String SHOW_EVENT_DETAIL = "eventDetail.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -115,6 +116,9 @@ public class MainController extends HttpServlet {
             }
              else if("ShowFollowEvent".equals(action)){
                 url = SHOW_FOLLOW;
+            }
+             else if("ShowEventDetail".equals(action)){
+                url = SHOW_EVENT_DETAIL;
             }
              else {
                 HttpSession session = request.getSession();

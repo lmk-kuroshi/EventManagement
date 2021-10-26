@@ -150,10 +150,21 @@
                     <div class="event-card-single" >
                         <img src="<%=event.getImage()%>" alt="Image Event"/>
                         <div>
-                            <a href="eventDetail.jsp?id=<%=event.getEventID()%>&name=<%=event.getEventName()%>&creatorID=<%=event.getCreatorID()%>&categoryID=<%=event.getCategoryID()%>
-                               &location=<%=event.getLocationID()%>&eventDetail=<%=event.getEventDetail()%>&seat=<%=event.getSeat()%>&startTime=<%=event.getStartTime()%>
-                               &endTime=<%=event.getEndTime()%>&creatTime=<%=event.getCreateTime()%>&image=<%=event.getImage()%>&video=<%=event.getVideo()%>
-                               &status=<%=event.getStatus()%>"> <%=event.getEventName()%> </a>
+                            <form action="MainController">
+                                <button class="las la-search" type="submit" value="ShowEventDetail" name="action"><%=event.getEventName()%></button>
+                                <input type="hidden" name="id" value="<%= event.getEventID()%>"/>
+                                <input type="hidden" name="name" value="<%= event.getEventName()%>"/>
+                                <input type="hidden" name="categoryID" value="<%= event.getCategoryID()%>"/>
+                                <input type="hidden" name="location" value="<%= event.getLocationID()%>"/>
+                                <input type="hidden" name="eventDetail" value="<%= event.getEventDetail()%>"/>
+                                <input type="hidden" name="seat" value="<%= event.getSeat()%>"/>
+                                <input type="hidden" name="startTime" value="<%= event.getStartTime()%>"/>
+                                <input type="hidden" name="endTime" value="<%= event.getEndTime()%>"/>
+                                <input type="hidden" name="creatTime" value="<%= event.getCreateTime()%>"/>
+                                <input type="hidden" name="image" value="<%= event.getImage()%>"/>
+                                <input type="hidden" name="video" value="<%= event.getVideo()%>"/>
+                                <input type="hidden" name="status" value="<%= event.getStatus()%>"/>
+                            </form>
                             <span>Start Time: <%=event.getStartTime()%></span>
                             <span>End Time: <%=event.getEndTime()%></span>
                             <span>Category: <%=event.getCategoryID()%></span>
