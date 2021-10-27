@@ -4,6 +4,7 @@
     Author     : Minh Khoa
 --%>
 
+<%@page import="com.group5.category.CategoryDAO"%>
 <%@page import="com.group5.users.UserDTO"%>
 <%@page import="com.group5.location.LocationDTO"%>
 <%@page import="com.group5.event.EventError"%>
@@ -17,9 +18,9 @@
         <title>Create Event Page</title>
         <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
         <link href="css/createEventStyle.css" rel="stylesheet" >
-        <link rel="stylesheet"
-              href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
-        <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+        <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+        
     </head>
     <body>
         <%
@@ -30,88 +31,107 @@
                 search = "";
             }
         %>    
+        <%
+            List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
+            CategoryDAO catedao = new CategoryDAO();
+            categoryList = catedao.getListCategory();
+            request.setAttribute("LIST_CATEGORY", categoryList);
+        %>
 
-
-        <input type="checkbox" id="nav-toggle">
-        <div class="sidebar">
-            <div class="sidebar-brand">
-                <h2><img class="logo" src="css/img/logo.png"> <span>Software</span></h2>
+        <div class="sidebar close">
+            <div class="logo-details">
+                <img class="logo" src="css/img/logo.png"> 
+                <span class="logo_name">Event</span>
             </div>
-            <div class="sidebar-menu">
-                <ul>
+            <div class="sidebar-line"></div>
+            <ul class="nav-links">
+                <div class="sidebar-align">
                     <li>
-                        <!--<a href="" class="active"><span class="las la-igloo"></span> <span>Dashboard</span></a>-->
-                        <a href="index.jsp" class="active"><span class="las la-chart-line"></span> <span>Trending</span></a>
-                    </li>
-                    <li>
-                        <a href=""><span class="lab la-buromobelexperte"></span> <span>Category</span></a>
-                        <!--<span class="las la-users"></span> <span>Category</span>-->
-                        <!--                        <div class="dropdown" data-dropdown>
-                                                    <button class="link" data-dropdown-button>Category</button>
-                                                    <div class="dropdown-menu information-grid">
-                                                        <div>
-                                                            <div class="dropdown-heading">Free Tutorials</div>
-                                                            <div class="dropdown-links">
-                                                                <a href="#" class="link">All</a>
-                                                                <a href="#" class="link">Latest</a>
-                                                                <a href="#" class="link">Popular</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>-->
-                    </li>
-                    <!--
- /*                <li>
-                        <a href=""><span class="las la-clipboard-list"></span><span>Projects</span></a>
-                    </li> --*/
-                    -->                 <li>
-                        <a href="ShowFollowEventController"><span class="las la-bell"></span> <span>Notify</span></a>
-                    </li>
 
-                    <li>
-                        <a href="CreateEventController"><span class="las la-calendar-plus"></span><span>CreateEvent</span></a>  
-                    </li>
-                    <li>
-                        <a href="ShowListEditEventController"><span class="las la-eye"></span><span>ShowListEditEvent</span></a>  
-                    </li>
-                    <li>
-                        <a href="changeRole.jsp"><span class="las la-scroll"></span><span>Change Role</span></a>  
-                    </li>
+                        <a href="SearchController">
+                            <i class='bx bx-trending-up'></i>
+                            <span class="links_name">Trending</span>
+                        </a>
 
-                    <!--
-                    <li>
-                        <a href=""><span class="las la-receipt"></span> <span>Inventory</span></a>
-                    </li>-->
-                    <li>
-                        <a href=""><span class="las la-user-circle"></span> <span>Accounts</span></a>
+                        <span class="tooltip">Trending</span>
                     </li>
-                    <!--                    <li>
-                                            <a href=""><span class="las la-clipboard-list"></span> <span>Tasks</span></a>
-                                        </li>-->
                     <li>
-                        <div class="logout">
-                            <form action="MainController">
-                                <a> 
-                                    <span class="las la-door-open"></span> <span><input type="submit" name="action" value="Logout"/> </span>
-                                </a>
-                            </form>
+                        <div class="iocn-link">
+                            <a href="#" class="open-submenu">
+                                <i class='bx bx-collection' ></i>
+                                <span class="links_name">Category</span>  
+                                <i class='bx bxs-chevron-down arrow' ></i>
+                            </a>
                         </div>
+                        <ul class="sub-menu">
+
+                            <li><a class="link_name" href="#">Category</a></li>
+                                <%
+                                    if (categoryList != null) {
+                                        for (CategoryDTO category : categoryList) {
+                                %>
+                            <li><a href="SearchController?categoryName=<%=category.getCategoryName()%>"><%=category.getCategoryName()%></a></li>
+                                <%
+                                        }
+                                    }
+                                %>
+                        </ul>
                     </li>
-                </ul>
-            </div>
+                    <li>
+                        <a href="ShowFollowEventController">
+                            <i class='las la-bell' ></i>
+                            <span class="links_name">Notify</span>
+                        </a>
+                        <span class="tooltip">Notify</span>
+                    </li>
+                    <li>
+                        <a href="CreateEventController">
+                            <i class='las la-calendar-plus' ></i>
+                            <span class="links_name">Create Event</span>
+                        </a>
+                        <span class="tooltip">Create Event</span>
+                    </li>
+                    <li>
+                        <a href="ShowListEditEventController">
+                            <i class='bx bx-show'></i>
+                            <span class="links_name">Show List Edit Event</span>
+                        </a>
+                        <span class="tooltip">Show List Edit Event</span>
+                    </li>
+                    <li>
+                        <a href="changeRoleLeader.jsp">
+                            <i class="las la-scroll"></i>
+                            <span class="links_name">Change Role</span>
+                        </a>  
+                        <span class="tooltip">Change Role</span>
+                    </li>
+                    <li>
+                        <a href="accountLeader.jsp">
+                            <i class='las la-user-circle' ></i>
+                            <span class="links_name">Accounts</span>
+                        </a>
+                        <span class="tooltip">Accounts</span>
+                    </li>
+                    <li>
+                        <form action="MainController">
+                            <a href="LogoutController">
+                                <i class='las la-door-open' ></i>
+                                <span class="links_name">Logout</span>
+                            </a>
+                        </form>
+                        <span class="tooltip">Logout</span>
+                    </li>
+                </div>
+            </ul>
         </div>
+
         <div class="main-content">
             <header>
-                <h2>
-                    <label for="nav-toggle">
-                        <span class="las la-bars"></span>
-                    </label>
-
-                    <span>Dashboard</span>
-                </h2>
+                <div class="sidebar-button">
+                    <i class='bx bx-menu sidebarBtn'></i>
+                    <span class="dashboard">Dashboard</span>
+                </div>
                 <div class="search-wrapper">
-                    <!--                <span class="las la-search"></span>
-                                    <input type="search" placeholder="Search here" />-->
                     <form action="MainController">
                         <button class="las la-search" type="submit" value="Search" name="action"></button>
                         <input type="text" name="search" value="<%= search%>" placeholder="Search here"/>
@@ -122,7 +142,7 @@
                     <img src="css/img/2.jpg" width="40px" height="40px" alt="" />
                     <div>
                         <h4><%=loginUser.getName()%></h4>
-                        <small>Student</small>
+                        <small>Leader</small>
                     </div>
                 </div>
             </header>
@@ -139,12 +159,14 @@
                         <h1>Create Event</h1><br>
 
                         <form action="MainController">
-                            Event Name: <input type="text" name="eventName"/>
-                            <%= eventError.getEventNameError()%></br><br>
+                            <span>Event Name: </span><input type="text" name="eventName"/>
+                            <%= eventError.getEventNameError()%>
+                            <br>
+                            <br>
 
-                            Category:
+                            <span>Category: </span>
                             <select name="categoryID">
-                                <% List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
+                                <% categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
                                     if (categoryList != null) {
                                         for (CategoryDTO category : categoryList) {
                                 %>
@@ -155,7 +177,7 @@
                                     }
                                 %>
                             </select> </br><br>
-                            Available Location:
+                            <span>Available Location: </span>
                             <select name="locationID">
                                 <% List<LocationDTO> locationList = (List<LocationDTO>) request.getAttribute("LIST_LOCATION");
                                     if (locationList != null) {
@@ -168,35 +190,56 @@
                                     }
                                 %>
                             </select>
-                            Event Detail: 
+                            <br>
+                            <br>
+                            <span>Event Detail: </span>
+                            <br>
                             <br> <textarea id="editor" name="eventDetail"></textarea><br>
-                            <%= eventError.getEventDetailError()%></br><br>
-                            Maximum seat: <input type="number" name="seat"/>
+                            <%= eventError.getEventDetailError()%><br>
+                            <span>Maximum seat: </span><input type="number" name="seat"/>
                             <%= eventError.getSeatError()%></br><br>
 
-                            Start Time: <input type="datetime-local" name="startTime"/>
+                            <span>Start Time: </span><input type="datetime-local" name="startTime"/>
                             <%= eventError.getStartTimeError()%></br><br>
 
-                            End Time: <input type="datetime-local" name="endTime"/>
+                            <span>End Time: </span><input type="datetime-local" name="endTime"/>
                             <%= eventError.getEndTimeError()%></br><br>
 
-                            Image(please enter the image's link): 
+                            <span>Image(please enter the image's link): </span>
                             <input type="text" name="image"/><br><br>
 
-                            Video(please enter a YouTube embed video link):
+                            <span>Video(please enter a YouTube embed video link): </span>
                             <input type="text" name="video"/><br>
-
+                            <div class="button-align">
                             <button type="submit" name="action" value="ConfirmCreateEvent">Confirm Create Event</button>
                             <button type="reset" value="Reset">Reset</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </main>
             <footer>
-                <h2><img class="logo" src="css/img/footerLogo.svg"/></h2>
-                <p class="copyright">© 2021 GROUP 5</p>
+                <div class="footer-align">
+                    <div class="footer-copyright">
+                        <h3><img class="logo" src="css/img/logo.png"/><span>Event</span></h3>
+                        <small class="copyright">Copyright © 2021 by GROUP 5</small>
+                    </div>
+                    <div class="follow-contact">
+                        <h3>Contact</h3>
+                        <small><span class="las la-envelope"></span><span> eventnotifygroup5@gmail.com</span></small>
+                        <br>
+                        <small><span class="las la-phone"></span><span> 0914 291 596</span></small>
+                    </div>
+                    <div class="follow-address">
+                        <h3>Address</h3>
+                        <small><span class="las la-map-marker-alt"></span><span> Lô E2a-7, Đường D1, Khu Công Nghệ Cao, Long Thạnh</span>
+                            <br><span> Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh</span></small>
+                    </div>
+                </div>
             </footer>
         </div>
+        <script src="js/DashboardBtn.js"></script>
+        <script defer src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
         <script>
             
             ClassicEditor
@@ -209,5 +252,6 @@
                     });
             
         </script>
+        
     </body>
 </html>

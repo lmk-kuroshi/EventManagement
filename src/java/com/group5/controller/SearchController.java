@@ -10,6 +10,7 @@ import com.group5.event.EventDTO;
 import com.group5.users.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -36,13 +37,36 @@ public class SearchController extends HttpServlet {
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             String search = request.getParameter("search");
-            if(search==null) search="";
+            if (search == null) {
+                search = "";
+            }
             String categoryName = request.getParameter("categoryName");
-            if(categoryName==null) categoryName="";
+            if (categoryName == null) {
+                categoryName = "";
+            }
             EventDAO dao = new EventDAO();
             List<EventDTO> list = dao.getListEvent(search, categoryName);
             if (!list.isEmpty()) {
-                request.setAttribute("LIST_EVENT", list);
+                //                request.setAttribute("LIST_EVENT", list);
+                List<EventDTO> upcomingList = new ArrayList<>();
+                List<EventDTO> ongoingList = new ArrayList<>();
+                List<EventDTO> completeList = new ArrayList<>();
+                List<EventDTO> cancelList = new ArrayList<>();
+                for (EventDTO event : list) {
+                    if (event.getStatus().equals("Upcoming")) {
+                        upcomingList.add(event);
+                    } else if (event.getStatus().equals("Ongoing")) {
+                        ongoingList.add(event);
+                    } else if (event.getStatus().equals("Complete")) {
+                        completeList.add(event);
+                    } else {
+                        cancelList.add(event);
+                    }
+                }
+                request.setAttribute("LIST_EVENT_UPCOMING", upcomingList);
+                request.setAttribute("LIST_EVENT_ONGOING", ongoingList);
+                request.setAttribute("LIST_EVENT_COMPLETE", completeList);
+                request.setAttribute("LIST_EVENT_CANCELED", cancelList);
                 if (categoryName != "") {
                     String message = "Event with category " + categoryName;
                     request.setAttribute("SEARCH_EVENT_MESSAGE", message);

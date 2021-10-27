@@ -5,6 +5,7 @@
  */
 package com.group5.controller;
 
+import com.group5.users.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -42,98 +43,97 @@ public class MainController extends HttpServlet {
     private static final String EVENTMENTORATTEND = "SearchEventMentorAttendController";
     private static final String QANDAMENTOR = "QandAMentorController";
     private static final String EDITANWERED = "EditAnswerController";
-    private static final String CHANGEROLE ="ChangeRoleController";
+    private static final String CHANGEROLE = "ChangeRoleController";
     private static final String EDITANSWERQA = "EditQAController";
     private static final String ANSWERQA = "AnswerQAController";
     private static final String FOLLOW = "FollowOrUnfollowController";
     private static final String SHOW_FOLLOW = "ShowFollowEventController";
-    private static final String SHOW_EVENT_DETAIL = "eventDetail.jsp";
+    private static final String SHOW_EVENT_DETAIL_STUDENT = "eventDetail.jsp";
+    private static final String SHOW_EVENT_DETAIL_LEADER = "eventDetailLeader.jsp";
+    private static final String SHOW_EVENT_DETAIL_MENTOR = "eventDetailMentor.jsp";
     private static final String ADD_MENTOR = "AddMentorController";
     private static final String CONFIRM_ADD_MENTOR = "ConfirmAddMentorController";
     private static final String CONFIRM_REMOVE_MENTOR = "ConfirmRemoveMentorController";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+
             String action = request.getParameter("action");
             if ("Login".equals(action)) {
                 url = LOGIN;
-            } else if("Search".equals(action)){
+            } else if ("Search".equals(action)) {
                 url = SEARCH;
-            } else if("Logout".equals(action)){
+            } else if ("Logout".equals(action)) {
                 url = LOGOUT;
-            } else if("CreateEvent".equals(action)){
+            } else if ("CreateEvent".equals(action)) {
                 url = CREATE_EVENT;
-            } else if("ConfirmCreateEvent".equals(action)){
+            } else if ("ConfirmCreateEvent".equals(action)) {
                 url = CONFIRM_CREATE_EVENT;
-            } else if("ShowListEditEvent".equals(action)){
+            } else if ("ShowListEditEvent".equals(action)) {
                 url = SHOW_LIST_EDIT_EVENT;
-            } else if("EditEvent".equals(action)){
+            } else if ("EditEvent".equals(action)) {
                 url = EDIT_EVENT;
-            } else if("ConfirmEditEvent".equals(action)){
+            } else if ("ConfirmEditEvent".equals(action)) {
                 url = CONFIRM_EDIT_EVENT;
-            } else if("AddFollowup".equals(action)){
+            } else if ("AddFollowup".equals(action)) {
                 url = ADD_FOLLOWUP;
-            } else if("ShowFollowup".equals(action)){
+            } else if ("ShowFollowup".equals(action)) {
                 url = SHOW_FOLLOWUP;
-            } else if("searchUser".equals(action)){
+            } else if ("searchUser".equals(action)) {
                 url = SEARCH_USER;
-            }else if("updateUser".equals(action)){
+            } else if ("updateUser".equals(action)) {
                 url = UPDATE_USER;
-            }else if("deleteUser".equals(action)){
+            } else if ("deleteUser".equals(action)) {
                 url = DELETE_USER;
-            }else if("restoreUser".equals(action)){
+            } else if ("restoreUser".equals(action)) {
                 url = RESTORE_USER;
-            } else if("CancelEvent".equals(action)){
+            } else if ("CancelEvent".equals(action)) {
                 url = CANCEL_EVENT;
-            } else if("StartEvent".equals(action)){
+            } else if ("StartEvent".equals(action)) {
                 url = START_EVENT;
-            } else if("CompleteEvent".equals(action)){
+            } else if ("CompleteEvent".equals(action)) {
                 url = COMPLETE_EVENT;
-            } else if("EditFollowup".equals(action)){
+            } else if ("EditFollowup".equals(action)) {
                 url = EDIT_FOLLOWUP;
-            } else if("ConfirmEditFollowup".equals(action)){
+            } else if ("ConfirmEditFollowup".equals(action)) {
                 url = CONFIRM_EDIT_FOLLOWUP;
-            }
-            else if("Edit Answered".equals(action)){
+            } else if ("Edit Answered".equals(action)) {
                 url = EDITANWERED;
-            }else if("Confirm Resquest".equals(action)){
+            } else if ("Confirm Resquest".equals(action)) {
                 url = CHANGEROLE;
-            }
-            else if("AnswerQA".equals(action)){
+            } else if ("AnswerQA".equals(action)) {
                 url = ANSWERQA;
-            }
-            else if("Answered".equals(action)){
+            } else if ("Answered".equals(action)) {
                 url = EDITANSWERQA;
-            }
-            else if("Q&A".equals(action)){
+            } else if ("Q&A".equals(action)) {
                 url = QANDAMENTOR;
-            }
-             else if ("Event Attended".equals(action)) {
+            } else if ("Event Attended".equals(action)) {
                 url = EVENTMENTORATTEND;
-            }
-             else if("FollowOrUnfollow".equals(action)){
+            } else if ("FollowOrUnfollow".equals(action)) {
                 url = FOLLOW;
-            }
-             else if("ShowFollowEvent".equals(action)){
+            } else if ("ShowFollowEvent".equals(action)) {
                 url = SHOW_FOLLOW;
-            }
-             else if("ShowEventDetail".equals(action)){
-                url = SHOW_EVENT_DETAIL;
-            }
-             else if("AddMentor".equals(action)){
+            } else if ("ShowEventDetail".equals(action)) {
+                if (loginUser.getRoleID().equals("STU")) {
+                    url = SHOW_EVENT_DETAIL_STUDENT;
+                } else if (loginUser.getRoleID().equals("LD")) {
+                    url = SHOW_EVENT_DETAIL_LEADER;
+                } else if (loginUser.getRoleID().equals("MT")) {
+                    url = SHOW_EVENT_DETAIL_MENTOR;
+                }
+            } else if ("AddMentor".equals(action)) {
                 url = ADD_MENTOR;
-            }
-             else if("ConfirmAddMentor".equals(action)){
+            } else if ("ConfirmAddMentor".equals(action)) {
                 url = CONFIRM_ADD_MENTOR;
-            }
-             else if("ConfirmRemoveMentor".equals(action)){
+            } else if ("ConfirmRemoveMentor".equals(action)) {
                 url = CONFIRM_REMOVE_MENTOR;
-            }
-             else {
-                HttpSession session = request.getSession();
+            } else {
+                session = request.getSession();
                 session.setAttribute("ERROR_MESSAGE", "Function is not supported!");
             }
         } catch (Exception e) {

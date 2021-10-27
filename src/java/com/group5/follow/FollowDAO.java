@@ -113,7 +113,7 @@ public class FollowDAO {
         try {
             conn = DBUtil.getConnection();
             if (conn != null) {
-                String sql = "SELECT followID, tblFollow.eventID, followStatus, eventName"
+                String sql = "SELECT followID, tblFollow.eventID, followStatus, eventName, image, startTime, endTime"
                         + " FROM tblEvent, tblFollow"
                         + " WHERE tblEvent.eventID = tblFollow.eventID"
                         + " AND studentID=?";
@@ -126,7 +126,10 @@ public class FollowDAO {
                     String eventID = rs.getString("eventID");
                     String followStatus = rs.getString("followStatus");
                     String eventName = rs.getString("eventName");
-                    list.add(new FollowDTO(followID, eventID, eventID, followStatus, eventName));
+                    String image = rs.getString("image");
+                    String startTime = rs.getString("startTime");
+                    String endTime = rs.getString("endTime");
+                    list.add(new FollowDTO(followID, eventID, eventID, followStatus, eventName,image, startTime, endTime));
                 
                 }
             }

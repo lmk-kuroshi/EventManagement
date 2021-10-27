@@ -7,6 +7,7 @@ package com.group5.controller;
 
 import com.group5.event.FollowupDAO;
 import com.group5.event.FollowupDTO;
+import com.group5.users.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -22,13 +24,18 @@ import javax.servlet.http.HttpServletResponse;
 public class ShowFollowupController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "followupDetail.jsp";
+//    private static final String SUCCESS = "followupDetail.jsp";
+    private final static String STUDENT = "followupDetail.jsp";
+    private final static String LEADER = "followupDetailLeader.jsp";
+    private final static String MENTOR = "followupDetailMentor.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             String eventID = request.getParameter("eventID");
             FollowupDAO dao = new FollowupDAO();
             List<FollowupDTO> list = dao.getListFollowup(eventID);
@@ -39,7 +46,13 @@ public class ShowFollowupController extends HttpServlet {
             } else {
                 request.setAttribute("EMPTY_LIST","NO FOLLOWUP");
             }
-                url=SUCCESS;
+            if (loginUser.getRoleID().equals("STU")) {
+                url = STUDENT;
+            } else if (loginUser.getRoleID().equals("LD")) {
+                url = LEADER;
+            } else if (loginUser.getRoleID().equals("MT")) {
+                url = MENTOR;
+            }
         } catch (Exception e) {
             request.setAttribute("ERROR_MESSAGE", "Error at ShowFollowupController");
         } finally {

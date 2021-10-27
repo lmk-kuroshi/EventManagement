@@ -1,9 +1,6 @@
-<%-- 
-    Document   : eventDetail
-    Created on : Sep 27, 2021, 2:48:16 PM
-    Author     : Minh Khoa
---%>
-
+<%@page import="com.group5.category.CategoryDAO"%>
+<%@page import="com.group5.category.CategoryDTO"%>
+<%@page import="java.util.List"%>
 <%@page import="com.group5.users.UserDTO"%>
 <%@page import="java.sql.Timestamp"%>
 <%@page import="com.group5.event.EventDTO"%>
@@ -14,8 +11,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Event Details Page</title>
         <link href="css/eventDetailStyle.css" rel="stylesheet" />
-        <link rel="stylesheet"
-              href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+        <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     </head>
     <body>
         <%
@@ -33,62 +30,92 @@
                     request.getParameter("status"));
             if (event != null) {
         %>
-        <input type="checkbox" id="nav-toggle">
-        <div class="sidebar">
-            <div class="sidebar-brand">
-                <h2><img class="logo" src="css/img/logo.png"> <span>Software</span></h2>
+        <%
+            List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
+            CategoryDAO catedao = new CategoryDAO();
+            categoryList = catedao.getListCategory();
+            request.setAttribute("LIST_CATEGORY", categoryList);
+        %>
+
+        <div class="sidebar close">
+            <div class="logo-details">
+                <img class="logo" src="css/img/logo.png"> 
+                <span class="logo_name">Event</span>
             </div>
-            <div class="sidebar-menu">
-                <ul>
+            <div class="sidebar-line"></div>
+            <ul class="nav-links">
+                <div class="sidebar-align">
                     <li>
-                        <!--                        <a href="" class="active"><span class="las la-igloo"></span> <span>Dashboard</span></a>-->
-                        <a href="SearchController" class="active"><span class="la la-chart-line"></span> <span>Trending</span></a>
+
+                        <a href="SearchController">
+                            <i class='bx bx-trending-up'></i>
+                            <span class="links_name">Trending</span>
+                        </a>
+
+                        <span class="tooltip">Trending</span>
                     </li>
                     <li>
-                        <a href=""><span class="lab la-buromobelexperte"></span> <span>Category</span></a>
-                    </li><!--
- /*                <li>
-                        <a href=""><span class="las la-clipboard-list"></span><span>Projects</span></a>
-                    </li> --*/
-                    -->                 <li>
-                        <a href=""><span class="las la-bell"></span> <span>Notify</span></a>
+                        <div class="iocn-link">
+                            <a href="#" class="open-submenu">
+                                <i class='bx bx-collection' ></i>
+                                <span class="links_name">Category</span>  
+                                <i class='bx bxs-chevron-down arrow' ></i>
+                            </a>
+                        </div>
+                        <ul class="sub-menu">
+
+                            <li><a class="link_name" href="#">Category</a></li>
+                                <%
+                                    if (categoryList != null) {
+                                        for (CategoryDTO category : categoryList) {
+                                %>
+                            <li><a href="SearchController?categoryName=<%=category.getCategoryName()%>"><%=category.getCategoryName()%></a></li>
+                                <%
+                                        }
+                                    }
+                                %>
+                        </ul>
                     </li>
                     <li>
-                        <a href="changeRole.jsp"><span class="las la-scroll"></span><span>Change Role</span></a>  
+                        <a href="ShowFollowEventController">
+                            <i class='las la-bell' ></i>
+                            <span class="links_name">Notify</span>
+                        </a>
+                        <span class="tooltip">Notify</span>
                     </li>
-                    <!--
                     <li>
-                        <a href=""><span class="las la-receipt"></span> <span>Inventory</span></a>
-                    </li>-->
-                    <li>
-                        <a href=""><span class="las la-user-circle"></span> <span>Accounts</span></a>
+                        <a href="changeRole.jsp">
+                            <i class="las la-scroll"></i>
+                            <span class="links_name">Change Role</span>
+                        </a>  
+                        <span class="tooltip">Change Role</span>
                     </li>
-                    <!--                    <li>
-                                            <a href=""><span class="las la-clipboard-list"></span> <span>Tasks</span></a>
-                                        </li>-->
                     <li>
-                        <!--                        <div class="logout">
-                                                    <form action="MainController">
-                                                        <a> 
-                                                            <span class="las la-door-open"></span> <span><input type="submit" name="action" value="Logout"/> </span>
-                                                        </a>
-                                                    </form>
-                                                </div>-->
-                        <a href="LogoutController"><span class="las la-door-open"></span> <span>Logout</span></a>
+                        <a href="accountStudent.jsp">
+                            <i class='las la-user-circle' ></i>
+                            <span class="links_name">Accounts</span>
+                        </a>
+                        <span class="tooltip">Accounts</span>
                     </li>
-                </ul>
-            </div>
+                    <li>
+                        <form action="MainController">
+                            <a href="LogoutController">
+                                <i class='las la-door-open' ></i>
+                                <span class="links_name">Logout</span>
+                            </a>
+                        </form>
+                        <span class="tooltip">Logout</span>
+                    </li>
+                </div>
+            </ul>
         </div>
 
         <div class="main-content">
             <header>
-                <h2>
-                    <label for="nav-toggle">
-                        <span class="las la-bars"></span>
-                    </label>
-
-                    <span>Dashboard</span>
-                </h2>
+                <div class="sidebar-button">
+                    <i class='bx bx-menu sidebarBtn'></i>
+                    <span class="dashboard">Dashboard</span>
+                </div>
                 <div class="search-wrapper">
                     <!--                <span class="las la-search"></span>
                                     <input type="search" placeholder="Search here" />-->
@@ -111,19 +138,35 @@
                     <div class="event-align">
                         <h1 class="event-name"><%=event.getEventName()%></h1>
         <!--                <h1> Post by: <%=event.getCreatorID()%> at <%=event.getCreateTime()%></h1>-->
-                        <div>
-                            <img src ="<%=event.getImage()%>"> 
+                        <div class="event-detail-img">
+                            <img src ="<%=event.getImage()%>" alt="Event Image"> 
                         </div>
-                        <iframe src="<%=event.getVideo()%>" 
-                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                        </iframe>
-                        <div class="event-detail-info">
+                        <div class="event-detail-video">
+                            <iframe src="<%=event.getVideo()%>" onerror="alert('URL invalid !!');" 
+                                    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="event-detail-button">
                             <div class="event-detail-follow">
                                 <form action="MainController">
                                     <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
-                                    <button type="submit" name="action" value="FollowOrUnfollow">Follow</button>
+                                    <button class="btnFollow" type="submit" name="action" value="FollowOrUnfollow">Follow</button>
                                 </form>
                             </div>
+                            <div class="event-detail-register">
+                                <form action="MainController">
+                                    <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
+                                    <button type="submit" name="action" value="Register">Register</button>
+                                </form>
+                            </div>
+                            <div class="event-detail-followup">
+                                <form action="MainController">
+                                    <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
+                                    <button type="submit" name="action" value="ShowFollowup">Show Follow Up</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="event-detail-info">
                             <br>
                             <h3> Location:<span> <%=event.getLocationID()%></span></h3>
                             <br>
@@ -139,79 +182,29 @@
                         </div>
                         <% }
                         %>
-
-                        <!--<form action="MainController">
-                            <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
-                            <input type="submit" name="action" value="ShowFollowup"/>
-                        </form>-->
                     </div>
                 </div>
             </main>        
-
+            <footer>
+                <div class="footer-align">
+                    <div class="footer-copyright">
+                        <h3><img class="logo" src="css/img/logo.png"/><span>Event</span></h3>
+                        <small class="copyright">Copyright © 2021 by GROUP 5</small>
+                    </div>
+                    <div class="follow-contact">
+                        <h3>Contact</h3>
+                        <small><span class="las la-envelope"></span><span> eventnotifygroup5@gmail.com</span></small>
+                        <br>
+                        <small><span class="las la-phone"></span><span> 0914 291 596</span></small>
+                    </div>
+                    <div class="follow-address">
+                        <h3>Address</h3>
+                        <small><span class="las la-map-marker-alt"></span><span> Lô E2a-7, Đường D1, Khu Công Nghệ Cao, Long Thạnh</span>
+                            <br><span> Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh</span></small>
+                    </div>
+                </div>
+            </footer>
         </div>   
-
+        <script defer="" src="js/DashboardBtn.js"></script>
     </body>
 </html>
-
-
-
-
-
-<%-- 
-    Document   : eventDetail
-    Created on : Sep 27, 2021, 2:48:16 PM
-    Author     : Minh Khoa
---%>
-<%-- 
-<%@page import="java.sql.Timestamp"%>
-<%@page import="com.group5.event.EventDTO"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Event Details Page</title>
-    </head>
-    <body>
-        <div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0" nonce="UB5WJ2Iu"></script>
-        <%
-            EventDTO event = new EventDTO(request.getParameter("id"), request.getParameter("name"), request.getParameter("creatorID"),
-                    request.getParameter("categoryID"), request.getParameter("location"), request.getParameter("eventDetail"),
-                    Integer.parseInt(request.getParameter("seat")), Timestamp.valueOf(request.getParameter("creatTime")), Timestamp.valueOf(request.getParameter("startTime")),
-                    Timestamp.valueOf(request.getParameter("endTime")), request.getParameter("image"), request.getParameter("video"),
-                    request.getParameter("status"));
-            if (event != null) {
-        %>
-
-        <h1>Event: <%=event.getEventName()%></h1>
-        <h1> <%=event.getCategoryID()%></h1>
-        <h1> Post by: <%=event.getCreatorID()%> at <%=event.getCreateTime()%></h1>
-        <h1> Location: <%=event.getLocationID()%></h1>
-        
-        <form action="MainController">
-            <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
-            <input type="submit" name="action" value="FollowOrUnfollow"/>
-        </form>
-            
-        <h1> From <%=event.getStartTime()%> to <%=event.getEndTime()%></h1>
-        <img src ="<%=event.getImage()%>"> 
-
-        <iframe width="560" height="315" src="<%=event.getVideo()%>" 
-                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-        <h1> <%=event.getEventDetail()%></h1>
-        <h1> <%=event.getStatus()%></h1>
-        <h2> Seat available <%=event.getSeat()%></h2>
-        <% }
-        %>
-        
-        <form action="MainController">
-            <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
-            <input type="submit" name="action" value="ShowFollowup"/>
-        </form>
-
-<div class="fb-comments" data-href="http://localhost:8080/EventManagement/" data-width="500" data-numposts="5"></div>
-    </body>
-</html>
---%>
