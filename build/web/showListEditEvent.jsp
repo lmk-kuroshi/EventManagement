@@ -90,6 +90,8 @@
                     <th>Add Followup</th>
                     <th>Edit Followup</th>
                     <th>Start Event</th>
+                    <th>Add Mentor</th>
+                    <th>Remove Mentor</th>
                 </tr>
             </thead>
             <tbody>
@@ -125,6 +127,18 @@
                         <form action="MainController">
                             <input type="hidden" name="eventID" value="<%= event.getEventID()%>"/>                            
                             <input type="submit" name="action" value="StartEvent"/>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="MainController">
+                            <input type="hidden" name="eventID" value="<%= event.getEventID()%>"/>                            
+                            <input type="submit" name="action" value="AddMentor"/>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="MainController">
+                            <input type="hidden" name="eventID" value="<%= event.getEventID()%>"/>                            
+                            <input type="submit" name="action" value="RemoveMentor"/>
                         </form>
                     </td>
                 </tr>
