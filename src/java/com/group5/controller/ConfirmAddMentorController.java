@@ -7,12 +7,8 @@ package com.group5.controller;
 
 import com.group5.memtorEvent.MentorEventDAO;
 import com.group5.memtorEvent.MentorEventDTO;
-import com.group5.users.UserDAO;
-import com.group5.users.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,10 +18,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Minh Khoa
  */
-public class AddMentorController extends HttpServlet {
+public class ConfirmAddMentorController extends HttpServlet {
 
- private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "addMentor.jsp";
+    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "AddMentorController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -33,28 +29,39 @@ public class AddMentorController extends HttpServlet {
         String url =ERROR;
         try {
             String eventID = request.getParameter("eventID");
-            List<MentorEventDTO> mentorsThisEvent = new ArrayList<>();
-            MentorEventDAO mentorEventDAO = new MentorEventDAO();
-            mentorsThisEvent = mentorEventDAO.getListMentorInThisEvent(eventID);
+            String mentorID = request.getParameter("mentorID");
             
-            List<UserDTO> mentorList = new ArrayList<>();
-            UserDAO mentordao = new UserDAO();
-            mentorList=mentordao.getListMentor();
+            MentorEventDTO mentorEvent = new MentorEventDTO();
+            MentorEventDAO dao = new MentorEventDAO();
+            mentorEvent = dao.checkMentorEvent(eventID, mentorID);
+            if (mentorEvent.getMentorID() != null) {
+                if(mentorEvent.getMentorEventStatus().equals("DACT")){
+                    boolean check = dao.updateMentorEvent(mentorEvent.getMentorEventID(), "ACT");
+                    if (check) {
+                        url = SUCCESS;
+                    }
+                }
+                else{
+                    url = SUCCESS;
+                }
+            }
+            else{
+                String mentorEventID = "MTEV_ID-"+System.currentTimeMillis();
+                boolean checkAdd = dao.addMentorEvent(new MentorEventDTO(mentorEventID, eventID, mentorID, "ACT"));
+                if (checkAdd) {
+                    url = SUCCESS;
+                }
+            }
+            request.setAttribute("eventID", eventID);
             
-            request.setAttribute("LIST_MENTOR", mentorList);
-            request.setAttribute("LIST_MENTOR_THIS_EVENT", mentorsThisEvent);
-            
-            
-            //request.setAttribute("eventID", request.getParameter("eventID"));
-//            request.setAttribute("eventName", request.getParameter("eventName"));
-            url = SUCCESS;
             
         } catch (Exception e) {            
-            request.setAttribute("ERROR_MESSAGE","Error at AddMentorController");
+            request.setAttribute("ERROR_MESSAGE","Error at ConfirmAddMentorController");
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
-    }    
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

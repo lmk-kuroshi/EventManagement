@@ -49,7 +49,8 @@ public class MainController extends HttpServlet {
     private static final String SHOW_FOLLOW = "ShowFollowEventController";
     private static final String SHOW_EVENT_DETAIL = "eventDetail.jsp";
     private static final String ADD_MENTOR = "AddMentorController";
-    private static final String REMOVE_MENTOR = "RemoveMentorController";
+    private static final String CONFIRM_ADD_MENTOR = "ConfirmAddMentorController";
+    private static final String CONFIRM_REMOVE_MENTOR = "ConfirmRemoveMentorController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -125,8 +126,11 @@ public class MainController extends HttpServlet {
              else if("AddMentor".equals(action)){
                 url = ADD_MENTOR;
             }
-             else if("RemoveMentor".equals(action)){
-                url = REMOVE_MENTOR;
+             else if("ConfirmAddMentor".equals(action)){
+                url = CONFIRM_ADD_MENTOR;
+            }
+             else if("ConfirmRemoveMentor".equals(action)){
+                url = CONFIRM_REMOVE_MENTOR;
             }
              else {
                 HttpSession session = request.getSession();
