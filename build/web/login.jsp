@@ -11,17 +11,21 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link href="css/loginStyle.css" rel="stylesheet" >
+        <link rel="stylesheet"
+              href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
     </head>
     <body>
-<!--        <a href="https://accounts.google.com/o/oauth2/auth?scope=profile%20email&redirect_uri=http://localhost:8080/EventManagement/LoginGoogleHandler&response_type=code
-    &client_id=428640701768-fgq8e77is2ufa6l6q758mpp9262gls0e.apps.googleusercontent.com&approval_prompt=force">Login With FPT mail</a>  -->
-        
+        <!--        <a href="https://accounts.google.com/o/oauth2/auth?scope=profile%20email&redirect_uri=http://localhost:8080/EventManagement/LoginGoogleHandler&response_type=code
+            &client_id=428640701768-fgq8e77is2ufa6l6q758mpp9262gls0e.apps.googleusercontent.com&approval_prompt=force">Login With FPT mail</a>  -->
+
         <div class="wrapper">
             <nav class="navbar">
-                <img class="logo" src="css/img/logo.png">
+                <div class="icon">
+                    <h2><img class="logo" src="css/img/logo.png"> <span>Event</span></h2>
+                </div>
                 <ul>
                     <li><a class="active" href="https://accounts.google.com/o/oauth2/auth?scope=profile%20email&redirect_uri=http://localhost:8080/EventManagement/LoginGoogleHandler&response_type=code
-    &client_id=428640701768-fgq8e77is2ufa6l6q758mpp9262gls0e.apps.googleusercontent.com&approval_prompt=force">
+                           &client_id=428640701768-fgq8e77is2ufa6l6q758mpp9262gls0e.apps.googleusercontent.com&approval_prompt=force">
                             <img class src="css/img/logo-gg-new.png">
                             Sign in with @fpt.edu.vn</a></li>
                 </ul>
@@ -33,11 +37,24 @@
 
 
         </div>
-        <div class="footer-bar">
         <footer>
-            <h2><img class="logo" src="css/img/footerLogo.svg"/></h2>
-            <p class="copyright">© 2021 GROUP 5</p>
-        </footer>
+            <div class="footer-align">
+                <div class="footer-copyright">
+                    <h3><img class="logo" src="css/img/logo.png"/><span>Event</span></h3>
+                    <small class="copyright">Copyright © 2021 by GROUP 5</small>
+                </div>
+                <div class="follow-contact">
+                    <h3>Contact</h3>
+                    <small><span class="las la-envelope"></span><span> eventnotifygroup5@gmail.com</span></small>
+                    <br>
+                    <small><span class="las la-phone"></span><span> 0914 291 596</span></small>
+                </div>
+                <div class="follow-address">
+                    <h3>Address</h3>
+                    <small><span class="las la-map-marker-alt"></span><span> Lô E2a-7, Đường D1, Khu Công Nghệ Cao, Long Thạnh</span>
+                        <br><span> Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh</span></small>
+                </div>
             </div>
+        </footer>
     </body>
 </html>

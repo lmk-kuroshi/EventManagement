@@ -42,7 +42,7 @@ public class EventDAO {
                         +    " WHERE tblEvent.categoryID = tblCategory.categoryID " 
                         +    " AND tblEvent.creatorID = tblUser.userID " 
                         +    " AND tblEvent.locationID = tblLocation.locationID and " 
-                        +    " eventName like ? AND categoryName like ? ";
+                        +    " eventName like ? AND categoryName like ?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, "%" + search + "%");
                 stm.setString(2, "%" + categoryName + "%");

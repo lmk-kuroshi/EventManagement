@@ -19,6 +19,7 @@
         <link href="css/hompageStyle.css" rel="stylesheet" />
         <link rel="stylesheet"
               href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     </head>
     <body>
         <%
@@ -37,84 +38,80 @@
             request.setAttribute("LIST_CATEGORY", categoryList);
         %>
 
-
-        <input type="checkbox" id="nav-toggle">
         <div class="sidebar">
-            <div class="sidebar-brand">
-                <h2><img class="logo" src="css/img/logo.png"> <span>Software</span></h2>
+            <div class="logo-details">
+                <img class="logo" src="css/img/logo.png"> 
+                <!--                <i class='bx bxl-c-plus-plus'></i>-->
+                <span class="logo_name">Event</span>
             </div>
-            <div class="sidebar-menu">
-                <ul>
+            <div class="sidebar-line"></div>
+            <ul class="nav-links">
+                <div class="sidebar-align">
                     <li>
-                        <!--<a href="" class="active"><span class="las la-igloo"></span> <span>Dashboard</span></a>-->
-                        <a href="leader.jsp" class="active"><span class="las la-chart-line"></span> <span>Trending</span></a>
+
+                        <a href="SearchController">
+                            <!--                        <i class='bx bx-grid-alt' ></i>-->
+                            <i class="las la-chart-line"></i>
+                            <span class="links_name">Trending</span>
+                        </a>
+
+                        <span class="tooltip">Trending</span>
                     </li>
                     <li>
-                        <a href=""><span class="lab la-buromobelexperte"></span> <span>Category</span></a>
-                        <!--<span class="las la-users"></span> <span>Category</span>-->
-                        <!--                        <div class="dropdown" data-dropdown>
-                                                    <button class="link" data-dropdown-button>Category</button>
-                                                    <div class="dropdown-menu information-grid">
-                                                        <div>
-                                                            <div class="dropdown-heading">Free Tutorials</div>
-                                                            <div class="dropdown-links">
-                                                                <a href="#" class="link">All</a>
-                                                                <a href="#" class="link">Latest</a>
-                                                                <a href="#" class="link">Popular</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>-->
-                    </li>
-                    <!--
- /*                <li>
-                        <a href=""><span class="las la-clipboard-list"></span><span>Projects</span></a>
-                    </li> --*/
-                    -->                 <li>
-                        <a href="ShowFollowEventController"><span class="las la-bell"></span> <span>Notify</span></a>
-                    </li>
-                    
-                    <li>
-                        <a href="CreateEventController"><span class="las la-calendar-plus"></span><span>CreateEvent</span></a>  
+                        <a href="ShowFollowEventController">
+                            <i class='las la-bell' ></i>
+                            <span class="links_name">Notify</span>
+                        </a>
+                        <span class="tooltip">Notify</span>
                     </li>
                     <li>
-                        <a href="ShowListEditEventController"><span class="las la-eye"></span><span>ShowListEditEvent</span></a>  
+                        <a href="CreateEventController">
+                            <i class='las la-calendar-plus' ></i>
+                            <span class="links_name">Create Event</span>
+                        </a>
+                        <span class="tooltip">Create Event</span>
                     </li>
                     <li>
-                        <a href="changeRole.jsp"><span class="las la-scroll"></span><span>Change Role</span></a>  
+                        <a href="ShowListEditEventController">
+                            <i class='las la-eye' ></i>
+                            <span class="links_name">Show List Edit Event</span>
+                        </a>
+                        <span class="tooltip">Show List Edit Event</span>
                     </li>
-                    
-                    <!--
                     <li>
-                        <a href=""><span class="las la-receipt"></span> <span>Inventory</span></a>
-                    </li>-->
-                    <li>
-                        <a href=""><span class="las la-user-circle"></span> <span>Accounts</span></a>
+                        <a href="ShowFollowEventController">
+                            <i class='las la-user-circle' ></i>
+                            <span class="links_name">Accounts</span>
+                        </a>
+                        <span class="tooltip">Accounts</span>
                     </li>
-                    <!--                    <li>
-                                            <a href=""><span class="las la-clipboard-list"></span> <span>Tasks</span></a>
-                                        </li>-->
                     <li>
-                        <div class="logout">
-                            <form action="MainController">
-                                <a> 
-                                    <span class="las la-door-open"></span> <span><input type="submit" name="action" value="Logout"/> </span>
-                                </a>
-                            </form>
-                        </div>
+                        <a href="changeRole.jsp">
+                            <i class='las la-scroll' ></i>
+                            <span class="links_name">Change Role</span>
+                        </a>
+                        <span class="tooltip">Change Role</span>
                     </li>
-                </ul>
-            </div>
+                    <li>
+                        <form action="MainController">
+                            <a href="LogoutController">
+                                <i class='las la-door-open' ></i>
+                                <span class="links_name">Logout</span>
+                            </a>
+                        </form>
+                        <span class="tooltip">Logout</span>
+                    </li>
+                </div>
+            </ul>
         </div>
+
+
         <div class="main-content">
             <header>
-                <h2>
-                    <label for="nav-toggle">
-                        <span class="las la-bars"></span>
-                    </label>
-
-                    <span>Dashboard</span>
-                </h2>
+                <div class="sidebar-button">
+                    <i class='bx bx-menu sidebarBtn'></i>
+                    <span class="dashboard">Dashboard</span>
+                </div>
                 <div class="search-wrapper">
                     <!--                <span class="las la-search"></span>
                                     <input type="search" placeholder="Search here" />-->
@@ -165,18 +162,33 @@
                         </div>
                     </div>
 
-                <%
+                    <%
+                                }
                             }
                         }
-                    }
-                %>
+                    %>
                 </div>
             </main>
             <footer>
-                <h2><img class="logo" src="css/img/footerLogo.svg"/></h2>
-                <p class="copyright">© 2021 GROUP 5</p>
+                <div class="footer-align">
+                    <div class="footer-copyright">
+                        <h3><img class="logo" src="css/img/logo.png"/><span>Event</span></h3>
+                        <small class="copyright">Copyright © 2021 by GROUP 5</small>
+                    </div>
+                    <div class="follow-contact">
+                        <h3>Contact</h3>
+                        <small><span class="las la-envelope"></span><span> eventnotifygroup5@gmail.com</span></small>
+                        <br>
+                        <small><span class="las la-phone"></span><span> 0914 291 596</span></small>
+                    </div>
+                    <div class="follow-address">
+                        <h3>Address</h3>
+                        <small><span class="las la-map-marker-alt"></span><span> Lô E2a-7, Đường D1, Khu Công Nghệ Cao, Long Thạnh</span>
+                            <br><span> Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh</span></small>
+                    </div>
+                </div>
             </footer>
         </div>
-
+        <script src="js/DashboardBtn.js"></script>
     </body>
 </html>
