@@ -5,6 +5,7 @@
  */
 package com.group5.event;
 
+import com.group5.follow.FollowerDTO;
 import com.group5.utils.DBUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -422,5 +423,91 @@ public class EventDAO {
             Logger.getLogger(EventDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return  null;
+    }
+    
+    public boolean sendMailNotification(String notification, String eventID) throws SQLException, ClassNotFoundException, MessagingException {
+       Properties properties = new Properties();
+        System.out.println("Prepare!");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+        
+        String myAccountEmail = "eventnotifygroup5@gmail.com";
+        String password = "eventgroup5";
+        
+        Session session = Session.getInstance(properties, new Authenticator() {
+        
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication(){
+                return new PasswordAuthentication(myAccountEmail, password);
+            }
+                    
+        });
+        List<FollowerDTO> listFollower = new ArrayList<>();
+        listFollower = getListWhoFollowedEvent(eventID);
+        String email;
+        for (FollowerDTO list : listFollower) {
+        String htmlCode ="Dear " + list.getFollowerName() + ",<br> Your event you followed( " + list.getEventName() + ") has been "+ notification + ".<br>Please see the details so you don't miss the event information<br>Thank you,<br>Panda. ";
+        email = list.getEmail();
+        Message message = prepareMessageNotification(session, myAccountEmail, email, htmlCode);//knguyen9047@gmail.com
+        Transport.send(message);
+        }
+        System.out.println("Message sent seccessfully!");
+        return true;
+    }
+    
+    private static Message prepareMessageNotification(Session session, String myAccountEmail, String recepient, String htmlCode){
+        
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(myAccountEmail));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
+            message.setSubject("Notification about event you followed");
+            
+            message.setContent(htmlCode ,"text/html");
+            return message;
+        } catch (Exception ex) {
+            Logger.getLogger(EventDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return  null;
+    }
+    public List<FollowerDTO> getListWhoFollowedEvent(String eventID) throws SQLException {
+        List<FollowerDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtil.getConnection();
+            if (conn != null) {
+                String sql = "select  tblFollow.eventID, studentID, followStatus, userID, userEmail, userName , eventName From tblFollow, tblUser, tblEvent " 
+                        +    " WHERE studentID = userID AND tblEvent.eventID = tblFollow.eventID AND tblFollow.followStatus = 'followed' AND tblFollow.eventID like ?  " ;
+                        
+               stm = conn.prepareStatement(sql);
+               stm.setString(1, "%" + eventID + "%");
+               rs = stm.executeQuery();
+                while (rs.next()) {
+                    String eventName = rs.getString("eventName");
+                    String userName = rs.getString("userName");
+                    String userEmail = rs.getString("userEmail");
+                    
+                               
+                    list.add(new FollowerDTO(eventName, userName, userEmail));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
     }
 }

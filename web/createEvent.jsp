@@ -19,6 +19,7 @@
         <link href="css/createEventStyle.css" rel="stylesheet" >
         <link rel="stylesheet"
               href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+        <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
     </head>
     <body>
         <%
@@ -167,7 +168,8 @@
                                     }
                                 %>
                             </select>
-                            Event Detail: <textarea id="editor" name="eventDetail"></textarea>
+                            Event Detail: 
+                            <br> <textarea id="editor" name="eventDetail"></textarea><br>
                             <%= eventError.getEventDetailError()%></br><br>
                             Maximum seat: <input type="number" name="seat"/>
                             <%= eventError.getSeatError()%></br><br>
@@ -196,14 +198,16 @@
             </footer>
         </div>
         <script>
+            
             ClassicEditor
                     .create(document.querySelector('#editor'), {
-
-                        toolbar: ['Heading', '|', 'bold', 'italic', 'link', '|', 'numberedList', 'bulletedList', 'outdent', 'indent', '|', 'undo', 'redo']
+                        
+                        toolbar: ['Heading', '|', 'bold', 'italic', 'link', '|', 'numberedList', 'bulletedList', '|', 'undo', 'redo']
                     })
                     .catch(error => {
                         console.log(error);
                     });
+            
         </script>
     </body>
 </html>

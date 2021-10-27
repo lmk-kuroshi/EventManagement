@@ -37,12 +37,14 @@ public class EditEventController extends HttpServlet {
         String url=ERROR;
         try {
             String eventID = request.getParameter("eventID");
+            String notification = "new updated";
             
             EventDAO dao = new EventDAO();
                 EventDTO event = dao.getEventByID(eventID);
             if (event != null) {
                 request.setAttribute("EVENT_EDIT", event);
                 url = SUCCESS;
+                dao.sendMailNotification(notification, eventID);
             }
             CategoryDAO catedao = new CategoryDAO();
             List<CategoryDTO> listCategory = new ArrayList<>();

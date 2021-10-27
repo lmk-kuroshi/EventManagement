@@ -29,7 +29,7 @@ public class AddFollowupController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
     private static final String SUCCESS = "leader.jsp";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -39,19 +39,21 @@ public class AddFollowupController extends HttpServlet {
             String followupDetail = request.getParameter("followupDetail");
             String followupImage = request.getParameter("followupImage");
             String followupVideo = request.getParameter("followupVideo");
-            
-            String followupID = "FL-"+ System.currentTimeMillis();
-            
+            String notification = request.getParameter("notification");
+
+            String followupID = "FL-" + System.currentTimeMillis();
+
             FollowupDTO followup = new FollowupDTO(followupID, eventID, followupDetail, followupImage, followupVideo);
             FollowupDAO dao = new FollowupDAO();
-            
+            EventDAO daos = new EventDAO();
             boolean checkInsert = dao.addFollowup(followup);
-                    if (checkInsert) {
-                        url = SUCCESS;
-                    }
-            
+            if (checkInsert) {
+                url = SUCCESS;
+                checkInsert = daos.sendMailNotification(notification, eventID);
+            }
+
         } catch (Exception e) {
-            request.setAttribute("ERROR_MESSAGE","Error at AddFollowupController");
+            request.setAttribute("ERROR_MESSAGE", "Error at AddFollowupController");
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
