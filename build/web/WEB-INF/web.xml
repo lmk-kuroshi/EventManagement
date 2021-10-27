@@ -104,6 +104,14 @@
         <servlet-name>RemoveMentorController</servlet-name>
         <servlet-class>com.group5.controller.RemoveMentorController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ConfirmAddMentorController</servlet-name>
+        <servlet-class>com.group5.controller.ConfirmAddMentorController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfirmRemoveMentorController</servlet-name>
+        <servlet-class>com.group5.controller.ConfirmRemoveMentorController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginGoogleHandler</servlet-name>
         <url-pattern>/LoginGoogleHandler</url-pattern>
@@ -207,6 +215,14 @@
     <servlet-mapping>
         <servlet-name>RemoveMentorController</servlet-name>
         <url-pattern>/RemoveMentorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmAddMentorController</servlet-name>
+        <url-pattern>/ConfirmAddMentorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmRemoveMentorController</servlet-name>
+        <url-pattern>/ConfirmRemoveMentorController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
