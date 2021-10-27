@@ -32,6 +32,7 @@ public class ConfirmRemoveMentorController extends HttpServlet {
             
             MentorEventDTO mentorEvent = new MentorEventDTO();
             MentorEventDAO dao = new MentorEventDAO();
+            //check ID
             mentorEvent = dao.checkMentorEvent(eventID, mentorID);
             if (mentorEvent.getMentorID() != null) {
                     boolean check = dao.updateMentorEvent(mentorEvent.getMentorEventID(), "DACT");
