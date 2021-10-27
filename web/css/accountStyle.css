@@ -14,8 +14,8 @@ and open the template in the editor.
 
 :root{
     /*--main-color:#DD2f6E;*/ 
-    --main-color:#1C232C; 
-    /*    --main-color: #11101D; */
+    /*    --main-color:#1C232C; */
+    --main-color: #11101D; 
     /*    --main-color:#2e86de;*/
     --color-dark: #1D2231;
     --text-grey: #8390A2;
@@ -33,67 +33,6 @@ form
     font-family: "Times New Roman", Times, serif;
 }
 
-.content-table {
-    margin-left: auto;
-    margin-right: auto;
-    border-collapse: collapse;
-    font-size: 0.9em;
-    min-width: 400px;
-    border-radius: 5px 5px 0 0;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    font-family: "Times New Roman", Times, serif;
-}
-
-.content-table thead tr {
-    /*background-color: #009879;*/
-    background-color: var(--main-color);
-    color: #ffffff;
-    text-align: left;
-    font-weight: bold;
-
-}
-
-.content-table th,
-.content-table td {
-    padding: 12px 15px;
-}
-
-.content-table tbody tr {
-    /*border-bottom: 1px solid #dddddd;*/
-    background-color: white;
-}
-
-.content-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-
-.content-table tbody tr:last-of-type {
-    border-bottom: 2px solid var(--main-color);
-}
-
-.content-table tbody tr.active-row {
-    font-weight: bold;
-    color: #009879;
-}
-
-.content-table tbody input{
-    border: none;
-    width: 100%;
-    background-color: inherit;
-}
-
-.content-table tbody button{
-    border-radius: 12px;
-    background: var(--main-color);
-    color: white;
-    padding: 8px 18px;
-}
-
-
-
-
-
 *{
     padding: 0;
     margin: 0;
@@ -108,7 +47,8 @@ form
     left: 0;
     top: 0;
     height: 100%;
-    width: 95px;
+    width: 285px;
+    /*width: 95px;*/
     /*    background: #11101D;*/
     background: var(--main-color);
     /*    padding: 6px 14px;*/
@@ -122,8 +62,9 @@ form
     height: 1px;
     background: #fff;
 }
-.sidebar.active{
-    width: 285px;
+.sidebar.close{
+    /*width: 285px;*/
+    width: 95px;
 }
 
 .sidebar .logo-details{
@@ -145,12 +86,14 @@ form
     color: #fff;
     font-size: 25px;
     font-weight: 600;
-    opacity: 0;
+    /*opacity: 0;*/
+    opacity: 1;
     transition: all 0.5s ease;
     margin-left: 1rem;
 }
-.sidebar.active .logo-details .logo_name{
-    opacity: 1;
+.sidebar.close .logo-details .logo_name{
+    /*opacity: 1;*/
+    opacity: 0;
 }
 .sidebar i{
     color: #fff;
@@ -170,7 +113,8 @@ form
     margin: 8px 0;
     list-style: none;
 }
-.sidebar .nav-links li .tooltip{
+.sidebar.close .nav-links li .tooltip{
+    display: inline-block;
     position: absolute;
     top: -20px;
     left: calc(100% + 15px);
@@ -186,14 +130,14 @@ form
     pointer-events: none;
     transition: 0s;
 }
-.sidebar .nav-links li:hover .tooltip{
+.sidebar.close .nav-links li:hover .tooltip{
     opacity: 1;
     pointer-events: auto;
     transition: all 0.4s ease;
     top: 50%;
     transform: translateY(-50%);
 }
-.sidebar.active .nav-links li .tooltip{
+.sidebar .nav-links li .tooltip{
     display: none;
 }
 
@@ -206,7 +150,8 @@ form
     text-decoration: none;
     transition: all 0.4s ease;
     /*    background: #11101D;*/
-    background: var(--main-color);
+    /*    background: var(--main-color);*/
+    background: inherit;
 }
 .sidebar .nav-links li a:hover{
     background: #FFF;
@@ -216,12 +161,12 @@ form
     font-size: 17px;
     font-weight: 500;
     white-space: nowrap;
-    opacity: 0;
+    opacity: 1;
     pointer-events: none;
     transition: 0.4s;
 }
-.sidebar.active .nav-links li a .links_name{
-    opacity: 1;
+.sidebar.close .nav-links li a .links_name{
+    opacity: 0;
     pointer-events: auto;
 }
 .sidebar .nav-links li a:hover .links_name,
@@ -242,14 +187,18 @@ form
     position: relative;
     background: #f5f5f5;
     min-height: 100vh;
-    width: calc(100% - 95px);
-    left: 95px;
+    width: calc(100% - 285px);
+    left: 285px;
+    /*    width: calc(100% - 95px);
+        left: 95px;*/
     transition: all 0.5s ease;
 }
 
-.sidebar.active ~ .main-content{
-    width: calc(100% - 285px);
-    left: 285px;
+.sidebar.close ~ .main-content{
+    width: calc(100% - 95px);
+    left: 95px;
+    /*    width: calc(100% - 285px);
+        left: 285px;*/
 }
 
 header{
@@ -259,17 +208,21 @@ header{
     padding: 1rem 1.5rem;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
     position: fixed;
-    width: calc(100% - 95px);
-    left: 95px;
+    /*    width: calc(100% - 95px);
+        left: 95px;*/
+    width: calc(100% - 285px);
+    left: 285px;
     top: 0;
     z-index: 100;
     transition: all 0.5s ease;
 }
 
 
-.sidebar.active ~ .main-content header{
-    left: 285px;
-    width: calc(100% - 285px);
+.sidebar.close ~ .main-content header{
+    left: 95px;
+    width: calc(100% - 95px);
+    /*    left: 285px;
+        width: calc(100% - 285px);*/
 }
 
 .main-content header .sidebar-button{
@@ -520,80 +473,115 @@ footer .footer-copyright .logo{
 }
 
 
-.event-card{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 2rem;
-    margin: 1rem 2rem 1rem 2rem;
+
+.sidebar .nav-links i.arrow{
+    margin-left: 60px;
+    animation: fadeIn 1s;
+    opacity: 1;
 }
 
-.event-card-single{
-    width: 270px;
-    height: 400px;
-    justify-content: space-between;
-    background: #fff;
-    padding: 0;
-    border-radius: 2px;
-    color: black;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+@keyframes fadeIn {
+  from {
+  	opacity: 0;
+  }
+  to {
+ 	opacity: 1;
+  }
 }
 
-.event-card-single img{
-    display: inline-block;
-    position: relative;
-    width: 100%;
-    height: 40%;
+.sidebar .nav-links li.showMenu i.arrow{
+    transform: rotate(-180deg);
+}
+.sidebar.close .nav-links i.arrow{
+    display: none;
+    opacity: 0;
 }
 
-
-.event-card-single a{
-    font-size: 1.3rem;
-    font-family: 'Poppins',sans-serif;
-    text-decoration: blue;
+.sidebar .nav-links li a .link_name{
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+    transition: all 0.4s ease;
 }
-
-.event-card-single span,
-.event-card-single a{
-    display: inline-block;
-    position: relative;
-    text-align: center;
-    padding: .5rem;
-    width: 100%;
+.sidebar.close .nav-links li a .link_name{
+    opacity: 0;
+    pointer-events: none;
 }
-
-.event-card-single .event-name{
-    color: #ff6600;
-    font-family: 'Abril Fatface', cursive;
-    font-size: 22px;
+.sidebar .nav-links li .sub-menu{
+    border-radius: 6px 6px 6px 6px;
+    padding:14px 2.5rem;
+    /*padding: 6px 6px 14px 80px;*/
+    margin-top: -3px;
+    background: #1d1b31;
+    display: none;
+    align-content: center;
 }
-
-.event-card-single span {
-    font-family: 'Karla', sans-serif;
-    font-size: 16px;
+.sidebar .nav-links li.showMenu .sub-menu{
+    display: block;
 }
+.sidebar .nav-links li .sub-menu a{
+    color: #fff;
+    font-size: 15px;
+    padding: 5px 0;
+    white-space: nowrap;
+    opacity: 0.6;
+    transition: all 0.3s ease;
 
-main .back-separate h1{
+}
+.sidebar .nav-links li .sub-menu a:hover{
+    opacity: 1;
+}
+.sidebar.close .nav-links li .sub-menu{
     position: absolute;
-    font-family: 'Lobster', cursive;
-    margin-left: 3rem;
-    margin-top: 1px;
-    color: #ff6600;
-    vertical-align: central;
+    left: 100%;
+    top: -10px;
+    margin-top: 0;
+    padding: 10px 20px;
+    border-radius: 0 6px 6px 0;
+    opacity: 0;
+    display: block;
+    pointer-events: none;
+    transition: 0s;
+    margin-left: 14px;
+    z-index: 4;
+}
+.sidebar.close .nav-links li:hover .sub-menu{
+    top: 0;
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0.4s ease;
+}
+.sidebar .nav-links li .sub-menu .link_name{
+    display: none;
+}
+.sidebar.close .nav-links li .sub-menu .link_name{
+    font-size: 18px;
+    opacity: 1;
+    display: block;
+}
+.sidebar .nav-links li .sub-menu.blank{
+    opacity: 1;
+    pointer-events: auto;
+    padding: 3px 20px 6px 16px;
+    opacity: 0;
+    pointer-events: none;
+}
+.sidebar .nav-links li:hover .sub-menu.blank{
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-main .back-separate{
-    margin: 2rem 0;
-    padding: 0;
-    height: 3rem;
-    background:  #fff;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+.sidebar .nav-links .sub-menu li a:hover{
+    background: inherit;
 }
+
 
 main .account-card{
+    width: 85%;
     height: 400px;
     background: #fff;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    margin: 3rem 15rem;
+    margin: 3rem 0rem 3rem 10rem;
 }
 
 main .account-card-align{

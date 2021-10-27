@@ -1,35 +1,31 @@
 <%-- 
-    Document   : leader
-    Created on : Sep 29, 2021, 2:10:57 PM
-    Author     : Minh Khoa
+    Document   : notificationLeader
+    Created on : Oct 27, 2021, 5:49:37 PM
+    Author     : DELL
 --%>
-
 <%@page import="com.group5.category.CategoryDAO"%>
 <%@page import="com.group5.category.CategoryDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="com.group5.event.EventDTO"%>
+<%@page import="com.group5.follow.FollowDTO"%>
 <%@page import="com.group5.users.UserDTO"%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Leader Page</title>
-        <link href="css/hompageStyle.css" rel="stylesheet" />
+        <title>Notification Leader Page</title>
+        <link href="css/notificationStyle.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
         <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     </head>
     <body>
         <%
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-
             String search = request.getParameter("search");
             if (search == null) {
                 search = "";
             }
-        %>    
-
+        %>
         <%
             List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
             CategoryDAO catedao = new CategoryDAO();
@@ -124,7 +120,6 @@
             </ul>
         </div>
 
-
         <div class="main-content">
             <header>
                 <div class="sidebar-button">
@@ -146,108 +141,54 @@
                     </div>
                 </div>
             </header>
-
             <main>
-                <%
-                    String message = (String) request.getAttribute("SEARCH_EVENT_MESSAGE");
-                    if (message == null) {
-                        message = "";
-                    }
-                %>
+                <div class="follow-card">
+                    <div class="follow-align">
+                        <form action="MainController">
+                            <input type="hidden" name="eventID" value="<%=loginUser.getId()%>"/>
+                            <input type="submit" name="action" value="ShowFollowEvent"/>
+                        </form>
 
-                <!--<%= message%><br>-->
-                <div class="back-separate">
-                    <h1>Ongoing Event</h1>
-                </div>
-                <div class="event-card">
-                    <%
-                        List<EventDTO> onlist = (List<EventDTO>) request.getAttribute("LIST_EVENT_ONGOING");
-                        if (onlist != null) {
-                            if (!onlist.isEmpty()) {
-                                for (EventDTO event : onlist) {
+                        <%
+                            List<FollowDTO> followList = (List<FollowDTO>) request.getAttribute("FOLLOW_LIST");
+                            if (followList != null) {
+                                if (!followList.isEmpty()) {
+                        %>    
+                        <table border="1">
+                            <thead>
+                                <tr>
+                                    <th>Event Name</th>   
+                                    <th>Unfollow</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%
+                                    for (FollowDTO follow : followList) {
+                                %>
+                                <tr>
+                                    <td><%=follow.getEventName()%></td>
+                                    <td>
+                                        <form action="MainController">
+                                            <input type="hidden" name="eventID" value="<%=follow.getEventID()%>"/>
+                                            <input type="submit" name="action" value="FollowOrUnfollow"/>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <%
 
-                    %> 
-                    <div class="event-card-single" >
-                        <img src="<%=event.getImage()%>" alt="Image Event"/>
-                        <div>
-                            <a href="eventDetailLeader.jsp?id=<%=event.getEventID()%>&name=<%=event.getEventName()%>&creatorID=<%=event.getCreatorID()%>&categoryID=<%=event.getCategoryID()%>
-                               &location=<%=event.getLocationID()%>&eventDetail=<%=event.getEventDetail()%>&seat=<%=event.getSeat()%>&startTime=<%=event.getStartTime()%>
-                               &endTime=<%=event.getEndTime()%>&creatTime=<%=event.getCreateTime()%>&image=<%=event.getImage()%>&video=<%=event.getVideo()%>
-                               &status=<%=event.getStatus()%>"> <span class="event-name"><%=event.getEventName()%></span></a>
-                            <span>Start: <%=event.getStartTime()%></span>
-                            <span>Ends: <%=event.getEndTime()%></span>
-                            <span>Category: <%=event.getCategoryID()%></span>
-                        </div>
+                                            }
+
+                                        }
+
+                                    }
+
+                                %>
+                            </tbody>
+
+                        </table>
                     </div>
-
-                    <%
-                                }
-                            }
-                        }
-                    %>
                 </div>
-                <div class="back-separate">
-                    <h1>Upcoming Event</h1>
-                </div>
-                <div class="event-card">
-                    <%
-                        List<EventDTO> uplist = (List<EventDTO>) request.getAttribute("LIST_EVENT_UPCOMING");
-                        if (uplist != null) {
-                            if (!uplist.isEmpty()) {
-                                for (EventDTO event : uplist) {
-
-                    %> 
-                    <div class="event-card-single" >
-                        <img src="<%=event.getImage()%>" alt="Image Event"/>
-                        <div>
-                            <a href="eventDetailLeader.jsp?id=<%=event.getEventID()%>&name=<%=event.getEventName()%>&creatorID=<%=event.getCreatorID()%>&categoryID=<%=event.getCategoryID()%>
-                               &location=<%=event.getLocationID()%>&eventDetail=<%=event.getEventDetail()%>&seat=<%=event.getSeat()%>&startTime=<%=event.getStartTime()%>
-                               &endTime=<%=event.getEndTime()%>&creatTime=<%=event.getCreateTime()%>&image=<%=event.getImage()%>&video=<%=event.getVideo()%>
-                               &status=<%=event.getStatus()%>"> <span class="event-name"><%=event.getEventName()%></span></a>
-                            <span>Start: <%=event.getStartTime()%></span>
-                            <span>Ends: <%=event.getEndTime()%></span>
-                            <span>Category: <%=event.getCategoryID()%></span>
-                        </div>
-                    </div>
-
-                    <%
-                                }
-                            }
-                        }
-                    %>
-                </div>
-                <div class="back-separate">
-                    <h1>Completed Event</h1>
-                </div>
-                <div class="event-card">
-                    <%
-                        List<EventDTO> comlist = (List<EventDTO>) request.getAttribute("LIST_EVENT_COMPLETE");
-                        if (comlist != null) {
-                            if (!comlist.isEmpty()) {
-                                for (EventDTO event : comlist) {
-
-                    %> 
-                    <div class="event-card-single" >
-                        <img src="<%=event.getImage()%>" alt="Image Event"/>
-                        <div>
-                            <a href="eventDetailLeader.jsp?id=<%=event.getEventID()%>&name=<%=event.getEventName()%>&creatorID=<%=event.getCreatorID()%>&categoryID=<%=event.getCategoryID()%>
-                               &location=<%=event.getLocationID()%>&eventDetail=<%=event.getEventDetail()%>&seat=<%=event.getSeat()%>&startTime=<%=event.getStartTime()%>
-                               &endTime=<%=event.getEndTime()%>&creatTime=<%=event.getCreateTime()%>&image=<%=event.getImage()%>&video=<%=event.getVideo()%>
-                               &status=<%=event.getStatus()%>"> <span class="event-name"><%=event.getEventName()%></span></a>
-                            <span>Start: <%=event.getStartTime()%></span>
-                            <span>Ends: <%=event.getEndTime()%></span>
-                            <span>Category: <%=event.getCategoryID()%></span>
-                        </div>
-                    </div>
-
-                    <%
-                                }
-                            }
-                        }
-                    %>
-
-                </div>
-            </main>
+            </main>       
             <footer>
                 <div class="footer-align">
                     <div class="footer-copyright">
@@ -268,6 +209,7 @@
                 </div>
             </footer>
         </div>
+
         <script src="js/DashboardBtn.js"></script>
     </body>
 </html>

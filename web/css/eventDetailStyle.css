@@ -573,20 +573,24 @@ footer .footer-copyright .logo{
 }
 
 .event-detail-follow button{
+    border:3px solid var(--main-color);
     border-radius: 12px;
     background: var(--main-color);
     color: white;
     padding: 10px 25px;
     font-weight: 900;
+    font-size: 16px;
 }
 
 .event-detail-follow button:hover{
+    border:3px solid var(--main-color);
     border-radius: 12px;
     background: #fff;
     color: var(--main-color);
     padding: 10px 25px;
     font-weight: 900;
     cursor: pointer;
+    font-size: 16px;
 }
 
 .event-detail-info{
@@ -685,4 +689,6 @@ footer .footer-copyright .logo{
 .sidebar .nav-links .sub-menu li a:hover{
     background: inherit;
 }
+
+
 

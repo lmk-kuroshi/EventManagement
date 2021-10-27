@@ -15,8 +15,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Change  Role Page</title>
         <link href="css/changeRoleStyle.css" rel="stylesheet" >
-        <link rel="stylesheet"
-              href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+        <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     </head>
     <body>
         <%
@@ -40,7 +40,6 @@
         <div class="sidebar close">
             <div class="logo-details">
                 <img class="logo" src="css/img/logo.png"> 
-                <!--                <i class='bx bxl-c-plus-plus'></i>-->
                 <span class="logo_name">Event</span>
             </div>
             <div class="sidebar-line"></div>
@@ -49,7 +48,6 @@
                     <li>
 
                         <a href="SearchController">
-                            <!--                        <i class='bx bx-grid-alt' ></i>-->
                             <i class='bx bx-trending-up'></i>
                             <span class="links_name">Trending</span>
                         </a>
@@ -63,7 +61,6 @@
                                 <span class="links_name">Category</span>  
                                 <i class='bx bxs-chevron-down arrow' ></i>
                             </a>
-                            <!--                            <i class='bx bxs-chevron-down arrow' ></i>-->
                         </div>
                         <ul class="sub-menu">
 
@@ -73,12 +70,10 @@
                                         for (CategoryDTO category : categoryList) {
                                 %>
                             <li><a href="SearchController?categoryName=<%=category.getCategoryName()%>"><%=category.getCategoryName()%></a></li>
-                            <!--     //                        <li><a href="#">JavaScript</a></li>
-                                                        <li><a href="#">PHP & MySQL</a></li>-->
-                            <%
+                                <%
+                                        }
                                     }
-                                }
-                            %>
+                                %>
                         </ul>
                     </li>
                     <li>
@@ -123,8 +118,6 @@
                     <span class="dashboard">Dashboard</span>
                 </div>
                 <div class="search-wrapper">
-                    <!--                <span class="las la-search"></span>
-                                    <input type="search" placeholder="Search here" />-->
                     <form action="MainController">
                         <button class="las la-search" type="submit" value="Search" name="action"></button>
                         <input type="text" name="search" value="<%= search%>" placeholder="Search here"/>

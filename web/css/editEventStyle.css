@@ -4,28 +4,22 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : Oct 14, 2021, 8:14:47 AM
-    Author     : DELL
-*/
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Oct 7, 2021, 12:40:15 AM
+    Created on : Oct 27, 2021, 7:30:05 PM
     Author     : DELL
 */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wgt@300;400;500;600;&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
 
 :root{
-    /*--main-color:#DD2f6E;*/ 
-/*    --main-color:#2f3640; */
-    /*--main-color: #222f3e;*/ 
-    /*--main-color:#34495e;*/
+    /*    --main-color:#DD2f6E; 
+        --main-color:#1C232C; */
     --main-color: #11101D; 
-    --color-dark: #1D2231;
-    --text-grey: #8390A2;
+    /*        --main-color:#2e86de;
+        --color-dark: #1D2231;
+        --text-grey: #8390A2;*/
 }
 
 
@@ -35,10 +29,6 @@ form
     overflow: hidden;
 }
 
-
-* {
-    font-family: "Times New Roman", Times, serif;
-}
 
 *{
     padding: 0;
@@ -522,7 +512,7 @@ footer .footer-copyright .logo{
     white-space: nowrap;
     opacity: 0.6;
     transition: all 0.3s ease;
-    
+
 }
 .sidebar .nav-links li .sub-menu a:hover{
     opacity: 1;
@@ -571,7 +561,13 @@ footer .footer-copyright .logo{
     background: inherit;
 }
 
-/*.event-card{
+
+
+
+
+
+
+.event-card{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 2rem;
@@ -610,45 +606,187 @@ footer .footer-copyright .logo{
     text-align: center;
     padding: .5rem;
     width: 100%;
-}*/
+}
 
-.changeRole-card{
-    height: 400px;
+.event-card-single .event-name{
+    color: #ff6600;
+    font-family: 'Abril Fatface', cursive;
+    font-size: 22px;
+}
+
+.event-card-single span {
+    font-family: 'Karla', sans-serif;
+    font-size: 16px;
+}
+
+main .back-separate h1{
+    position: absolute;
+    font-family: 'Lobster', cursive;
+    margin-left: 3rem;
+    margin-top: 1px;
+    color: #ff6600;
+    vertical-align: central;
+}
+
+main .back-separate{
+    margin: 2rem 0;
+    padding: 0;
+    height: 3rem;
+    background:  #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+
+.edit-event-card{
+    height: 80%;
     background: #fff;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     margin: 3rem 5rem;
 }
 
-.changeRole-card-align{
+.edit-event-align{
     padding: 3rem 5rem;
 }
 
-.changeRole-card input{
-    border: none;
-    border-bottom: 2px solid var(--main-color);
-/*    background-color: inherit;*/
-    height: 40px;
-    width: 500px;
+main .edit-event-title{
+    font-weight: 900;
+    font-size: 26px;
+    color: #ff6600;
+    font-family: 'Acme', sans-serif;
 }
 
 
-.changeRole-card button{
-    display: inline-block;
+.content-table {
+    /*    margin-left: auto;
+        margin-right: auto;*/
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    width: 100%;
+    /*    min-width: 400px;*/
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    font-family: "Times New Roman", Times, serif;
+}
+
+.content-table thead tr {
+    /*background-color: #009879;*/
+    background-color: var(--main-color);
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+
+}
+
+.content-table th,
+.content-table td {
+    padding: 12px 15px;
+}
+
+.content-table tbody tr {
+    /*border-bottom: 1px solid #dddddd;*/
+    background-color: white;
+}
+
+.content-table tbody tr:nth-of-type(even) {
+    width: 100%;
+    background-color: #f3f3f3;
+}
+
+.content-table tbody tr:last-of-type {
+    border-bottom: 2px solid var(--main-color);
+}
+
+.content-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+.content-table tbody input{
+    border: none;
+    width: 100%;
+    background-color: inherit;
+}
+
+/*.content-table tbody button{
     border-radius: 12px;
     background: var(--main-color);
     color: white;
-    padding: 10px 20px;
-    margin-top: 2rem;
+    padding: 8px 18px;
+}*/
+
+/*.content-table tbody td{
+    display: inline-block;
+}*/
+
+/*.content-table input[type=submit]{
+    border:3px solid var(--main-color);
+    border-radius: 12px;
+    background: var(--main-color);
+    color: white;
+    padding: 10px 25px;
+    font-weight: 500;
+    font-size: 13px;
 }
 
-.changeRole-card h2{
-    font-weight: 600;
-    font-family: 'SFUIDisplayRegular', sans-serif;
-    text-size:150px;
+.content-table input[type=submit]:hover{
+    border:3px solid var(--main-color);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--main-color);
+    padding: 10px 25px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 13px;
+}*/
+.content-table button a{
+    color: #fff;
+}
+.content-table button a:hover{
+    color: var(--main-color);
+}
+.content-table button{
+    width: 130px;
+    height: auto;
+    border:3px solid var(--main-color);
+    border-radius: 12px;
+    background: var(--main-color);
+    color: white;
+    /*    padding: 10px 25px;*/
+    padding: 8px 18px;
+    font-weight: 500;
+    font-size: 13px;
+    text-align: center;
 }
 
-.changeRole-card h2 span{
-    font-weight: 200;
-    font-family: 'SFUIDisplayRegular', sans-serif;
+.content-table button:hover{
+    width: 130px;
+    height: auto;
+    border:3px solid var(--main-color);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--main-color);
+    /*padding: 10px 25px;*/
+    padding: 8px 18px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 13px;
+    text-align: center;
 }
 
+.content-table .add-followup-align{
+    margin-top: 3rem;
+}
+
+.content-table .event-name{
+    color: #ff6600;
+    font-family: 'Abril Fatface', cursive;
+    font-size: 22px;
+}
+
+.content-table span {
+    font-family: 'Karla', sans-serif;
+    font-size: 16px;
+}

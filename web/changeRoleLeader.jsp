@@ -1,34 +1,34 @@
 <%-- 
-    Document   : leader
-    Created on : Sep 29, 2021, 2:10:57 PM
-    Author     : Minh Khoa
+    Document   : ChangeRoleLeader
+    Created on : Oct 27, 2021, 8:54:06 PM
+    Author     : DELL
 --%>
 
 <%@page import="com.group5.category.CategoryDAO"%>
 <%@page import="com.group5.category.CategoryDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="com.group5.event.EventDTO"%>
 <%@page import="com.group5.users.UserDTO"%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Leader Page</title>
-        <link href="css/hompageStyle.css" rel="stylesheet" />
+        <title>Change  Role Page</title>
+        <link href="css/changeRoleStyle.css" rel="stylesheet" >
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
         <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     </head>
     <body>
         <%
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String reason = "";
 
             String search = request.getParameter("search");
             if (search == null) {
                 search = "";
             }
-        %>    
+        %>
+
 
         <%
             List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
@@ -142,111 +142,34 @@
                     <img src="css/img/2.jpg" width="40px" height="40px" alt="" />
                     <div>
                         <h4><%=loginUser.getName()%></h4>
-                        <small>Leader</small>
+                        <small>Student</small>
                     </div>
                 </div>
             </header>
 
             <main>
-                <%
-                    String message = (String) request.getAttribute("SEARCH_EVENT_MESSAGE");
-                    if (message == null) {
-                        message = "";
-                    }
-                %>
+                <div class="changeRole-card">
+                    <div class="changeRole-card-align">
+                        <form action="MainController">
+                            <input type="hidden" name="nameRegister" value="<%=loginUser.getName()%>" />
+                            <input type="hidden" name="gmail" value="<%=loginUser.getEmail()%>"/>
+                            <br>
+                            <h2>Write clearly: <span>Infomation about role you want to be become, reason,...</span></h2><br>
+                            <br><input class="textbox" size="25%" height="50" name="reason" value="<%=reason%> "placeholder="Infomation about role you want to be become, reason,..."/><br>          
+                            <button type="submit" name="action" value="Confirm Resquest">Confirm Resquest</button><br>
 
-                <!--<%= message%><br>-->
-                <div class="back-separate">
-                    <h1>Ongoing Event</h1>
-                </div>
-                <div class="event-card">
-                    <%
-                        List<EventDTO> onlist = (List<EventDTO>) request.getAttribute("LIST_EVENT_ONGOING");
-                        if (onlist != null) {
-                            if (!onlist.isEmpty()) {
-                                for (EventDTO event : onlist) {
+                            <%
 
-                    %> 
-                    <div class="event-card-single" >
-                        <img src="<%=event.getImage()%>" alt="Image Event"/>
-                        <div>
-                            <a href="eventDetailLeader.jsp?id=<%=event.getEventID()%>&name=<%=event.getEventName()%>&creatorID=<%=event.getCreatorID()%>&categoryID=<%=event.getCategoryID()%>
-                               &location=<%=event.getLocationID()%>&eventDetail=<%=event.getEventDetail()%>&seat=<%=event.getSeat()%>&startTime=<%=event.getStartTime()%>
-                               &endTime=<%=event.getEndTime()%>&creatTime=<%=event.getCreateTime()%>&image=<%=event.getImage()%>&video=<%=event.getVideo()%>
-                               &status=<%=event.getStatus()%>"> <span class="event-name"><%=event.getEventName()%></span></a>
-                            <span>Start: <%=event.getStartTime()%></span>
-                            <span>Ends: <%=event.getEndTime()%></span>
-                            <span>Category: <%=event.getCategoryID()%></span>
-                        </div>
-                    </div>
-
-                    <%
+                                String message = (String) request.getAttribute("STUDENT_MESSAGE");
+                                if (message == null) {
+                                    message = "";
                                 }
-                            }
-                        }
-                    %>
-                </div>
-                <div class="back-separate">
-                    <h1>Upcoming Event</h1>
-                </div>
-                <div class="event-card">
-                    <%
-                        List<EventDTO> uplist = (List<EventDTO>) request.getAttribute("LIST_EVENT_UPCOMING");
-                        if (uplist != null) {
-                            if (!uplist.isEmpty()) {
-                                for (EventDTO event : uplist) {
-
-                    %> 
-                    <div class="event-card-single" >
-                        <img src="<%=event.getImage()%>" alt="Image Event"/>
-                        <div>
-                            <a href="eventDetailLeader.jsp?id=<%=event.getEventID()%>&name=<%=event.getEventName()%>&creatorID=<%=event.getCreatorID()%>&categoryID=<%=event.getCategoryID()%>
-                               &location=<%=event.getLocationID()%>&eventDetail=<%=event.getEventDetail()%>&seat=<%=event.getSeat()%>&startTime=<%=event.getStartTime()%>
-                               &endTime=<%=event.getEndTime()%>&creatTime=<%=event.getCreateTime()%>&image=<%=event.getImage()%>&video=<%=event.getVideo()%>
-                               &status=<%=event.getStatus()%>"> <span class="event-name"><%=event.getEventName()%></span></a>
-                            <span>Start: <%=event.getStartTime()%></span>
-                            <span>Ends: <%=event.getEndTime()%></span>
-                            <span>Category: <%=event.getCategoryID()%></span>
-                        </div>
+                            %>
+                            <%= message%>
+                        </form> 
                     </div>
-
-                    <%
-                                }
-                            }
-                        }
-                    %>
                 </div>
-                <div class="back-separate">
-                    <h1>Completed Event</h1>
-                </div>
-                <div class="event-card">
-                    <%
-                        List<EventDTO> comlist = (List<EventDTO>) request.getAttribute("LIST_EVENT_COMPLETE");
-                        if (comlist != null) {
-                            if (!comlist.isEmpty()) {
-                                for (EventDTO event : comlist) {
 
-                    %> 
-                    <div class="event-card-single" >
-                        <img src="<%=event.getImage()%>" alt="Image Event"/>
-                        <div>
-                            <a href="eventDetailLeader.jsp?id=<%=event.getEventID()%>&name=<%=event.getEventName()%>&creatorID=<%=event.getCreatorID()%>&categoryID=<%=event.getCategoryID()%>
-                               &location=<%=event.getLocationID()%>&eventDetail=<%=event.getEventDetail()%>&seat=<%=event.getSeat()%>&startTime=<%=event.getStartTime()%>
-                               &endTime=<%=event.getEndTime()%>&creatTime=<%=event.getCreateTime()%>&image=<%=event.getImage()%>&video=<%=event.getVideo()%>
-                               &status=<%=event.getStatus()%>"> <span class="event-name"><%=event.getEventName()%></span></a>
-                            <span>Start: <%=event.getStartTime()%></span>
-                            <span>Ends: <%=event.getEndTime()%></span>
-                            <span>Category: <%=event.getCategoryID()%></span>
-                        </div>
-                    </div>
-
-                    <%
-                                }
-                            }
-                        }
-                    %>
-
-                </div>
             </main>
             <footer>
                 <div class="footer-align">

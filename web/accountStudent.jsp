@@ -43,7 +43,7 @@
             String roleName = ro.getRoleName(loginUser.getRoleID());
         %>
 
-        <div class="sidebar">
+        <div class="sidebar close">
             <div class="logo-details">
                 <img class="logo" src="css/img/logo.png"> 
                 <!--                <i class='bx bxl-c-plus-plus'></i>-->
@@ -56,11 +56,34 @@
 
                         <a href="SearchController">
                             <!--                        <i class='bx bx-grid-alt' ></i>-->
-                            <i class="las la-chart-line"></i>
+                            <i class='bx bx-trending-up'></i>
                             <span class="links_name">Trending</span>
                         </a>
 
                         <span class="tooltip">Trending</span>
+                    </li>
+                    <li>
+                        <div class="iocn-link">
+                            <a href="#" class="open-submenu">
+                                <i class='bx bx-collection' ></i>
+                                <span class="links_name">Category</span>  
+                                <i class='bx bxs-chevron-down arrow' ></i>
+                            </a>
+                            <!--                            <i class='bx bxs-chevron-down arrow' ></i>-->
+                        </div>
+                        <ul class="sub-menu">
+
+                            <li><a class="link_name" href="#">Category</a></li>
+                                <%
+                                    if (categoryList != null) {
+                                        for (CategoryDTO category : categoryList) {
+                                %>
+                            <li><a href="SearchController?categoryName=<%=category.getCategoryName()%>"><%=category.getCategoryName()%></a></li>
+                                <%
+                                        }
+                                    }
+                                %>
+                        </ul>
                     </li>
                     <li>
                         <a href="ShowFollowEventController">
@@ -77,7 +100,7 @@
                         <span class="tooltip">Change Role</span>
                     </li>
                     <li>
-                        <a href="ShowFollowEventController">
+                        <a href="accountStudent.jsp">
                             <i class='las la-user-circle' ></i>
                             <span class="links_name">Accounts</span>
                         </a>
@@ -103,8 +126,6 @@
                     <span class="dashboard">Dashboard</span>
                 </div>
                 <div class="search-wrapper">
-                    <!--                <span class="las la-search"></span>
-                                    <input type="search" placeholder="Search here" />-->
                     <form action="MainController">
                         <button class="las la-search" type="submit" value="Search" name="action"></button>
                         <input type="text" name="search" value="<%= search%>" placeholder="Search here"/>
