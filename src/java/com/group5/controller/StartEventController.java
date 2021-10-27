@@ -21,23 +21,24 @@ public class StartEventController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
     private static final String SUCCESS = "ShowListEditEventController";
-    
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        try{
+        try {
             String eventID = request.getParameter("eventID");
+            String notification = request.getParameter("notification");
             EventDAO dao = new EventDAO();
-            
+
             boolean checkUpdate = dao.startEvent(eventID);
-                    if (checkUpdate) {
-                        url = SUCCESS;
-                    }
-        }catch (Exception e){
-            request.setAttribute("ERROR_MESSAGE","Error at CancelEventController");
-        }finally{
+            if (checkUpdate) {
+                url = SUCCESS;
+                dao.sendMailNotification(notification, eventID);
+            }
+        } catch (Exception e) {
+            request.setAttribute("ERROR_MESSAGE", "Error at CancelEventController");
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

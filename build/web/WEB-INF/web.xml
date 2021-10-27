@@ -96,6 +96,14 @@
         <servlet-name>ShowFollowEventController</servlet-name>
         <servlet-class>com.group5.controller.ShowFollowEventController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddMentorController</servlet-name>
+        <servlet-class>com.group5.controller.AddMentorController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveMentorController</servlet-name>
+        <servlet-class>com.group5.controller.RemoveMentorController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginGoogleHandler</servlet-name>
         <url-pattern>/LoginGoogleHandler</url-pattern>
@@ -191,6 +199,14 @@
     <servlet-mapping>
         <servlet-name>ShowFollowEventController</servlet-name>
         <url-pattern>/ShowFollowEventController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddMentorController</servlet-name>
+        <url-pattern>/AddMentorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveMentorController</servlet-name>
+        <url-pattern>/RemoveMentorController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

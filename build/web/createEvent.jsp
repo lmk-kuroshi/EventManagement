@@ -15,9 +15,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Event Page</title>
+        <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
         <link href="css/createEventStyle.css" rel="stylesheet" >
         <link rel="stylesheet"
               href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+        <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
     </head>
     <body>
         <%
@@ -166,7 +168,8 @@
                                     }
                                 %>
                             </select>
-                            Event Detail: <input type="text" name="eventDetail"/>
+                            Event Detail: 
+                            <br> <textarea id="editor" name="eventDetail"></textarea><br>
                             <%= eventError.getEventDetailError()%></br><br>
                             Maximum seat: <input type="number" name="seat"/>
                             <%= eventError.getSeatError()%></br><br>
@@ -194,5 +197,17 @@
                 <p class="copyright">© 2021 GROUP 5</p>
             </footer>
         </div>
+        <script>
+            
+            ClassicEditor
+                    .create(document.querySelector('#editor'), {
+                        
+                        toolbar: ['Heading', '|', 'bold', 'italic', 'link', '|', 'numberedList', 'bulletedList', '|', 'undo', 'redo']
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            
+        </script>
     </body>
 </html>

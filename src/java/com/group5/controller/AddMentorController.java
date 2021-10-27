@@ -5,60 +5,42 @@
  */
 package com.group5.controller;
 
-import com.group5.category.CategoryDAO;
-import com.group5.category.CategoryDTO;
-import com.group5.event.EventDAO;
-import com.group5.event.EventDTO;
-import com.group5.location.LocationDAO;
-import com.group5.location.LocationDTO;
-import com.group5.users.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Minh Khoa
  */
-public class EditEventController extends HttpServlet {
+public class AddMentorController extends HttpServlet {
 
-    private final static String ERROR = "error.jsp";
-    private final static String SUCCESS = "editEvent.jsp";
-    
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url=ERROR;
-        try {
-            String eventID = request.getParameter("eventID");
-            String notification = "new updated";
-            
-            EventDAO dao = new EventDAO();
-                EventDTO event = dao.getEventByID(eventID);
-            if (event != null) {
-                request.setAttribute("EVENT_EDIT", event);
-                url = SUCCESS;
-                dao.sendMailNotification(notification, eventID);
-            }
-            CategoryDAO catedao = new CategoryDAO();
-            List<CategoryDTO> listCategory = new ArrayList<>();
-            listCategory=catedao.getListCategory();
-            request.setAttribute("LIST_CATEGORY", listCategory);
-            
-            LocationDAO locaDAO = new LocationDAO();
-            List<LocationDTO> listLocation = new ArrayList<>();
-            listLocation=locaDAO.getListLocation();
-            request.setAttribute("LIST_LOCATION", listLocation);
-        } catch (Exception e) {
-            log("Error at SearchController" + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AddMentorController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AddMentorController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

@@ -208,4 +208,41 @@ public class UserDAO {
         }
         return check;
     }
+    
+    public List<UserDTO> getListMentor() throws SQLException {
+        List<UserDTO> list = new ArrayList<>();
+        Connection connect = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            connect = DBUtil.getConnection();
+            if (connect != null) {
+                String sql = "SELECT userID, userEmail, userName, statusID, roleID "
+                        + " FROM tblUser "
+                        + " WHERE roleID like 'MT' ";
+                stm = connect.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String userID = rs.getString("userID");
+                    String userName = rs.getString("userName");
+                    String userEmail = rs.getString("userEmail");
+                    String statusID = rs.getString("statusID");
+                    String roleID = rs.getString("roleID");
+                    list.add(new UserDTO(userID, userEmail, statusID, userName, roleID));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (connect != null) {
+                connect.close();
+            }
+        }
+        return list;
+    }
 }

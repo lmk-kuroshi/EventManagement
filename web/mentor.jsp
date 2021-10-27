@@ -134,7 +134,7 @@
                         if (QAM.getReply() == null) {
 
         %>
-        <a href="answerQuestion.jsp?questionID=<%=QAM.getQuestionID()%>&mentorID=<%=QAM.getMentorID()%>&studentID=<%=QAM.getStudentID()%>&eventID=<%=QAM.getEventID()%>&eventName=<%=QAM.getEventName()%>&&questionDetail=<%=QAM.getQuestionDetail()%>&reply=<%=QAM.getReply()%>"> <%=QAM.getQuestionID()%>. Answer</a><br>
+        <a href="answerQuestion.jsp?questionID=<%=QAM.getQuestionID()%>&mentorID=<%=QAM.getMentorID()%>&studentID=<%=QAM.getStudentID()%>&eventID=<%=QAM.getEventID()%>&eventName=<%=QAM.getEventName()%>&&questionDetail=<%=QAM.getQuestionDetail()%>&reply=<%=QAM.getReply()%>"> <%=QAM.getEventName()%>: <%=QAM.getQuestionDetail()%></a><br>
 
         <%
                         }
