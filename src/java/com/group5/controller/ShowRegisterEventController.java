@@ -5,40 +5,44 @@
  */
 package com.group5.controller;
 
-import com.group5.event.QandADAO;
-import com.group5.event.QandADTO;
+import com.group5.register.RegisterDAO;
+import com.group5.register.RegisterDTO;
+import com.group5.users.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Nghia
+ * @author Minh Khoa
  */
-@WebServlet(name = "QandAMentorController", urlPatterns = {"/QandAMentorController"})
-public class QandAMentorController extends HttpServlet {
+public class ShowRegisterEventController extends HttpServlet {
 
-    private final static String ERROR = "mentor.jsp";
-    private final static String SUCCESS = "listQA.jsp";
+    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "notification.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         String url = ERROR;
-         try {
+        String url=ERROR;
+        try{
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             
-            QandADAO dao = new QandADAO();
-            List<QandADTO> list = dao.getListQuestion();
-            if (!list.isEmpty()) {
-                request.setAttribute("QA_MENTOR", list);
-                url = SUCCESS;
-            }
-        } catch (Exception e) {
-            log("Error at QandAMentorController" + e.toString());
+            RegisterDAO dao = new RegisterDAO();
+            List<RegisterDTO> list = dao.getListRegister(loginUser.getId());
+            
+                request.setAttribute("REGISTER_LIST", list);    
+            
+            
+            url=SUCCESS;
+        } catch(Exception e) {
+            request.setAttribute("ERROR_MESSAGE","Error at ShowFollowEventController");
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

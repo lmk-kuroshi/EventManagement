@@ -5,40 +5,63 @@
  */
 package com.group5.controller;
 
-import com.group5.event.QandADAO;
-import com.group5.event.QandADTO;
+import com.group5.event.EventDAO;
+import com.group5.event.EventDTO;
+import com.group5.register.RegisterDAO;
+import com.group5.register.RegisterDTO;
+import com.group5.users.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Nghia
+ * @author Minh Khoa
  */
-@WebServlet(name = "QandAMentorController", urlPatterns = {"/QandAMentorController"})
-public class QandAMentorController extends HttpServlet {
+public class RegisterController extends HttpServlet {
 
-    private final static String ERROR = "mentor.jsp";
-    private final static String SUCCESS = "listQA.jsp";
+    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "ShowRegisterEventController";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         String url = ERROR;
-         try {
-            
-            QandADAO dao = new QandADAO();
-            List<QandADTO> list = dao.getListQuestion();
-            if (!list.isEmpty()) {
-                request.setAttribute("QA_MENTOR", list);
+        String url = ERROR;
+        try {
+            HttpSession session = request.getSession();
+            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
+            String eventID = request.getParameter("eventID");
+
+            EventDTO event = new EventDTO();
+            EventDAO eventDAO = new EventDAO();
+            event = eventDAO.getEventByID(eventID);
+            if (event.getSeat() > 0) {
+
+                RegisterDTO register = new RegisterDTO();
+                RegisterDAO dao = new RegisterDAO();
+                register = dao.checkRegister(eventID, user.getId());
+
+                if (register.getRegisterID() == null) {
+                    String registerID = "RG_ID-" + System.currentTimeMillis();
+                    boolean checkNewRegister = dao.addRegister(new RegisterDTO(registerID, eventID, user.getId(), "Registed"));
+                    if (checkNewRegister) {
+                        boolean checkSeatUpdate = eventDAO.updateSeat(eventID);
+                        if (checkSeatUpdate) {
+                            url = SUCCESS;
+                        }
+                    }
+                } else {
+                    url = SUCCESS;
+                }
+            } else {
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at QandAMentorController" + e.toString());
+            request.setAttribute("ERROR_MESSAGE", "Error at RegisterController");
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

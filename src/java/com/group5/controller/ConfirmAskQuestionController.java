@@ -7,38 +7,48 @@ package com.group5.controller;
 
 import com.group5.event.QandADAO;
 import com.group5.event.QandADTO;
+import com.group5.users.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Nghia
+ * @author Minh Khoa
  */
-@WebServlet(name = "QandAMentorController", urlPatterns = {"/QandAMentorController"})
-public class QandAMentorController extends HttpServlet {
+public class ConfirmAskQuestionController extends HttpServlet {
 
-    private final static String ERROR = "mentor.jsp";
-    private final static String SUCCESS = "listQA.jsp";
+    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "askQuestion.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         String url = ERROR;
-         try {
+        String url =ERROR;
+        try {          
+            String eventID = request.getParameter("eventID");
+            String mentorID = request.getParameter("mentorID");
+            String eventName = request.getParameter("eventName");
+            String questionDetail = request.getParameter("questionDetail");
             
+            String questionID = "QA_ID-"+System.currentTimeMillis();
+            
+            HttpSession session = request.getSession();
+            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
+            
+            QandADTO question = new QandADTO(questionID, mentorID, user.getId(), eventID, eventName, questionDetail, null);
             QandADAO dao = new QandADAO();
-            List<QandADTO> list = dao.getListQuestion();
-            if (!list.isEmpty()) {
-                request.setAttribute("QA_MENTOR", list);
+            boolean check = dao.addQuestion(question);
+            if (check) {
                 url = SUCCESS;
             }
-        } catch (Exception e) {
-            log("Error at QandAMentorController" + e.toString());
+            
+        } catch (Exception e) {            
+            request.setAttribute("ERROR_MESSAGE","Error at ConfirmAddMentorController");
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

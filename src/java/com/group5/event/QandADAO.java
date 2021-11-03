@@ -139,5 +139,35 @@ public class QandADAO {
         return check;
     }
 
-    
+    public boolean addQuestion(QandADTO qa) throws SQLException{
+        boolean check = false;
+        Connection con = null;
+        PreparedStatement stm = null;
+        
+        try {
+            con = DBUtil.getConnection();
+            if (con != null) {
+                String sql="INSERT INTO tblQandA(questionID, mentorID, studentID, eventID, questionDetail, reply) VALUES (?,?,?,?,?,?) ";
+                stm = con.prepareStatement(sql);
+               
+                 
+                stm.setString(1, qa.getQuestionID());
+                stm.setString(2, qa.getMentorID());
+                stm.setString(3, qa.getStudentID());
+                stm.setString(4, qa.getEventID());
+                stm.setString(5, qa.getQuestionDetail());
+                stm.setString(6, qa.getReply());
+                check = stm.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return check;
+    }
 }

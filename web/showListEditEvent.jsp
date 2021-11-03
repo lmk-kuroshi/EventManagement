@@ -305,6 +305,12 @@
                                     <td>
                                         <div class="add-followup-align">
 
+                                            <form action="MainController">
+                                                <input type="hidden" name="eventID" value="<%= event.getEventID()%>"/>   
+                                                <input type="hidden" name="eventName" value="<%= event.getEventName()%>"/>
+                                                <input type="submit" name="action" value="AddMentor"/>
+                                            </form>
+
                                             <a href="addFollowup.jsp?eventID=<%=event.getEventID()%>&eventName=<%=event.getEventName()%>">Add Follow Up</a>
 
                                         </div>
@@ -402,9 +408,9 @@
                                         <div class="event-name">
                                             <%=event.getEventName()%>
                                         </div><br><br>
-                                        
+
                                         <span>Start: <%=event.getStartTime()%></span><br><br>
-                                        
+
                                         <span>Ends: <%=event.getEndTime()%></span>
                                     </td>                   
                                 </tr>

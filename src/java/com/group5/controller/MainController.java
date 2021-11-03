@@ -54,6 +54,10 @@ public class MainController extends HttpServlet {
     private static final String ADD_MENTOR = "AddMentorController";
     private static final String CONFIRM_ADD_MENTOR = "ConfirmAddMentorController";
     private static final String CONFIRM_REMOVE_MENTOR = "ConfirmRemoveMentorController";
+    private static final String REGISTER = "RegisterController";
+    private static final String SHOW_REGISTER = "ShowRegisterEventController";
+    private static final String ASK_QUESTION = "AskQuestionController";
+    private static final String CONFIRM_ASK_QUESTION = "ConfirmAskQuestionController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -132,6 +136,14 @@ public class MainController extends HttpServlet {
                 url = CONFIRM_ADD_MENTOR;
             } else if ("ConfirmRemoveMentor".equals(action)) {
                 url = CONFIRM_REMOVE_MENTOR;
+            } else if ("Register".equals(action)) {
+                url = REGISTER;
+            } else if ("ShowRegisterEvent".equals(action)) {
+                url = SHOW_REGISTER;
+            } else if ("AskQuestion".equals(action)) {
+                url = ASK_QUESTION;
+            } else if ("ConfirmAskQuestion".equals(action)) {
+                url = CONFIRM_ASK_QUESTION;
             } else {
                 session = request.getSession();
                 session.setAttribute("ERROR_MESSAGE", "Function is not supported!");

@@ -205,10 +205,10 @@
                             <span>End Time: </span><input type="datetime-local" name="endTime"/>
                             <%= eventError.getEndTimeError()%></br><br>
 
-                            <span>Image(please enter the image's link): </span>
+                            <span>Poster (please enter the image's link): </span>
                             <input type="text" name="image"/><br><br>
 
-                            <span>Video(please enter a YouTube embed video link): </span>
+                            <span>Video (please enter a YouTube embed video link): </span>
                             <input type="text" name="video"/><br>
                             <div class="button-align">
                             <button type="submit" name="action" value="ConfirmCreateEvent">Confirm Create Event</button>
