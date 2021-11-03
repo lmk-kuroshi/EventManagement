@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wgt@300;400;500;600;&display=swap');
 *{
     padding: 0;
     margin: 0;
@@ -15,16 +17,37 @@
 }
 .navbar{
     position: fixed;
-    height: 80px;
+    height: 85px;
     width: 100%;
     top: 0;
     left: 0;
     background: rgba(0,0,0,0.4);
 }
-.navbar .logo{
+.icon{
+    padding-left: 70px;
+    padding-top: 10px;
+    width: 300px;
+    float: left;
+    height: 90px;
+}
+
+.navbar h2{
+    padding-left: 20px;
+    float: left;
+    padding-top: 10px;
+    color: #fff;
+    font-family: 'Poppins',sans-serif;
+}
+.navbar h2 span{
+    display: inline-block;
+    padding-right: 1rem;
+}
+.navbar h2 .logo{
+    display: inline-block;
     width: 86px;
     height: auto;
-    padding: 20px 100px; 
+    padding-right: 1rem;
+    vertical-align: middle;
 }
 .navbar ul{
     float: right;
@@ -59,10 +82,11 @@
 .wrapper .center{
     position: absolute;
     left: 50%;
-    top: 45%;
+    top: 40%;
     transform: translate(-50%, -50%);
-    font-family: sans-serif;
+    font-family: 'Rampart One', cursive;
     user-select: none;
+    text-align: center;
 }
 .center{
     width: 1200px;
@@ -72,10 +96,8 @@
     position: relative;
 }
 .center h1{
-    font-family: 'Times New Roman';
     font-size: 80px;
     padding-left: 20px;
-    margin-top: 9%;
     letter-spacing: 2px;
 }
 .center h2{
@@ -84,39 +106,35 @@
 }
 
 
-.footer-bar {
+footer{
     position: relative;
-    height: 110px;
+    height: 120px;
     width: 100%;
     background-color: #333333;
-    bottom:0;
-}
-
-.footer-bar p.copyright {
-    position: relative;
-    width: 100%;
     color: #fff;
-    line-height: 40px;
-    font-size: 0.7em;
-    text-align: center;
     bottom:0;
+    font-family: 'Poppins', sans-serif;
 }
 
-.footer-bar h2{
-    padding-top: 1.2rem;
-   text-align: center;
+footer .footer-align{
+    padding: 2rem 5rem 1rem 5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: .5rem;
+    margin-left: 3rem;
 }
-
-.footer-bar img{
+footer h3{
+    font-family: 'Poppins', sans-serif;
+}
+footer h3{
+    margin-bottom: .5rem;
+}
+footer .footer-copyright h3 span{
     display: inline-block;
-    width: 140px;
+    padding-left: 1rem;
+}
+footer .footer-copyright .logo{
+    width: 70px;
     height: auto;
-    padding-right: .5rem;
     vertical-align: middle;
-}
-
-.footer-bar span{
-    display: inline-block;
-    padding-right: 1rem;
-    color: white;
 }

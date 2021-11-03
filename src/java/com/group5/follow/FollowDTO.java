@@ -15,6 +15,9 @@ public class FollowDTO {
     private String studentID;
     private String followStatus;
     private String eventName;
+    private String eventImage;
+    private String startTime;
+    private String endTime;
 
     public FollowDTO() {
     }
@@ -26,12 +29,39 @@ public class FollowDTO {
         this.followStatus = followStatus;
     }
 
-    public FollowDTO(String followID, String eventID, String studentID, String followStatus, String eventName) {
+    public FollowDTO(String followID, String eventID, String studentID, String followStatus, String eventName, String eventImage, String startTime, String endTime) {
         this.followID = followID;
         this.eventID = eventID;
         this.studentID = studentID;
         this.followStatus = followStatus;
         this.eventName = eventName;
+        this.eventImage = eventImage;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
+    public String getEventImage() {
+        return eventImage;
+    }
+
+    public void setEventImage(String eventImage) {
+        this.eventImage = eventImage;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     
