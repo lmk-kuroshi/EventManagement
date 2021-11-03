@@ -510,4 +510,28 @@ public class EventDAO {
         }
         return list;
     }
+    
+    public boolean updateSeat (String eventID) throws ClassNotFoundException, SQLException{
+        boolean check=false;
+        Connection con = null;
+        PreparedStatement stm = null;
+        try{
+            con=DBUtil.getConnection();
+            if(con !=null){
+                String sql = "UPDATE tblEvent SET seat = seat - 1 WHERE eventID=?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, eventID);
+                check = stm.executeUpdate() > 0;
+            }
+        }catch (Exception e) {
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return check;
+    }
 }

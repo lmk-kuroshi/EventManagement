@@ -164,6 +164,11 @@
                                     <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
                                     <button type="submit" name="action" value="ShowFollowup">Show Follow Up</button>
                                 </form>
+                                <form action="MainController">
+                                    <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
+                                    <input type="hidden" name="eventName" value="<%= event.getEventName()%>"/>
+                                    <button type="submit" name="action" value="AskQuestion">Ask Question</button>
+                                </form>    
                             </div>
                         </div>
                         <div class="event-detail-info">

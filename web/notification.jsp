@@ -4,6 +4,7 @@
     Author     : Minh Khoa
 --%>
 
+<%@page import="com.group5.register.RegisterDTO"%>
 <%@page import="com.group5.category.CategoryDAO"%>
 <%@page import="com.group5.category.CategoryDTO"%>
 <%@page import="java.util.List"%>
@@ -172,6 +173,56 @@
                                                 <input type="hidden" name="eventID" value="<%=follow.getEventID()%>"/>
                                                 <button type="submit" name="action" value="FollowOrUnfollow">Unfollow</button>
                                             </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <%
+
+                                            }
+
+                                        }
+
+                                    }
+
+                                %>
+                            </tbody>
+
+                        </table>
+                        
+                        <form action="MainController">
+                            <input type="hidden" name="eventID" value="<%=loginUser.getId()%>"/>
+                            <button class="follow-title" type="submit" name="action" value="ShowRegisterEvent">List of events you have registered</button>
+                        </form>    
+                        <%
+                            List<RegisterDTO> registerList = (List<RegisterDTO>) request.getAttribute("REGISTER_LIST");
+                            if (registerList != null) {
+                                if (!registerList.isEmpty()) {
+                        %>
+                        <table class="content-table" width="90%">
+                            <thead>
+                                <tr>
+                                    <th></th>   
+                                    <th></th>   
+                                    <th></th>   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%
+                                    for (RegisterDTO register : registerList) {
+                                %>
+                                <tr>                                    
+                                    <td>
+                                        <div class="event-name">
+                                            <%=register.getEventName()%>
+                                        </div>
+<!--                                        <br>
+                                        <span>Start: </span>
+                                        <br>
+                                        <span>Ends: </span>-->
+                                    </td>
+                                    <td>
+                                        <div class="event-name">
+                                            <%=register.getRegisterStatus()%>
                                         </div>
                                     </td>
                                 </tr>
