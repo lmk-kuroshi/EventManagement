@@ -58,6 +58,7 @@ public class MainController extends HttpServlet {
     private static final String SHOW_REGISTER = "ShowRegisterEventController";
     private static final String ASK_QUESTION = "AskQuestionController";
     private static final String CONFIRM_ASK_QUESTION = "ConfirmAskQuestionController";
+    private static final String CONFIRM_UNBAN = "ConfirmUnbanRequestController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -144,6 +145,8 @@ public class MainController extends HttpServlet {
                 url = ASK_QUESTION;
             } else if ("ConfirmAskQuestion".equals(action)) {
                 url = CONFIRM_ASK_QUESTION;
+            } else if ("ConfirmResquestUnban".equals(action)) {
+                url = CONFIRM_UNBAN;    
             } else {
                 session = request.getSession();
                 session.setAttribute("ERROR_MESSAGE", "Function is not supported!");

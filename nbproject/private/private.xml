@@ -3,21 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPT/Now/SWP391/clone/clone2801/EventManagement/src/java/com/group5/utils/DBUtil.java</file>
-            <file>file:/D:/FPT/Now/SWP391/clone/clone2801/EventManagement/web/mentor.jsp</file>
-            <file>file:/D:/FPT/Now/SWP391/clone/clone2801/EventManagement/src/java/com/group5/controller/AskQuestionController.java</file>
-            <file>file:/D:/FPT/Now/SWP391/clone/clone2801/EventManagement/src/java/com/group5/controller/MainController.java</file>
-            <file>file:/D:/FPT/Now/SWP391/clone/clone2801/EventManagement/web/notification.jsp</file>
-            <file>file:/D:/FPT/Now/SWP391/clone/clone2801/EventManagement/web/showListEditEvent.jsp</file>
-            <file>file:/D:/FPT/Now/SWP391/clone/clone2801/EventManagement/web/leader.jsp</file>
-            <file>file:/D:/FPT/Now/SWP391/clone/clone2801/EventManagement/web/createEvent.jsp</file>
-            <file>file:/D:/FPT/Now/SWP391/clone/clone2801/EventManagement/web/eventDetailLeader.jsp</file>
-            <file>file:/D:/FPT/Now/SWP391/clone/clone2801/EventManagement/web/listQA.jsp</file>
-            <file>file:/D:/FPT/Now/SWP391/clone/clone2801/EventManagement/web/eventDetail.jsp</file>
-            <file>file:/D:/FPT/Now/SWP391/clone/clone2801/EventManagement/src/java/com/group5/controller/QandAMentorController.java</file>
-            <file>file:/D:/FPT/Now/SWP391/clone/clone2801/EventManagement/web/eventDetailMentor.jsp</file>
-            <file>file:/D:/FPT/Now/SWP391/clone/clone2801/EventManagement/web/askQuestion.jsp</file>
-            <file>file:/D:/FPT/Now/SWP391/clone/clone2801/EventManagement/web/index.jsp</file>
+            <file>file:/D:/FPT/Now/SWP391/clone/clone611/khoa3/web/changeRole.jsp</file>
+            <file>file:/D:/FPT/Now/SWP391/clone/clone611/khoa3/src/java/com/group5/controller/LoginController.java</file>
+            <file>file:/D:/FPT/Now/SWP391/clone/clone611/khoa3/src/java/com/group5/controller/MainController.java</file>
+            <file>file:/D:/FPT/Now/SWP391/clone/clone611/khoa3/web/unban.jsp</file>
+            <file>file:/D:/FPT/Now/SWP391/clone/clone611/khoa3/src/java/com/group5/controller/ConfirmUnbanRequestController.java</file>
+            <file>file:/D:/FPT/Now/SWP391/clone/clone611/khoa3/src/java/servlet/LoginGoogleHandler.java</file>
+            <file>file:/D:/FPT/Now/SWP391/clone/clone611/khoa3/src/java/com/group5/controller/ChangeRoleController.java</file>
+            <file>file:/D:/FPT/Now/SWP391/clone/clone611/khoa3/src/java/com/group5/event/EventDAO.java</file>
         </group>
     </open-files>
 </project-private>

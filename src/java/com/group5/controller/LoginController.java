@@ -30,21 +30,22 @@ public class LoginController extends HttpServlet {
     private static final String LEADER_PAGE = "SearchController";
     private static final String ADMIN_PAGE = "SearchUserController";
     private static final String MENTOR_PAGE = "SearchController";
-    
+    private static final String UNBAN_PAGE = "unban.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
             //lay id cua uG check với hệ thống
-                //UserDAO dao = new UserDAO();
-                //UserDTO user = new UserDTO();
-                //HttpSession session = request.getSession();
+            //UserDAO dao = new UserDAO();
+            //UserDTO user = new UserDTO();
+            //HttpSession session = request.getSession();
             //nếu có thì cho vô theo role
-                //role student vô student page
-                //role mentor vào mentor
-                //role admin vào admin
-                //role leader vào trang leader
+            //role student vô student page
+            //role mentor vào mentor
+            //role admin vào admin
+            //role leader vào trang leader
             //nếu ko có thì add vào db với role mặc định là student
             UserGoogleDTO googleUser = (UserGoogleDTO) request.getAttribute("UserGoogle");
             String checkID = googleUser.getId();
@@ -52,24 +53,26 @@ public class LoginController extends HttpServlet {
             UserDAO dao = new UserDAO();
             UserDTO user = dao.checkLoginSpecial(checkID);
             HttpSession session = request.getSession();
-            
+
             if (user == null) {
                 UserDTO newUser = new UserDTO(googleUser.getId(), googleUser.getEmail(), "ACT", googleUser.getName(), "STU");
                 dao.insertUser(newUser);
                 user = dao.checkLoginSpecial(checkID);
-                
+
             }
-            if(user.getRoleID().equals("STU")){
-                url = STUDENT_PAGE;
-            }
-            if ("MT".equals(user.getRoleID())) {
-             url = MENTOR_PAGE;
-            }
-            else if(user.getRoleID().equals("AD")){
-                url = ADMIN_PAGE;
-            }
-            else if (user.getRoleID().equals("LD")) {
-                url = LEADER_PAGE;
+            if (user.getStatus().equals("DACT")) {
+                url = UNBAN_PAGE;
+            } else {
+                if (user.getRoleID().equals("STU")) {
+                    url = STUDENT_PAGE;
+                }
+                if ("MT".equals(user.getRoleID())) {
+                    url = MENTOR_PAGE;
+                } else if (user.getRoleID().equals("AD")) {
+                    url = ADMIN_PAGE;
+                } else if (user.getRoleID().equals("LD")) {
+                    url = LEADER_PAGE;
+                }
             }
             session.setAttribute("LOGIN_USER", user);
         } catch (Exception e) {
