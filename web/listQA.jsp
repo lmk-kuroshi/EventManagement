@@ -4,6 +4,7 @@
     Author     : Minh Khoa
 --%>
 
+<%@page import="com.group5.role.RoleDAO"%>
 <%@page import="com.group5.event.QandADTO"%>
 <%@page import="com.group5.category.CategoryDAO"%>
 <%@page import="com.group5.category.CategoryDTO"%>
@@ -32,7 +33,11 @@
             if (search == null) {
                 search = "";
             }
-        %>    
+        %>  
+        <%
+            RoleDAO ro = new RoleDAO();
+            String roleName = ro.getRoleName(loginUser.getRoleID());
+        %>
 
         <%
             List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
@@ -129,7 +134,7 @@
                 </div>
                 <div class="search-wrapper">
                     <form action="MainController">
-                        <button class="las la-search" type="submit" value="Search" name="action"></button>
+                        <button class="las la-search" type="submit" value="Q&A" name="action"></button>
                         <input type="text" name="search" value="<%= search%>" placeholder="Search here"/>
                     </form>
                 </div>
@@ -137,7 +142,7 @@
                     <img src="css/img/2.jpg" width="40px" height="40px" alt="" />
                     <div>
                         <h4><%=loginUser.getName()%></h4>
-                        <small>Mentor</small>
+                        <small><%= roleName%></small>
                     </div>
                 </div>
             </header>
@@ -151,7 +156,7 @@
                                 if (QAM.getReply() == null) {
 
                 %>
-                <a href="answerQuestion.jsp?questionID=<%=QAM.getQuestionID()%>&mentorID=<%=QAM.getMentorID()%>&studentID=<%=QAM.getStudentID()%>&eventID=<%=QAM.getEventID()%>&eventName=<%=QAM.getEventName()%>&&questionDetail=<%=QAM.getQuestionDetail()%>&reply=<%=QAM.getReply()%>"> <%=QAM.getEventName()%>: <%=QAM.getQuestionDetail()%></a><br>
+                <a href="answerQuestion.jsp?questionID=<%=QAM.getQuestionID()%>&mentorID=<%=QAM.getMentorID()%>&studentID=<%=QAM.getStudentID()%>&eventID=<%=QAM.getEventID()%>&eventName=<%=QAM.getEventName()%>&&questionDetail=<%=QAM.getQuestionDetail()%>&reply=<%=QAM.getReply()%>"><%=QAM.getQuestionDetail()%></a><br>
 
                 <%
                                 }
@@ -160,12 +165,12 @@
                     }
 
                 %>
-                <form action="MainController">
+<!--                <form action="MainController">
                     <input type="hidden" name="qaMentor"/>
 
                     <input type="submit" name="action" value="Q&A"/>
 
-                </form>
+                </form>-->
             </main>
             <footer>
                 <div class="footer-align">

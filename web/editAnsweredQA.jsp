@@ -4,6 +4,7 @@
     Author     : Nghia
 --%>
 
+<%@page import="com.group5.role.RoleDAO"%>
 <%@page import="com.group5.event.QandADTO"%>
 <%@page import="com.group5.users.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -20,6 +21,10 @@
             if (editAnsweredQA == null) {
                 editAnsweredQA = "";
             }
+        %>
+        <%
+            RoleDAO ro = new RoleDAO();
+            String roleName = ro.getRoleName(mentor.getRoleID());
         %>
          <h1>Hello Mentor: <%=mentor.getName()%></h1>
         <%

@@ -4,6 +4,7 @@
     Author     : Nghia
 --%>
 
+<%@page import="com.group5.role.RoleDAO"%>
 <%@page import="com.group5.event.EventDTO"%>
 <%@page import="com.group5.event.QandADTO"%>
 <%@page import="java.util.List"%>
@@ -24,6 +25,10 @@
                 answerQA = "";
             }
         %>
+        <%
+            RoleDAO ro = new RoleDAO();
+            String roleName = ro.getRoleName(mentor.getRoleID());
+        %>
          <h1>Hello Mentor: <%=mentor.getName()%></h1>
         <%
             QandADTO QAM = new QandADTO(request.getParameter("questionID"), request.getParameter("mentorID"), request.getParameter("studentID"),
@@ -41,8 +46,7 @@
              Question: <%=QAM.getQuestionDetail()%><br>
              
              <input type="text" name="answerQA" value="<%=answerQA%>"/>
-             <input type="submit" name="action" value="AnswerQA"/>
-                    
+             <input type="submit" name="action" value="AnswerQA"/>     
          </form> 
             <% 
             }

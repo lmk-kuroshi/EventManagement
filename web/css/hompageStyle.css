@@ -11,6 +11,7 @@ and open the template in the editor.
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Karla&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 :root{
     /*    --main-color:#DD2f6E; 
@@ -114,7 +115,7 @@ form
     position: absolute;
     top: -20px;
     left: calc(100% + 15px);
-    z-index: 3;
+    z-index: 2;
     background: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
     padding: 6px 12px;
@@ -511,7 +512,7 @@ footer .footer-copyright .logo{
     white-space: nowrap;
     opacity: 0.6;
     transition: all 0.3s ease;
-    
+
 }
 .sidebar .nav-links li .sub-menu a:hover{
     opacity: 1;
@@ -568,7 +569,7 @@ footer .footer-copyright .logo{
 
 .event-card{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(20, 1fr);
     grid-gap: 2rem;
     margin: 1rem 2rem 1rem 2rem;
 }
@@ -639,3 +640,210 @@ main .back-separate{
 }
 
 
+
+
+
+
+
+.carousel-container {
+    width: 1224px;
+    margin: 50px auto;
+    min-height: 200px;
+    height: auto;
+    position: relative;
+}
+@media screen and (max-width: 768px) {
+    .carousel-container {
+        width: 80%;
+    }
+}
+@media screen and (max-width: 1024px) {
+    .carousel-container {
+        width: 85%;
+    }
+}
+.carousel-container .carousel-inner {
+    overflow: hidden;
+}
+.carousel-container .track {
+    display: inline-flex;
+    transition: transform 0.5s;
+}
+.carousel-container .card-container {
+    width: 90%;
+    flex-shrink: 0;
+    height: auto;
+    padding-right: 15px;
+    box-sizing: border-box;
+}
+
+.nav button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1px solid #aaa;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 5;
+}
+.nav .prev {
+    left: -30px;
+    display: none;
+}
+.nav .prev.show {
+    display: block;
+}
+.nav .next {
+    right: -30px;
+}
+.nav .next.hide {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+.carousel-container2 {
+    width: 1224px;
+    margin: 50px auto;
+    min-height: 200px;
+    height: auto;
+    position: relative;
+}
+@media screen and (max-width: 768px) {
+    .carousel-container2 {
+        width: 80%;
+    }
+}
+@media screen and (max-width: 1024px) {
+    .carousel-container2 {
+        width: 85%;
+    }
+}
+.carousel-container2 .carousel-inner2 {
+    overflow: hidden;
+}
+.carousel-container2 .track2 {
+    display: inline-flex;
+    transition: transform 0.5s;
+}
+.carousel-container2 .card-container2 {
+    width: 90%;
+    flex-shrink: 0;
+    height: auto;
+    padding-right: 15px;
+    box-sizing: border-box;
+}
+
+.nav .prev2 {
+    left: -30px;
+    display: none;
+}
+.nav .prev2.show {
+    display: block;
+}
+.nav .next2 {
+    right: -30px;
+}
+.nav .next2.hide {
+    display: none;
+}
+
+
+
+
+
+
+
+.carousel-container3 {
+    width: 1224px;
+    margin: 50px auto;
+    min-height: 200px;
+    height: auto;
+    position: relative;
+}
+@media screen and (max-width: 768px) {
+    .carousel-container3 {
+        width: 80%;
+    }
+}
+@media screen and (max-width: 1024px) {
+    .carousel-container3 {
+        width: 85%;
+    }
+}
+.carousel-container3 .carousel-inner3 {
+    overflow: hidden;
+}
+.carousel-container3 .track3 {
+    display: inline-flex;
+    transition: transform 0.5s;
+}
+.carousel-container3 .card-container3 {
+    width: 90%;
+    flex-shrink: 0;
+    height: auto;
+    padding-right: 15px;
+    box-sizing: border-box;
+}
+
+.nav .prev3 {
+    left: -30px;
+    display: none;
+}
+.nav .prev3.show {
+    display: block;
+}
+.nav .next3 {
+    right: -30px;
+}
+.nav .next3.hide {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+ Position the "next button" to the right 
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+ On hover, add a grey background color 
+.prev:hover, .next:hover {
+  background-color: #f1f1f1;
+  color: black;*/

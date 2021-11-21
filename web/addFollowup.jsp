@@ -3,6 +3,7 @@
     Created on : Oct 3, 2021, 7:52:10 AM
     Author     : Minh Khoa
 --%>
+<%@page import="com.group5.role.RoleDAO"%>
 <%@page import="com.group5.category.CategoryDAO"%>
 <%@page import="com.group5.category.CategoryDTO"%>
 <%@page import="java.util.List"%>
@@ -32,6 +33,10 @@
             if (search == null) {
                 search = "";
             }
+        %>
+        <%
+            RoleDAO ro = new RoleDAO();
+            String roleName = ro.getRoleName(loginUser.getRoleID());
         %>
         <%
             List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
@@ -146,7 +151,7 @@
                     <img src="css/img/2.jpg" width="40px" height="40px" alt="" />
                     <div>
                         <h4><%=loginUser.getName()%></h4>
-                        <small>Student</small>
+                        <small><%= roleName%></small>
                     </div>
                 </div>
             </header>
@@ -154,25 +159,27 @@
                 <div class="create-event-card">
                     <div class="create-event-align">
                         <h1>Add followup for event: </h1>
-                        <h1 class="event-name"><%=eventName%></h1>
+                        <h1 class="event-name"><%=eventName%></h1><br><br>
                         <form action="MainController">
+                            <div class="create-event-info-button">
+                                <div class="create-event-info1">
+                                    <span>Image(please enter the image's link): </span>
+                                    <input class="long-input" type="text" name="followupImage"/>
+                                </div>
+                                <div class="create-event-info2">
+                                    <span>Video(please enter a YouTube embed video link):</span>
+                                    <input class="long-input" type="text" name="followupVideo"/>
+                                </div>
+                                <input type="hidden" name="eventID" value="<%=eventID%>"/>
+                                <input type="hidden" name="notification" value="new updated"/>
+                                <div class="button-align">
+                                    <button type="submit" name="action" value="AddFollowup">Add Follow Up</button>
+                                </div>
+                            </div>
                             <span>Followup Detail: </span><br><br>
                             <!--            <input type="text" name="followupDetail"/>-->
                             <textarea id="editor" name="followupDetail"></textarea><br>
-                            <br>
-                            <span>Image(please enter the image's link): </span>
-                            <input type="text" name="followupImage"/>
-                            <br>
-                            <br>
-                            <span>Video(please enter a YouTube embed video link):</span>
-                            <input type="text" name="followupVideo"/>
-                            <br>
-                            <br>
-                            <input type="hidden" name="eventID" value="<%=eventID%>"/>
-                            <input type="hidden" name="notification" value="new updated"/>
-                            <div class="button-align">
-                                <button type="submit" name="action" value="AddFollowup">Add Follow Up</button>
-                            </div>
+
                         </form>
                     </div>
                 </div>

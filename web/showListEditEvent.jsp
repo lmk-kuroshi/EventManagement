@@ -4,6 +4,7 @@
     Author     : Minh Khoa
 --%>
 
+<%@page import="com.group5.role.RoleDAO"%>
 <%@page import="com.group5.category.CategoryDAO"%>
 <%@page import="com.group5.category.CategoryDTO"%>
 <%@page import="java.util.List"%>
@@ -31,6 +32,10 @@
                 search = "";
             }
         %> 
+        <%
+            RoleDAO ro = new RoleDAO();
+            String roleName = ro.getRoleName(loginUser.getRoleID());
+        %>
 
         <%
             List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
@@ -144,7 +149,7 @@
                     <img src="css/img/2.jpg" width="40px" height="40px" alt="" />
                     <div>
                         <h4><%=loginUser.getName()%></h4>
-                        <small>Leader</small>
+                        <small><%= roleName%></small>
                     </div>
                 </div>
             </header>
@@ -166,6 +171,7 @@
                         <table class="content-table" width="90%">
                             <thead>
                                 <tr>
+                                    <th></th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -218,8 +224,7 @@
                                     </td>
                                     <td>
                                         <div class="add-followup-align">
-
-                                            <a href="addFollowup.jsp?eventID=<%=event.getEventID()%>&eventName=<%=event.getEventName()%>">Add Follow Up</a>
+                                            <a href="addFollowup.jsp?eventID=<%=event.getEventID()%>&eventName=<%=event.getEventName()%>"><button>Add Follow Up</button></a>
 
                                         </div>
                                     </td>
@@ -233,14 +238,15 @@
                                 %>
                             </tbody>
                         </table>
+                        <div class="back-separate">
+                            <h1>Upcoming</h1>
+                        </div>
                         <%
                             List<EventDTO> upcomingList = (List<EventDTO>) request.getAttribute("LIST_EVENT_EDIT_UPCOMING");
                             if (upcomingList != null) {
                                 if (!upcomingList.isEmpty()) {
                         %>
-                        <div class="back-separate">
-                            <h1>Upcoming</h1>
-                        </div>
+
                         <table class="content-table" width="90%">
                             <thead>
                                 <tr>
@@ -249,13 +255,7 @@
                                     <th></th>
                                     <th></th>
                                     <th></th>
-
-                                    <!--                                    <th>Event Name</th>
-                                                                        <th>Edit</th>
-                                                                        <th>Cancel</th>
-                                                                        <th>Add Followup</th>
-                                                                        <th>Edit Followup</th>
-                                                                        <th>Start Event</th>-->
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -303,18 +303,22 @@
                                         </form>
                                     </td>
                                     <td>
-                                        <div class="add-followup-align">
-
+                                        <div class="add-followup-mentor-align">
                                             <form action="MainController">
                                                 <input type="hidden" name="eventID" value="<%= event.getEventID()%>"/>   
                                                 <input type="hidden" name="eventName" value="<%= event.getEventName()%>"/>
-                                                <input type="submit" name="action" value="AddMentor"/>
+                                                <button type="submit" name="action" value="AddMentor">Add Mentor</button>
                                             </form>
-
-                                            <a href="addFollowup.jsp?eventID=<%=event.getEventID()%>&eventName=<%=event.getEventName()%>">Add Follow Up</a>
-
+                                            <br>
+                                            <br>
+                                            <div class="add-followup-align">
+                                                <a href="addFollowup.jsp?eventID=<%=event.getEventID()%>&eventName=<%=event.getEventName()%>"><button>Add Follow Up</button></a>
+                                            </div>
                                         </div>
                                     </td>
+                                    <td>
+
+                                    </td>  
                                 </tr>
                                 <%      }
                                         }
@@ -323,7 +327,7 @@
                             </tbody>
                         </table>
                         <div class="back-separate">
-                            <h1>Complete</h1>
+                            <h1>Completed</h1>
                         </div>
                         <%
                             List<EventDTO> completeList = (List<EventDTO>) request.getAttribute("LIST_EVENT_EDIT_COMPLETE");
@@ -333,6 +337,7 @@
                         <table class="content-table" width="90%">
                             <thead>
                                 <tr>
+                                    <th></th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -367,10 +372,13 @@
                                     <td>
                                         <div class="add-followup-align">
 
-                                            <a href="addFollowup.jsp?eventID=<%=event.getEventID()%>&eventName=<%=event.getEventName()%>">Add Follow Up</a>
+                                            <a href="addFollowup.jsp?eventID=<%=event.getEventID()%>&eventName=<%=event.getEventName()%>"><button>Add Follow Up</button></a>
 
                                         </div>
                                     </td>
+                                    <td>
+
+                                    </td>  
                                 </tr>
                                 <%      }
                                         }
@@ -391,7 +399,9 @@
                                 <tr>
                                     <th></th>
                                     <th></th>
-
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -405,13 +415,19 @@
                                         <img src="<%=event.getImage()%>" alt="Image Event"/>
                                     </td>
                                     <td>
+
                                         <div class="event-name">
                                             <%=event.getEventName()%>
                                         </div><br><br>
-
+                                    </td>
+                                    <td>
                                         <span>Start: <%=event.getStartTime()%></span><br><br>
+                                    </td>
+                                    <td>
+                                        <span>Ends: <%=event.getEndTime()%></span><br><br>
+                                    </td>                   
+                                    <td>
 
-                                        <span>Ends: <%=event.getEndTime()%></span>
                                     </td>                   
                                 </tr>
                                 <%      }

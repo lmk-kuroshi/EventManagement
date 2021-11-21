@@ -4,6 +4,7 @@
     Author     : Nghia
 --%>
 
+<%@page import="com.group5.role.RoleDAO"%>
 <%@page import="com.group5.memtorEvent.MentorEventDTO"%>
 <%@page import="com.group5.category.CategoryDAO"%>
 <%@page import="com.group5.category.CategoryDTO"%>
@@ -29,6 +30,10 @@
                 search = "";
             }
         %>    
+        <%
+            RoleDAO ro = new RoleDAO();
+            String roleName = ro.getRoleName(mentor.getRoleID());
+        %>
 
         <%
             List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
@@ -121,7 +126,7 @@
                     <img src="css/img/2.jpg" width="40px" height="40px" alt="" />
                     <div>
                         <h4><%=mentor.getName()%></h4>
-                        <small>Student</small>
+                        <small><%= roleName%></small>
                     </div>
                 </div>
             </header>
