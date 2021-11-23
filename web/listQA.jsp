@@ -18,7 +18,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Page</title>
-        <link href="css/hompageStyle.css" rel="stylesheet" />
+        <link href="css/ListQuestionStyle.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
         <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     </head>
@@ -93,11 +93,26 @@
                         <span class="tooltip">Notify</span>
                     </li>
                     <li>
-                        <a href="listQA.jsp">
-                            <i class="las la-question"></i>
-                            <span class="links_name">Q&A</span>
+                        <div class="iocn-link">
+                            <a href="#" class="open-submenu">
+                                <i class='las la-question' ></i>
+                                <span class="links_name">Q&A</span>  
+                                <i class='bx bxs-chevron-down arrow' style="margin-left: 92px;"></i>
+                            </a>
+                        </div>
+                        <ul class="sub-menu">
+                            <li><a class="link_name" href="#">Category</a></li>
+                            <li><a href="QandAMentorController">Unanswered questions</a></li>
+                            <li><a href="EditQAController">Answered questions</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="SearchEventMentorAttendController?eventMentorAttended=<%=loginUser.getId()%>">
+                            <input type="hidden" name="eventMentorAttended" value="<%=loginUser.getId()%>"/>
+                            <i class='bx bx-calendar-check'></i>
+                            <span class="links_name">Attended event</span>
                         </a>
-                        <span class="tooltip">Q&A</span>
+                        <span class="tooltip">Attended event</span>
                     </li>
                     <li>
                         <a href="changeRoleMentor.jsp">
@@ -134,6 +149,7 @@
                 </div>
                 <div class="search-wrapper">
                     <form action="MainController">
+                        <input type="hidden" name="qaMentor"/>
                         <button class="las la-search" type="submit" value="Q&A" name="action"></button>
                         <input type="text" name="search" value="<%= search%>" placeholder="Search here"/>
                     </form>
@@ -148,29 +164,74 @@
             </header>
 
             <main>
-                <%
-                    List<QandADTO> listQA = (List<QandADTO>) request.getAttribute("QA_MENTOR");
-                    if (listQA != null) {
-                        if (!listQA.isEmpty()) {
-                            for (QandADTO QAM : listQA) {
-                                if (QAM.getReply() == null) {
+                <div class="follow-card">
+                    <div class="follow-align">
+                        <h1>List of Unanswered question</h1>
 
-                %>
-                <a href="answerQuestion.jsp?questionID=<%=QAM.getQuestionID()%>&mentorID=<%=QAM.getMentorID()%>&studentID=<%=QAM.getStudentID()%>&eventID=<%=QAM.getEventID()%>&eventName=<%=QAM.getEventName()%>&&questionDetail=<%=QAM.getQuestionDetail()%>&reply=<%=QAM.getReply()%>"><%=QAM.getQuestionDetail()%></a><br>
+                        <%
+                            List<QandADTO> listQA = (List<QandADTO>) request.getAttribute("QA_MENTOR");
+                            if (listQA != null) {
+                                if (!listQA.isEmpty()) {
 
-                <%
-                                }
-                            }
-                        }
+
+                        %>  
+                        <table class="content-table" width="90%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Event Name</th>   
+                                    <th>Question</th>    
+                                    <th style="width:200px">Answer question</th>    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%                                    for (QandADTO QAM : listQA) {
+                                        if (QAM.getReply() == null) {
+                                %>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <div class="event-name">
+                                            <%=QAM.getEventName()%>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span>
+                                            <a href="answerQuestion.jsp?questionID=<%=QAM.getQuestionID()%>&mentorID=<%=QAM.getMentorID()%>&studentID=<%=QAM.getStudentID()%>&eventID=<%=QAM.getEventID()%>&eventName=<%=QAM.getEventName()%>&&questionDetail=<%=QAM.getQuestionDetail()%>&reply=<%=QAM.getReply()%>"> <%=QAM.getQuestionDetail()%></a><br>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span>
+                                            <a href="answerQuestion.jsp?questionID=<%=QAM.getQuestionID()%>&mentorID=<%=QAM.getMentorID()%>&studentID=<%=QAM.getStudentID()%>&eventID=<%=QAM.getEventID()%>&eventName=<%=QAM.getEventName()%>&&questionDetail=<%=QAM.getQuestionDetail()%>&reply=<%=QAM.getReply()%>"><button class="long-button">Answer question</button></a><br>
+                                        </span>
+                                    </td>
+
+                                </tr>
+                                <%
+
+                                                }
+                                            }
+
+                                        }
+
+                                    }
+
+                                %>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+
+
+
+                <%            String message = (String) request.getAttribute("SEARCH_EVENT_MESSAGE");
+                    if (message == null) {
+                        message = "";
                     }
-
                 %>
-<!--                <form action="MainController">
-                    <input type="hidden" name="qaMentor"/>
-
-                    <input type="submit" name="action" value="Q&A"/>
-
-                </form>-->
+                <%= message%> <br>       
             </main>
             <footer>
                 <div class="footer-align">

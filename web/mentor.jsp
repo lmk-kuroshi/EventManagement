@@ -22,9 +22,9 @@
         <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     </head>
     <body>
-        
-        
-        
+
+
+
         <%
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
 
@@ -84,6 +84,7 @@
                                 %>
                         </ul>
                     </li>
+
                     <li>
                         <a href="ShowFollowEventController">
                             <i class='las la-bell' ></i>
@@ -92,11 +93,26 @@
                         <span class="tooltip">Notify</span>
                     </li>
                     <li>
-                        <a href="QandAMentorController">
-                            <i class="las la-question"></i>
-                            <span class="links_name">Q&A</span>
+                        <div class="iocn-link">
+                            <a href="#" class="open-submenu">
+                                <i class='las la-question' ></i>
+                                <span class="links_name">Q&A</span>  
+                                <i class='bx bxs-chevron-down arrow' style="margin-left: 92px;"></i>
+                            </a>
+                        </div>
+                        <ul class="sub-menu">
+                            <li><a class="link_name" href="#">Q&A</a></li>
+                            <li><a href="QandAMentorController">Unanswered questions</a></li>
+                            <li><a href="EditQAController">Answered questions</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="SearchEventMentorAttendController?eventMentorAttended=<%=loginUser.getId()%>">
+                            <input type="hidden" name="eventMentorAttended" value="<%=loginUser.getId()%>"/>
+                            <i class='bx bx-calendar-check'></i>
+                            <span class="links_name">Attended event</span>
                         </a>
-                        <span class="tooltip">Q&A</span>
+                        <span class="tooltip">Attended event</span>
                     </li>
                     <li>
                         <a href="changeRoleMentor.jsp">
@@ -180,7 +196,7 @@
                                                 <input type="hidden" name="name" value="<%= event.getEventName()%>"/>
                                                 <input type="hidden" name="categoryID" value="<%= event.getCategoryID()%>"/>
                                                 <input type="hidden" name="location" value="<%= event.getLocationID()%>"/>
-                                                <input type="hidden" name="eventDetail" value="<%= event.getEventDetail()%>"/>
+                                                <textarea style= "display:none" name="eventDetail"><%=event.getEventDetail()%></textarea>
                                                 <input type="hidden" name="seat" value="<%= event.getSeat()%>"/>
                                                 <input type="hidden" name="startTime" value="<%= event.getStartTime()%>"/>
                                                 <input type="hidden" name="endTime" value="<%= event.getEndTime()%>"/>
@@ -242,7 +258,7 @@
                                                 <input type="hidden" name="name" value="<%= event.getEventName()%>"/>
                                                 <input type="hidden" name="categoryID" value="<%= event.getCategoryID()%>"/>
                                                 <input type="hidden" name="location" value="<%= event.getLocationID()%>"/>
-                                                <input type="hidden" name="eventDetail" value="<%= event.getEventDetail()%>"/>
+                                                <textarea style= "display:none" name="eventDetail"><%=event.getEventDetail()%></textarea>
                                                 <input type="hidden" name="seat" value="<%= event.getSeat()%>"/>
                                                 <input type="hidden" name="startTime" value="<%= event.getStartTime()%>"/>
                                                 <input type="hidden" name="endTime" value="<%= event.getEndTime()%>"/>
@@ -304,7 +320,7 @@
                                                 <input type="hidden" name="name" value="<%= event.getEventName()%>"/>
                                                 <input type="hidden" name="categoryID" value="<%= event.getCategoryID()%>"/>
                                                 <input type="hidden" name="location" value="<%= event.getLocationID()%>"/>
-                                                <input type="hidden" name="eventDetail" value="<%= event.getEventDetail()%>"/>
+                                                <textarea style= "display:none" name="eventDetail"><%=event.getEventDetail()%></textarea>
                                                 <input type="hidden" name="seat" value="<%= event.getSeat()%>"/>
                                                 <input type="hidden" name="startTime" value="<%= event.getStartTime()%>"/>
                                                 <input type="hidden" name="endTime" value="<%= event.getEndTime()%>"/>

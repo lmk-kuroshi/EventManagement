@@ -61,13 +61,13 @@
                         </a>
                         <span class="tooltip">Accounts</span>
                     </li>
-                    <li>
+<!--                    <li>
                         <a href="chart.jsp">
                             <i class='las la-user-circle' ></i>
                             <span class="links_name">Chart</span>
                         </a>
                         <span class="tooltip">Chart</span>
-                    </li>
+                    </li>-->
                     <li>
                         <form action="MainController">
                             <a href="LogoutController">

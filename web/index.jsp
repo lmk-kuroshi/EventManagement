@@ -176,7 +176,7 @@
                                                 <input type="hidden" name="name" value="<%= event.getEventName()%>"/>
                                                 <input type="hidden" name="categoryID" value="<%= event.getCategoryID()%>"/>
                                                 <input type="hidden" name="location" value="<%= event.getLocationID()%>"/>
-                                                <input type="hidden" name="eventDetail" value="<%= event.getEventDetail()%>"/>
+                                                <textarea style= "display:none" name="eventDetail"><%=event.getEventDetail()%></textarea>
                                                 <input type="hidden" name="seat" value="<%= event.getSeat()%>"/>
                                                 <input type="hidden" name="startTime" value="<%= event.getStartTime()%>"/>
                                                 <input type="hidden" name="endTime" value="<%= event.getEndTime()%>"/>
@@ -238,7 +238,7 @@
                                                 <input type="hidden" name="name" value="<%= event.getEventName()%>"/>
                                                 <input type="hidden" name="categoryID" value="<%= event.getCategoryID()%>"/>
                                                 <input type="hidden" name="location" value="<%= event.getLocationID()%>"/>
-                                                <input type="hidden" name="eventDetail" value="<%= event.getEventDetail()%>"/>
+                                                <textarea style= "display:none" name="eventDetail"><%=event.getEventDetail()%></textarea>
                                                 <input type="hidden" name="seat" value="<%= event.getSeat()%>"/>
                                                 <input type="hidden" name="startTime" value="<%= event.getStartTime()%>"/>
                                                 <input type="hidden" name="endTime" value="<%= event.getEndTime()%>"/>
@@ -300,7 +300,7 @@
                                                 <input type="hidden" name="name" value="<%= event.getEventName()%>"/>
                                                 <input type="hidden" name="categoryID" value="<%= event.getCategoryID()%>"/>
                                                 <input type="hidden" name="location" value="<%= event.getLocationID()%>"/>
-                                                <input type="hidden" name="eventDetail" value="<%= event.getEventDetail()%>"/>
+                                                <textarea style= "display:none" name="eventDetail"><%=event.getEventDetail()%></textarea>
                                                 <input type="hidden" name="seat" value="<%= event.getSeat()%>"/>
                                                 <input type="hidden" name="startTime" value="<%= event.getStartTime()%>"/>
                                                 <input type="hidden" name="endTime" value="<%= event.getEndTime()%>"/>

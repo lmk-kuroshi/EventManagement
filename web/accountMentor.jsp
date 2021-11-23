@@ -55,7 +55,6 @@
                     <li>
 
                         <a href="SearchController">
-                            <!--                        <i class='bx bx-grid-alt' ></i>-->
                             <i class='bx bx-trending-up'></i>
                             <span class="links_name">Trending</span>
                         </a>
@@ -69,7 +68,6 @@
                                 <span class="links_name">Category</span>  
                                 <i class='bx bxs-chevron-down arrow' ></i>
                             </a>
-                            <!--                            <i class='bx bxs-chevron-down arrow' ></i>-->
                         </div>
                         <ul class="sub-menu">
 
@@ -85,6 +83,7 @@
                                 %>
                         </ul>
                     </li>
+
                     <li>
                         <a href="ShowFollowEventController">
                             <i class='las la-bell' ></i>
@@ -93,11 +92,26 @@
                         <span class="tooltip">Notify</span>
                     </li>
                     <li>
-                        <a href="listQA.jsp">
-                            <i class="las la-question"></i>
-                            <span class="links_name">Q&A</span>
+                        <div class="iocn-link">
+                            <a href="#" class="open-submenu">
+                                <i class='las la-question' ></i>
+                                <span class="links_name">Q&A</span>  
+                                <i class='bx bxs-chevron-down arrow' style="margin-left: 92px;"></i>
+                            </a>
+                        </div>
+                        <ul class="sub-menu">
+                            <li><a class="link_name" href="#">Q&A</a></li>
+                            <li><a href="QandAMentorController">Unanswered questions</a></li>
+                            <li><a href="EditQAController">Answered questions</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="SearchEventMentorAttendController?eventMentorAttended=<%=loginUser.getId()%>">
+                            <input type="hidden" name="eventMentorAttended" value="<%=loginUser.getId()%>"/>
+                            <i class='bx bx-calendar-check'></i>
+                            <span class="links_name">Attended event</span>
                         </a>
-                        <span class="tooltip">Q&A</span>
+                        <span class="tooltip">Attended event</span>
                     </li>
                     <li>
                         <a href="changeRoleMentor.jsp">

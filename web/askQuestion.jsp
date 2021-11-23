@@ -18,9 +18,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ask Question Page</title>
-<!--        <link href="css/hompageStyle.css" rel="stylesheet" />
-        <link rel="stylesheet"
-              href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />-->
+        <link href="css/AnswerQuestionStyle.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     </head>
     <body>
         <%
@@ -36,133 +36,165 @@
         %>
 
         <%
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+        %>  
+
+        <%
             List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
             CategoryDAO catedao = new CategoryDAO();
             categoryList = catedao.getListCategory();
             request.setAttribute("LIST_CATEGORY", categoryList);
         %>
 
+        <div class="sidebar close">
+            <div class="logo-details">
+                <img class="logo" src="css/img/logo.png"> 
+                <span class="logo_name">Event</span>
+            </div>
+            <div class="sidebar-line"></div>
+            <ul class="nav-links">
+                <div class="sidebar-align">
+                    <li>
 
-        <input type="checkbox" id="nav-toggle">
-        <div class="sidebar">
-            <div class="sidebar-brand">
-                <h2><img class="logo" src="css/img/logo.png"> <span>Software</span></h2>
-            </div>
-            <div class="sidebar-menu">
-                <ul>
-                    <li>
-                        <!--<a href="" class="active"><span class="las la-igloo"></span> <span>Dashboard</span></a>-->
-                        <a href="index.jsp" class="active"><span class="las la-chart-line"></span> <span>Trending</span></a>
+                        <a href="SearchController">
+                            <i class='bx bx-trending-up'></i>
+                            <span class="links_name">Trending</span>
+                        </a>
+
+                        <span class="tooltip">Trending</span>
                     </li>
                     <li>
-                        <a href=""><span class="lab la-buromobelexperte"></span> <span>Category</span></a>
-                        <!--<span class="las la-users"></span> <span>Category</span>-->
-                        <!--                        <div class="dropdown" data-dropdown>
-                                                    <button class="link" data-dropdown-button>Category</button>
-                                                    <div class="dropdown-menu information-grid">
-                                                        <div>
-                                                            <div class="dropdown-heading">Free Tutorials</div>
-                                                            <div class="dropdown-links">
-                                                                <a href="#" class="link">All</a>
-                                                                <a href="#" class="link">Latest</a>
-                                                                <a href="#" class="link">Popular</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>-->
-                    </li>
-                    <!--
- /*                <li>
-                        <a href=""><span class="las la-clipboard-list"></span><span>Projects</span></a>
-                    </li> --*/
-                    -->                 <li>
-                        <a href="ShowFollowEventController"><span class="las la-bell"></span> <span>Notify</span></a>
-                    </li>
-                    <li>
-                        <a href="changeRole.jsp"><span class="las la-scroll"></span><span>Change Role</span></a>  
-                    </li>
-                    
-                    <!--
-                    <li>
-                        <a href=""><span class="las la-receipt"></span> <span>Inventory</span></a>
-                    </li>-->
-                    <li>
-                        <a href=""><span class="las la-user-circle"></span> <span>Accounts</span></a>
-                    </li>
-                    <!--                    <li>
-                                            <a href=""><span class="las la-clipboard-list"></span> <span>Tasks</span></a>
-                                        </li>-->
-                    <li>
-                        <div class="logout">
-                            <form action="MainController">
-                                <a> 
-                                    <span class="las la-door-open"></span> <span><input type="submit" name="action" value="Logout"/> </span>
-                                </a>
-                            </form>
+                        <div class="iocn-link">
+                            <a href="#" class="open-submenu">
+                                <i class='bx bx-collection' ></i>
+                                <span class="links_name">Category</span>  
+                                <i class='bx bxs-chevron-down arrow' ></i>
+                            </a>
                         </div>
+                        <ul class="sub-menu">
+
+                            <li><a class="link_name" href="#">Category</a></li>
+                                <%
+                                    if (categoryList != null) {
+                                        for (CategoryDTO category : categoryList) {
+                                %>
+                            <li><a href="SearchController?categoryName=<%=category.getCategoryName()%>"><%=category.getCategoryName()%></a></li>
+                                <%
+                                        }
+                                    }
+                                %>
+                        </ul>
                     </li>
-                </ul>
-            </div>
+                    <li>
+                        <a href="ShowFollowEventController">
+                            <i class='las la-bell' ></i>
+                            <span class="links_name">Notify</span>
+                        </a>
+                        <span class="tooltip">Notify</span>
+                    </li>
+                    <li>
+                        <a href="changeRole.jsp">
+                            <i class="las la-scroll"></i>
+                            <span class="links_name">Change Role</span>
+                        </a>  
+                        <span class="tooltip">Change Role</span>
+                    </li>
+                    <li>
+                        <a href="accountStudent.jsp">
+                            <i class='las la-user-circle' ></i>
+                            <span class="links_name">Accounts</span>
+                        </a>
+                        <span class="tooltip">Accounts</span>
+                    </li>
+                    <li>
+                        <form action="MainController">
+                            <a href="LogoutController">
+                                <i class='las la-door-open' ></i>
+                                <span class="links_name">Logout</span>
+                            </a>
+                        </form>
+                        <span class="tooltip">Logout</span>
+                    </li>
+                </div>
+            </ul>
         </div>
+
         <div class="main-content">
             <header>
-                <h2>
-                    <label for="nav-toggle">
-                        <span class="las la-bars"></span>
-                    </label>
-
-                    <span>Dashboard</span>
-                </h2>
+                <div class="sidebar-button">
+                    <i class='bx bx-menu sidebarBtn'></i>
+                    <span class="dashboard">Dashboard</span>
+                </div>
                 <div class="search-wrapper">
-                    <!--                <span class="las la-search"></span>
-                                    <input type="search" placeholder="Search here" />-->
                     <form action="MainController">
                         <button class="las la-search" type="submit" value="Search" name="action"></button>
                         <input type="text" name="search" value="<%= search%>" placeholder="Search here"/>
-
                     </form>
                 </div>
                 <div class="user-wrapper">
                     <img src="css/img/2.jpg" width="40px" height="40px" alt="" />
                     <div>
-                        <h4><%=mentor.getName()%></h4>
+                        <h4><%=loginUser.getName()%></h4>
                         <small><%= roleName%></small>
                     </div>
                 </div>
             </header>
 
             <main>
-        <%
-            List<MentorEventDTO> mentorsThisEventList = (List<MentorEventDTO>) request.getAttribute("MENTOR_THIS_EVENT");
-            String eventID = (String) request.getAttribute("eventID");
-            String eventName = (String) request.getAttribute("eventName");
-        %>
-        <h1>Ask Question for Event: <%=eventName%> </h1>
-        <form action="MainController">
-            <input type ="text" name="questionDetail" required=""/>
-            <select name="mentorID">               
-                <%
-                    if (mentorsThisEventList != null) {
-                        for (MentorEventDTO mentorThisEvent : mentorsThisEventList) {
-                %>
+                <div class="follow-card">
+                    <div class="follow-align">
+                        <%
+                            List<MentorEventDTO> mentorsThisEventList = (List<MentorEventDTO>) request.getAttribute("MENTOR_THIS_EVENT");
+                            String eventID = (String) request.getAttribute("eventID");
+                            String eventName = (String) request.getAttribute("eventName");
+                        %>
+                        <h1>Ask Question for Event: <span class="event-name"> <%=eventName%></span></h1>
+                        <form action="MainController">
+                            <h3>Select a mentor you want to ask in this event: 
+                            <select name="mentorID">               
+                                <%
+                                    if (mentorsThisEventList != null) {
+                                        for (MentorEventDTO mentorThisEvent : mentorsThisEventList) {
+                                %>
 
-                <option value="<%=mentorThisEvent.getMentorID()%>"> <%=mentorThisEvent.getMemtorName()%> </option>
+                                <option value="<%=mentorThisEvent.getMentorID()%>"> <%=mentorThisEvent.getMemtorName()%> </option>
 
-                <%}
-                    }
-                %>
-            </select>
-            <input type="hidden" name="eventID" value="<%= eventID%>" />
-            <input type="hidden" name="eventName" value="<%= eventName%>"/>
-            <input type="submit" name="action" value="ConfirmAskQuestion"/>
-        </form>
-                
+                                <%
+                                        }
+                                    }
+                                %>
+                            </select>
+                            </h3>
+                            <br>
+                            <input type ="text" name="questionDetail" required=""/>
+                            <input type="hidden" name="eventID" value="<%= eventID%>" />
+                            <input type="hidden" name="eventName" value="<%= eventName%>"/>
+                            <button style="width: 200px" type="submit" name="action" value="ConfirmAskQuestion">Confirm Question</button>
+                        </form>
+
+                    </div>
+                </div>
             </main>
             <footer>
-                <h2><img class="logo" src="css/img/footerLogo.svg"/></h2>
-                <p class="copyright">© 2021 GROUP 5</p>
+                <div class="footer-align">
+                    <div class="footer-copyright">
+                        <h3><img class="logo" src="css/img/logo.png"/><span>Event</span></h3>
+                        <small class="copyright">Copyright © 2021 by GROUP 5</small>
+                    </div>
+                    <div class="follow-contact">
+                        <h3>Contact</h3>
+                        <small><span class="las la-envelope"></span><span> eventnotifygroup5@gmail.com</span></small>
+                        <br>
+                        <small><span class="las la-phone"></span><span> 0914 291 596</span></small>
+                    </div>
+                    <div class="follow-address">
+                        <h3>Address</h3>
+                        <small><span class="las la-map-marker-alt"></span><span> Lô E2a-7, Đường D1, Khu Công Nghệ Cao, Long Thạnh</span>
+                            <br><span> Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh</span></small>
+                    </div>
+                </div>
             </footer>
         </div>
-
+        <script src="js/DashboardBtn.js"></script>
     </body>
 </html>
