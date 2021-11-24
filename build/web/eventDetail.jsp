@@ -1,3 +1,4 @@
+<%@page import="com.group5.role.RoleDAO"%>
 <%@page import="com.group5.category.CategoryDAO"%>
 <%@page import="com.group5.category.CategoryDTO"%>
 <%@page import="java.util.List"%>
@@ -29,6 +30,10 @@
                     Timestamp.valueOf(request.getParameter("endTime")), request.getParameter("image"), request.getParameter("video"),
                     request.getParameter("status"));
             if (event != null) {
+        %>
+        <%
+            RoleDAO ro = new RoleDAO();
+            String roleName = ro.getRoleName(loginUser.getRoleID());
         %>
         <%
             List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
@@ -129,7 +134,7 @@
                     <img src="css/img/2.jpg" width="40px" height="40px" alt="" />
                     <div>
                         <h4><%=loginUser.getName()%></h4>
-                        <small>Student</small>
+                        <small><%= roleName%></small>
                     </div>
                 </div>
             </header>
@@ -138,54 +143,66 @@
                     <div class="event-align">
                         <h1 class="event-name"><%=event.getEventName()%></h1>
         <!--                <h1> Post by: <%=event.getCreatorID()%> at <%=event.getCreateTime()%></h1>-->
-                        <div class="event-detail-img">
-                            <img src ="<%=event.getImage()%>" alt="Event Image"> 
-                        </div>
-                        <div class="event-detail-video">
-                            <iframe src="<%=event.getVideo()%>" onerror="alert('URL invalid !!');" 
-                                    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                            </iframe>
-                        </div>
-                        <div class="event-detail-button">
-                            <div class="event-detail-follow">
-                                <form action="MainController">
-                                    <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
-                                    <button class="btnFollow" type="submit" name="action" value="FollowOrUnfollow">Follow</button>
-                                </form>
+                        <div class="event-detail-img-vid">
+                            <div class="event-detail-img">
+                                <img src ="<%=event.getImage()%>" alt="Event Image"> 
                             </div>
-                            <div class="event-detail-register">
-                                <form action="MainController">
-                                    <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
-                                    <button type="submit" name="action" value="Register">Register</button>
-                                </form>
-                            </div>
-                            <div class="event-detail-followup">
-                                <form action="MainController">
-                                    <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
-                                    <button type="submit" name="action" value="ShowFollowup">Show Follow Up</button>
-                                </form>
-                                <form action="MainController">
-                                    <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
-                                    <input type="hidden" name="eventName" value="<%= event.getEventName()%>"/>
-                                    <button type="submit" name="action" value="AskQuestion">Ask Question</button>
-                                </form>    
+                            <div class="event-detail-video">
+                                <iframe src="<%=event.getVideo()%>" onerror="alert('URL invalid !!');" 
+                                        title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                </iframe>
                             </div>
                         </div>
-                        <div class="event-detail-info">
-                            <br>
-                            <h3> Location:<span> <%=event.getLocationID()%></span></h3>
-                            <br>
-                            <h3> From: <span><%=event.getStartTime()%></span></h3>
-                            <br>
-                            <h3> To: <span><%=event.getEndTime()%></span></h3>
-                            <br>
+
+                        <div class="event-detail-info-button">
+
+                            <div class="event-detail-info">
+                                <br>
+                                <h3> Location:<span> <%=event.getLocationID()%></span></h3>
+                                <br>
+                                <h3> From: <span><%=event.getStartTime()%></span></h3>
+                                <br>
+                                <h3> To: <span><%=event.getEndTime()%></span></h3>
+                                <br>
+                                <h3> Seat available: <span><%=event.getSeat()%></span></h3>
+                                <br>
+                            </div>
+                            <div class="event-detail-button">
+                                <div class="event-detail-follow">
+                                    <form action="MainController">
+                                        <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
+                                        <button class="btnFollow" type="submit" name="action" value="FollowOrUnfollow">Follow</button>
+                                    </form>
+                                </div>
+                                <div class="event-detail-register">
+                                    <form action="MainController">
+                                        <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
+                                        <button type="submit" name="action" value="Register">Register</button>
+                                    </form>
+                                </div>
+                                <div class="event-detail-followup">
+                                    <form action="MainController">
+                                        <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
+                                        <button type="submit" name="action" value="ShowFollowup">Show Follow Up</button>
+                                    </form>
+                                </div>
+                                <div class="event-detail-question">
+                                    <form action="MainController">
+                                        <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
+                                        <input type="hidden" name="eventName" value="<%= event.getEventName()%>"/>
+                                        <button type="submit" name="action" value="AskQuestion">Ask Question</button>
+                                    </form>  
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-detail-detail">
                             <h3> Description: <span><%=event.getEventDetail()%></span></h3>
                             <br>
             <!--                <h1> <%=event.getStatus()%></h1>-->
-                            <h3> Seat available: <span><%=event.getSeat()%></span></h3>
-                            <br>
+
                         </div>
-                        <% }
+                        <%
+                            }
                         %>
                     </div>
                 </div>

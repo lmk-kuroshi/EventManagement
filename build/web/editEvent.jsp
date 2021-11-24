@@ -4,6 +4,7 @@
     Author     : Minh Khoa
 --%>
 
+<%@page import="com.group5.role.RoleDAO"%>
 <%@page import="com.group5.category.CategoryDTO"%>
 <%@page import="com.group5.location.LocationDTO"%>
 <%@page import="java.util.List"%>
@@ -31,6 +32,10 @@
                 search = "";
             }
         %>    
+        <%
+            RoleDAO ro = new RoleDAO();
+            String roleName = ro.getRoleName(loginUser.getRoleID());
+        %>
         <%
             List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
             CategoryDAO catedao = new CategoryDAO();
@@ -142,7 +147,7 @@
                     <img src="css/img/2.jpg" width="40px" height="40px" alt="" />
                     <div>
                         <h4><%=loginUser.getName()%></h4>
-                        <small>Leader</small>
+                        <small><%= roleName%></small>
                     </div>
                 </div>
             </header>
@@ -160,70 +165,79 @@
                 %>
                 <div class="create-event-card">
                     <div class="create-event-align">
+
                         <h1>Edit Event</h1><br>
                         <form action="MainController">
-                            <span>Event Name: </span><input type="text" name="eventName" value="<%=event.getEventName()%>"/>
-                            <%= eventError.getEventNameError()%>
-                            <br>
-                            <br>
-                            <span>Category:</span>
-                            <select name="categoryID">
-                                <% categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
-                                    if (categoryList != null) {
-                                        for (CategoryDTO category : categoryList) {
-                                %>
+                            <div class="create-event-info-button">
+                                <div class="create-event-info1">
+                                    <span>Event Name: </span><input type="text" name="eventName" value="<%=event.getEventName()%>"/>
+                                    <%= eventError.getEventNameError()%>
+                                    <br>
+                                    <br>
+                                    <span>Category:</span>
+                                    <select name="categoryID">
+                                        <% categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
+                                            if (categoryList != null) {
+                                                for (CategoryDTO category : categoryList) {
+                                        %>
 
-                                <option value="<%=category.getCategoryID()%>"> <%=category.getCategoryName()%> </option>
+                                        <option value="<%=category.getCategoryID()%>"> <%=category.getCategoryName()%> </option>
 
-                                <%}
-                                    }
-                                %>
-                            </select> <br><br>
-                            <span>Available Location:</span>
-                            <select name="locationID">
-                                <% List<LocationDTO> locationList = (List<LocationDTO>) request.getAttribute("LIST_LOCATION");
-                                    if (locationList != null) {
-                                        for (LocationDTO location : locationList) {
-                                %>
+                                        <%}
+                                            }
+                                        %>
+                                    </select> <br><br>
+                                    <span>Available Location:</span>
+                                    <select name="locationID">
+                                        <% List<LocationDTO> locationList = (List<LocationDTO>) request.getAttribute("LIST_LOCATION");
+                                            if (locationList != null) {
+                                                for (LocationDTO location : locationList) {
+                                        %>
 
-                                <option value="<%=location.getLocationID()%>"> <%=location.getLocationName()%> </option>
+                                        <option value="<%=location.getLocationID()%>"> <%=location.getLocationName()%> </option>
 
-                                <%}
-                                    }
-                                %>
-                            </select><br>
-                            <br>
+                                        <%}
+                                            }
+                                        %>
+                                    </select>
+
+                                    <%= eventError.getEventDetailError()%>
+                                    <br>
+                                    <br>
+                                    <span>Maximum seat: </span><input type="number" name="seat" value="<%=event.getSeat()%>"/>
+                                    <%= eventError.getSeatError()%><br>
+                                    <br>
+                                </div>
+                                <div class="create-event-info2">
+                                    <span>Start Time: </span><input type="datetime-local" name="startTime" value="<%=event.getStartTime()%>"/>
+                                    <%= eventError.getStartTimeError()%><br>
+                                    <br>
+
+                                    <span>End Time: </span><input type="datetime-local" name="endTime" value="<%=event.getEndTime()%>"/>
+                                    <%= eventError.getEndTimeError()%><br>
+                                    <br>
+
+                                    <span>Image(please enter the image's link): </span>
+                                    <input class="long-input" type="text" name="image" value="<%=event.getImage()%>"/>
+                                    <br>
+                                    <br>
+                                    <span>Video(please enter a YouTube embed video link):</span>
+                                    <input class="long-input" type="text" name="video" value="<%=event.getVideo()%>"/>
+                                    <br>
+                                    <br>
+                                </div>
+                                <div class="button-align">
+                                    <button type="submit" name="action" value="ConfirmEditEvent">Confirm Edit Event</button>
+                                    <button type="reset" value="Reset">Reset</button>
+                                </div>
+
+                            </div>
                             <span>Event Detail: </span><br>
                             <br>
                             <textarea id="editor" name="eventDetail"><%=event.getEventDetail()%></textarea><br><br>
-                            <%= eventError.getEventDetailError()%></br>
-                            <span>Maximum seat: </span><input type="number" name="seat" value="<%=event.getSeat()%>"/>
-                            <%= eventError.getSeatError()%><br>
-                            <br>
-
-                            <span>Start Time: </span><input type="datetime-local" name="startTime" value="<%=event.getStartTime()%>"/>
-                            <%= eventError.getStartTimeError()%><br>
-                            <br>
-
-                            <span>End Time: </span><input type="datetime-local" name="endTime" value="<%=event.getEndTime()%>"/>
-                            <%= eventError.getEndTimeError()%><br>
-                            <br>
-
-                            <span>Image(please enter the image's link): </span>
-                            <input type="text" name="image" value="<%=event.getImage()%>"/>
-                            <br>
-                            <br>
-                            <span>Video(please enter a YouTube embed video link):</span>
-                            <input type="text" name="video" value="<%=event.getVideo()%>"/>
-                            <br>
-                            <br>
                             <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
                             <input type="hidden" name="creatTime" value="<%=event.getCreateTime()%>"/>
                             <input type="hidden" name="status" value="<%=event.getStatus()%>"/>
-                            <div class="button-align">
-                                <button type="submit" name="action" value="ConfirmEditEvent">Confirm Edit Event</button>
-                                <button type="reset" value="Reset">Reset</button>
-                            </div>
                         </form>
                     </div>
                 </div>

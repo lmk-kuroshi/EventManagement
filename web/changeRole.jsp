@@ -4,6 +4,7 @@
     Author     : ASUS
 --%>
 
+<%@page import="com.group5.role.RoleDAO"%>
 <%@page import="com.group5.category.CategoryDAO"%>
 <%@page import="com.group5.category.CategoryDTO"%>
 <%@page import="java.util.List"%>
@@ -27,6 +28,10 @@
             if (search == null) {
                 search = "";
             }
+        %>
+        <%
+            RoleDAO ro = new RoleDAO();
+            String roleName = ro.getRoleName(loginUser.getRoleID());
         %>
 
 
@@ -128,7 +133,7 @@
                     <img src="css/img/2.jpg" width="40px" height="40px" alt="" />
                     <div>
                         <h4><%=loginUser.getName()%></h4>
-                        <small>Student</small>
+                        <small><%= roleName%></small>
                     </div>
                 </div>
             </header>

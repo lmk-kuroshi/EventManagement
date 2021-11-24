@@ -147,7 +147,7 @@
                     <img src="css/img/2.jpg" width="40px" height="40px" alt="User Icon" />
                     <div>
                         <h4><%=loginUser.getName()%></h4>
-                        <small>Student</small>
+                        <small><%= roleName%></small>
                     </div>
                 </div>
             </header>

@@ -44,6 +44,10 @@ form
 
 }
 
+.content-table th{
+    text-align: center;
+}
+
 .content-table th,
 .content-table td {
     padding: 12px 15px;

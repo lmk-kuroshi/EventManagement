@@ -709,7 +709,7 @@ main .edit-event-title{
     width: 100%;
     background-color: inherit;
 }
-.content-table a{
+/*.content-table a{
     font-family: 'Poppins',sans-serif;
     display: flex;
     width: 130px;
@@ -718,7 +718,7 @@ main .edit-event-title{
     border-radius: 12px;
     background: var(--main-color);
     color: white;
-    /*    padding: 10px 25px;*/
+        padding: 10px 25px;
     padding: 8px 18px;
     font-weight: 500;
     font-size: 13px;
@@ -731,13 +731,13 @@ main .edit-event-title{
     border-radius: 12px;
     background: #fff;
     color: var(--main-color);
-    /*padding: 10px 25px;*/
+    padding: 10px 25px;
     padding: 8px 18px;
     font-weight: 500;
     cursor: pointer;
     font-size: 13px;
     text-align: center;
-}
+}*/
 .content-table button{
     font-family: 'Poppins',sans-serif;
     width: 130px;
@@ -768,9 +768,9 @@ main .edit-event-title{
     text-align: center;
 }
 
-.content-table .add-followup-align{
+/*.content-table .add-followup-align{
     margin-top:40%;
-}
+}*/
 
 .content-table .event-name{
     color: #ff6600;
@@ -787,3 +787,8 @@ main .edit-event-title{
     width: 240px;
     height: 140px;
 }
+
+
+/*.add-followup-mentor-align{
+    display: flex;
+}*/

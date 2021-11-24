@@ -3,6 +3,7 @@
     Created on : Oct 3, 2021, 11:09:10 AM
     Author     : Minh Khoa
 --%>
+<%@page import="com.group5.role.RoleDAO"%>
 <%@page import="com.group5.category.CategoryDAO"%>
 <%@page import="com.group5.category.CategoryDTO"%>
 <%@page import="java.util.List"%>
@@ -28,6 +29,10 @@
             if (search == null) {
                 search = "";
             }
+        %>
+        <%
+            RoleDAO ro = new RoleDAO();
+            String roleName = ro.getRoleName(loginUser.getRoleID());
         %>
         <%
             List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
@@ -83,11 +88,26 @@
                         <span class="tooltip">Notify</span>
                     </li>
                     <li>
-                        <a href="listQA.jsp">
-                            <i class="las la-question"></i>
-                            <span class="links_name">Q&A</span>
+                        <div class="iocn-link">
+                            <a href="#" class="open-submenu">
+                                <i class='las la-question' ></i>
+                                <span class="links_name">Q&A</span>  
+                                <i class='bx bxs-chevron-down arrow' style="margin-left: 92px;"></i>
+                            </a>
+                        </div>
+                        <ul class="sub-menu">
+                            <li><a class="link_name" href="#">Q&A</a></li>
+                            <li><a href="QandAMentorController">Unanswered questions</a></li>
+                            <li><a href="EditQAController">Answered questions</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="SearchEventMentorAttendController?eventMentorAttended=<%=loginUser.getId()%>">
+                            <input type="hidden" name="eventMentorAttended" value="<%=loginUser.getId()%>"/>
+                            <i class='bx bx-calendar-check'></i>
+                            <span class="links_name">Attended event</span>
                         </a>
-                        <span class="tooltip">Q&A</span>
+                        <span class="tooltip">Attended event</span>
                     </li>
                     <li>
                         <a href="changeRoleLeader.jsp">
@@ -135,7 +155,7 @@
                     <img src="css/img/2.jpg" width="40px" height="40px" alt="" />
                     <div>
                         <h4><%=loginUser.getName()%></h4>
-                        <small>Mentor</small>
+                        <small><%= roleName%></small>
                     </div>
                 </div>
             </header>

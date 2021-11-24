@@ -23,8 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "SearchEventMentorAttendController", urlPatterns = {"/SearchEventMentorAttendController"})
 public class SearchEventMentorAttendController extends HttpServlet {
 
-    private final static String ERROR = "mentor.jsp";
-    private final static String SUCCESS = "mentor.jsp";
+    private final static String ERROR = "MentorAttendedEvent.jsp";
+    private final static String SUCCESS = "MentorAttendedEvent.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

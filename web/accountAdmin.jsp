@@ -96,12 +96,13 @@
                     <img src="css/img/2.jpg" width="40px" height="40px" alt="User Icon" />
                     <div>
                         <h4><%=loginUser.getName()%></h4>
-                        <small>Admin</small>
+                        <small><%= roleName%></small>
                     </div>
                 </div>
             </header>
 
             <main>
+                
                 <div class="account-card">
                     <div class="account-card-align">
                         <div class="account-card-left">
@@ -138,5 +139,7 @@
             </footer>
         </div>
         <script src="js/DashboardBtn.js"></script>
+        
+        
     </body>
 </html>

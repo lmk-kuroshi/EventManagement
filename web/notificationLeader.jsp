@@ -3,6 +3,7 @@
     Created on : Oct 27, 2021, 5:49:37 PM
     Author     : DELL
 --%>
+<%@page import="com.group5.role.RoleDAO"%>
 <%@page import="com.group5.category.CategoryDAO"%>
 <%@page import="com.group5.category.CategoryDTO"%>
 <%@page import="java.util.List"%>
@@ -25,6 +26,10 @@
             if (search == null) {
                 search = "";
             }
+        %>
+        <%
+            RoleDAO ro = new RoleDAO();
+            String roleName = ro.getRoleName(loginUser.getRoleID());
         %>
         <%
             List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
@@ -137,7 +142,7 @@
                     <img src="css/img/2.jpg" width="40px" height="40px" alt="" />
                     <div>
                         <h4><%=loginUser.getName()%></h4>
-                        <small>Leader</small>
+                        <small><%= roleName%></small>
                     </div>
                 </div>
             </header>

@@ -4,6 +4,7 @@
     Author     : Minh Khoa
 --%>
 
+<%@page import="com.group5.role.RoleDAO"%>
 <%@page import="com.group5.category.CategoryDAO"%>
 <%@page import="com.group5.users.UserDTO"%>
 <%@page import="com.group5.category.CategoryDTO"%>
@@ -25,13 +26,21 @@
     </head>
     <body>
         <%
+            String eventID = request.getParameter("eventID");
+            String eventName = request.getParameter("eventName");
+        %>
+        <%
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
 
             String search = request.getParameter("search");
             if (search == null) {
                 search = "";
             }
-        %>    
+        %>   
+        <%
+            RoleDAO ro = new RoleDAO();
+            String roleName = ro.getRoleName(loginUser.getRoleID());
+        %>
         <%
             List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
             CategoryDAO catedao = new CategoryDAO();
@@ -143,7 +152,7 @@
                     <img src="css/img/2.jpg" width="40px" height="40px" alt="" />
                     <div>
                         <h4><%=loginUser.getName()%></h4>
-                        <small>Leader</small>
+                        <small><%= roleName%></small>
                     </div>
                 </div>
             </header>
@@ -170,23 +179,33 @@
                 <div class="create-event-card">
                     <div class="create-event-align">
                         <h1>Edit Followup Detail</h1><br>
+                        <!--<h1 class="event-name"><%=eventName%></h1><br><br>-->
                         <form action="MainController"> 
+                            <div class="create-event-info-button">
+                                <div class="create-event-info1">
+
+                                    <span>Image(please enter the image's link): </span>
+                                    <input class="long-input" type="text" name="followupImage" value="<%=followup.getFollowupImage()%>" /><br><br>
+
+                                </div>
+                                <div class="create-event-info2">
+                                    <span>Video(please enter a YouTube embed video link):</span>
+                                    <input class="long-input" type="text" name="followupVideo" value="<%=followup.getFollowupVideo()%>"/>
+                                    <input type="hidden" name="eventID" value="<%=followup.getEventID()%>"/>
+                                    <input type="hidden" name="followupID" value="<%=followup.getFollowupID()%>"/>
+                                    <input type="hidden" name="notification" value=" new updated"/>
+                                    <br>
+                                    <br>
+                                </div>
+                                <div class="button-align">
+                                    <button type="submit" name="action" value="ConfirmEditFollowup">Confirm Edit Followup</button>
+                                </div>
+                            </div>
+
                             <span>Followup Detail: </span><br><br>
                             <textarea id="editor<%=i%>" name="followupDetail"><%=followup.getFollowupDetail()%></textarea><br>
-                            <span>Image(please enter the image's link): </span>
-                            <input type="text" name="followupImage" value="<%=followup.getFollowupImage()%>" /><br><br>
-                            
-                            <span>Video(please enter a YouTube embed video link):</span>
-                            <input type="text" name="followupVideo" value="<%=followup.getFollowupVideo()%>"/>
-                            <input type="hidden" name="eventID" value="<%=followup.getEventID()%>"/>
-                            <input type="hidden" name="followupID" value="<%=followup.getFollowupID()%>"/>
-                            <input type="hidden" name="notification" value=" new updated"/>
-                            <br>
-                            <br>
-                            <div class="button-align">
-                                <button type="submit" name="action" value="ConfirmEditFollowup">Confirm Edit Followup</button>
-                            </div>
                         </form>
+
                     </div>
                 </div>
             </main>

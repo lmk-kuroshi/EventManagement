@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Karla&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 
 :root{
     /*--main-color:#DD2f6E;*/ 
@@ -533,24 +533,29 @@ footer .footer-copyright .logo{
     text-align: left;
     line-height: 46px;
     padding-top: 3rem;
-    margin: 35px 0;
     color: #ff6600;
     font-size: 40px;
     font-family: 'Abril Fatface', cursive;
-    margin-bottom: 55px;
+    margin-bottom: 35px;
     margin-top: 20px;
     font-weight: bold;
+}
+
+.event-detail .event-detail-img-vid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
 }
 
 .event-detail .event-detail-img{
     margin: 2rem 0;
     width: 100%;
-    display: inline-block;
+/*    display: inline-block;*/
 }
 
 .event-detail .event-detail-img img{
-    width: 680px;
-    height: auto;
+    width: 540px;
+    height: 285px;
     float: left;
     margin-right: 3rem;
 }
@@ -558,34 +563,41 @@ footer .footer-copyright .logo{
 .event-detail .event-detail-video{
     margin: 2rem 0;
     width: 100%;
-    display: inline-block;
+    /*display: inline-block;*/
 }
 .event-detail .event-detail-video iframe{
-    width: 520px;
-    height: 320px;
+    width: 540px;
+    height: 285px;
     float: left;
+}
+
+.event-detail-info-button{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
 }
 
 .event-detail h3{
     font-weight: 600;
-    font-family: 'Lora', serif;
-    text-size:150px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size:22px;
 }
 
 .event-detail h3 span{
     font-weight: 200;
-    font-family: 'Lora', serif;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .event-detail .event-detail-button{
-    margin: 1rem 0;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
 }
 
-.event-detail-follow{
+/*.event-detail-follow{
     display: flex;
     margin-right: 2rem;
-}
+}*/
 
 .event-detail-follow button{
     border:3px solid var(--main-color);
@@ -595,6 +607,8 @@ footer .footer-copyright .logo{
     padding: 10px 25px;
     font-weight: 900;
     font-size: 16px;
+    width: 13rem;
+    height: auto;
 }
 
 .event-detail-follow button:hover{
@@ -607,10 +621,10 @@ footer .footer-copyright .logo{
     cursor: pointer;
     font-size: 16px;
 }
-.event-detail-register{
+/*.event-detail-register{
     margin-right: 2rem;
     display: flex;
-}
+}*/
 .event-detail-register button{
     border:3px solid var(--main-color);
     border-radius: 12px;
@@ -619,6 +633,8 @@ footer .footer-copyright .logo{
     padding: 10px 25px;
     font-weight: 900;
     font-size: 16px;
+    width: 13rem;
+    height: auto;
 }
 
 .event-detail-register button:hover{
@@ -631,6 +647,13 @@ footer .footer-copyright .logo{
     cursor: pointer;
     font-size: 16px;
 }
+
+
+/*.event-detail-followup{
+    margin-right: 2rem;
+    display: flex;
+}*/
+
 .event-detail-followup button{
     border:3px solid var(--main-color);
     border-radius: 12px;
@@ -639,9 +662,34 @@ footer .footer-copyright .logo{
     padding: 10px 25px;
     font-weight: 900;
     font-size: 16px;
+    width: 13rem;
+    height: auto;
 }
 
 .event-detail-followup button:hover{
+    border:3px solid var(--main-color);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--main-color);
+    padding: 10px 25px;
+    font-weight: 900;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.event-detail-question button{
+    border:3px solid var(--main-color);
+    border-radius: 12px;
+    background: var(--main-color);
+    color: white;
+    padding: 10px 25px;
+    font-weight: 900;
+    font-size: 16px;
+    width: 13rem;
+    height: auto;
+}
+
+.event-detail-question button:hover{
     border:3px solid var(--main-color);
     border-radius: 12px;
     background: #fff;

@@ -4,6 +4,7 @@
     Author     : Minh Khoa
 --%>
 
+<%@page import="com.group5.role.RoleDAO"%>
 <%@page import="com.group5.category.CategoryDAO"%>
 <%@page import="com.group5.category.CategoryDTO"%>
 <%@page import="java.util.List"%>
@@ -21,9 +22,9 @@
         <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     </head>
     <body>
-        
-        
-        
+
+
+
         <%
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
 
@@ -31,7 +32,11 @@
             if (search == null) {
                 search = "";
             }
-        %>    
+        %>   
+        <%
+            RoleDAO ro = new RoleDAO();
+            String roleName = ro.getRoleName(loginUser.getRoleID());
+        %>
 
         <%
             List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
@@ -79,6 +84,7 @@
                                 %>
                         </ul>
                     </li>
+
                     <li>
                         <a href="ShowFollowEventController">
                             <i class='las la-bell' ></i>
@@ -87,11 +93,26 @@
                         <span class="tooltip">Notify</span>
                     </li>
                     <li>
-                        <a href="listQA.jsp">
-                            <i class="las la-question"></i>
-                            <span class="links_name">Q&A</span>
+                        <div class="iocn-link">
+                            <a href="#" class="open-submenu">
+                                <i class='las la-question' ></i>
+                                <span class="links_name">Q&A</span>  
+                                <i class='bx bxs-chevron-down arrow' style="margin-left: 92px;"></i>
+                            </a>
+                        </div>
+                        <ul class="sub-menu">
+                            <li><a class="link_name" href="#">Q&A</a></li>
+                            <li><a href="QandAMentorController">Unanswered questions</a></li>
+                            <li><a href="EditQAController">Answered questions</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="SearchEventMentorAttendController?eventMentorAttended=<%=loginUser.getId()%>">
+                            <input type="hidden" name="eventMentorAttended" value="<%=loginUser.getId()%>"/>
+                            <i class='bx bx-calendar-check'></i>
+                            <span class="links_name">Attended event</span>
                         </a>
-                        <span class="tooltip">Q&A</span>
+                        <span class="tooltip">Attended event</span>
                     </li>
                     <li>
                         <a href="changeRoleMentor.jsp">
@@ -136,7 +157,7 @@
                     <img src="css/img/2.jpg" width="40px" height="40px" alt="" />
                     <div>
                         <h4><%=loginUser.getName()%></h4>
-                        <small>Mentor</small>
+                        <small><%= roleName%></small>
                     </div>
                 </div>
             </header>
@@ -150,129 +171,191 @@
                 %>
 
                 <!--<%= message%><br>-->
+
                 <div class="back-separate">
                     <h1>Ongoing Event</h1>
                 </div>
-                <div class="event-card">
-                    <%
-                        List<EventDTO> onlist = (List<EventDTO>) request.getAttribute("LIST_EVENT_ONGOING");
-                        if (onlist != null) {
-                            if (!onlist.isEmpty()) {
-                                for (EventDTO event : onlist) {
+                <div class="carousel-container">
+                    <div class="carousel-inner">
+                        <div class="track">
+                            <div class="card-container">
+                                <div class="event-card">
+                                    <%
+                                        List<EventDTO> onlist = (List<EventDTO>) request.getAttribute("LIST_EVENT_ONGOING");
+                                        if (onlist != null) {
+                                            if (!onlist.isEmpty()) {
+                                                for (EventDTO event : onlist) {
 
-                    %> 
-                    <div class="event-card-single" >
-                        <img src="<%=event.getImage()%>" alt="Image Event"/>
-                        <div>
-                            <form action="MainController">
-                                <button type="submit" value="ShowEventDetail" name="action"><%=event.getEventName()%></button>
-                                <input type="hidden" name="id" value="<%= event.getEventID()%>"/>
-                                <input type="hidden" name="name" value="<%= event.getEventName()%>"/>
-                                <input type="hidden" name="categoryID" value="<%= event.getCategoryID()%>"/>
-                                <input type="hidden" name="location" value="<%= event.getLocationID()%>"/>
-                                <input type="hidden" name="eventDetail" value="<%= event.getEventDetail()%>"/>
-                                <input type="hidden" name="seat" value="<%= event.getSeat()%>"/>
-                                <input type="hidden" name="startTime" value="<%= event.getStartTime()%>"/>
-                                <input type="hidden" name="endTime" value="<%= event.getEndTime()%>"/>
-                                <input type="hidden" name="creatTime" value="<%= event.getCreateTime()%>"/>
-                                <input type="hidden" name="image" value="<%= event.getImage()%>"/>
-                                <input type="hidden" name="video" value="<%= event.getVideo()%>"/>
-                                <input type="hidden" name="status" value="<%= event.getStatus()%>"/>
-                            </form>
-                            <span>Start: <%=event.getStartTime()%></span>
-                            <span>Ends: <%=event.getEndTime()%></span>
-                            <span>Category: <%=event.getCategoryID()%></span>
+                                    %> 
+                                    <div class="event-card-single" >
+                                        <img src="<%=event.getImage()%>" alt="Image Event"/>
+                                        <div>
+                                            <form action="MainController">
+                                                <button type="submit" value="ShowEventDetail" name="action"><%=event.getEventName()%></button>
+                                                <input type="hidden" name="id" value="<%= event.getEventID()%>"/>
+                                                <input type="hidden" name="name" value="<%= event.getEventName()%>"/>
+                                                <input type="hidden" name="categoryID" value="<%= event.getCategoryID()%>"/>
+                                                <input type="hidden" name="location" value="<%= event.getLocationID()%>"/>
+                                                <textarea style= "display:none" name="eventDetail"><%=event.getEventDetail()%></textarea>
+                                                <input type="hidden" name="seat" value="<%= event.getSeat()%>"/>
+                                                <input type="hidden" name="startTime" value="<%= event.getStartTime()%>"/>
+                                                <input type="hidden" name="endTime" value="<%= event.getEndTime()%>"/>
+                                                <input type="hidden" name="creatTime" value="<%= event.getCreateTime()%>"/>
+                                                <input type="hidden" name="image" value="<%= event.getImage()%>"/>
+                                                <input type="hidden" name="video" value="<%= event.getVideo()%>"/>
+                                                <input type="hidden" name="status" value="<%= event.getStatus()%>"/>
+                                            </form>
+                                            <span>Start: <%=event.getStartTime()%></span>
+                                            <span>Ends: <%=event.getEndTime()%></span>
+                                            <span>Category: <%=event.getCategoryID()%></span>
+                                        </div>
+                                    </div>
+
+                                    <%
+                                                }
+                                            }
+                                        }
+                                    %>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <%
-                                }
-                            }
-                        }
-                    %>
+                    <div class="nav">
+                        <button class="prev">
+                            <i class="material-icons">
+                                keyboard_arrow_left
+                            </i>
+                        </button>
+                        <button class="next">
+                            <i class="material-icons">
+                                keyboard_arrow_right
+                            </i>
+                        </button>
+                    </div>
                 </div>
+
                 <div class="back-separate">
                     <h1>Upcoming Event</h1>
                 </div>
-                <div class="event-card">
-                    <%
-                        List<EventDTO> uplist = (List<EventDTO>) request.getAttribute("LIST_EVENT_UPCOMING");
-                        if (uplist != null) {
-                            if (!uplist.isEmpty()) {
-                                for (EventDTO event : uplist) {
+                <div class="carousel-container2">
+                    <div class="carousel-inner2">
+                        <div class="track2">
+                            <div class="card-container">
+                                <div class="event-card">
+                                    <%
+                                        List<EventDTO> uplist = (List<EventDTO>) request.getAttribute("LIST_EVENT_UPCOMING");
+                                        if (uplist != null) {
+                                            if (!uplist.isEmpty()) {
+                                                for (EventDTO event : uplist) {
 
-                    %> 
-                    <div class="event-card-single" >
-                        <img src="<%=event.getImage()%>" alt="Image Event"/>
-                        <div>
-                            <form action="MainController">
-                                <button type="submit" value="ShowEventDetail" name="action"><%=event.getEventName()%></button>
-                                <input type="hidden" name="id" value="<%= event.getEventID()%>"/>
-                                <input type="hidden" name="name" value="<%= event.getEventName()%>"/>
-                                <input type="hidden" name="categoryID" value="<%= event.getCategoryID()%>"/>
-                                <input type="hidden" name="location" value="<%= event.getLocationID()%>"/>
-                                <input type="hidden" name="eventDetail" value="<%= event.getEventDetail()%>"/>
-                                <input type="hidden" name="seat" value="<%= event.getSeat()%>"/>
-                                <input type="hidden" name="startTime" value="<%= event.getStartTime()%>"/>
-                                <input type="hidden" name="endTime" value="<%= event.getEndTime()%>"/>
-                                <input type="hidden" name="creatTime" value="<%= event.getCreateTime()%>"/>
-                                <input type="hidden" name="image" value="<%= event.getImage()%>"/>
-                                <input type="hidden" name="video" value="<%= event.getVideo()%>"/>
-                                <input type="hidden" name="status" value="<%= event.getStatus()%>"/>
-                            </form>
-                            <span>Start: <%=event.getStartTime()%></span>
-                            <span>Ends: <%=event.getEndTime()%></span>
-                            <span>Category: <%=event.getCategoryID()%></span>
+                                    %> 
+                                    <div class="event-card-single" >
+                                        <img src="<%=event.getImage()%>" alt="Image Event"/>
+                                        <div>
+                                            <form action="MainController">
+                                                <button type="submit" value="ShowEventDetail" name="action"><%=event.getEventName()%></button>
+                                                <input type="hidden" name="id" value="<%= event.getEventID()%>"/>
+                                                <input type="hidden" name="name" value="<%= event.getEventName()%>"/>
+                                                <input type="hidden" name="categoryID" value="<%= event.getCategoryID()%>"/>
+                                                <input type="hidden" name="location" value="<%= event.getLocationID()%>"/>
+                                                <textarea style= "display:none" name="eventDetail"><%=event.getEventDetail()%></textarea>
+                                                <input type="hidden" name="seat" value="<%= event.getSeat()%>"/>
+                                                <input type="hidden" name="startTime" value="<%= event.getStartTime()%>"/>
+                                                <input type="hidden" name="endTime" value="<%= event.getEndTime()%>"/>
+                                                <input type="hidden" name="creatTime" value="<%= event.getCreateTime()%>"/>
+                                                <input type="hidden" name="image" value="<%= event.getImage()%>"/>
+                                                <input type="hidden" name="video" value="<%= event.getVideo()%>"/>
+                                                <input type="hidden" name="status" value="<%= event.getStatus()%>"/>
+                                            </form>
+                                            <span>Start: <%=event.getStartTime()%></span>
+                                            <span>Ends: <%=event.getEndTime()%></span>
+                                            <span>Category: <%=event.getCategoryID()%></span>
+                                        </div>
+                                    </div>
+
+                                    <%
+                                                }
+                                            }
+                                        }
+                                    %>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <%
-                                }
-                            }
-                        }
-                    %>
+                    <div class="nav">
+                        <button class="prev2">
+                            <i class="material-icons">
+                                keyboard_arrow_left
+                            </i>
+                        </button>
+                        <button class="next2">
+                            <i class="material-icons">
+                                keyboard_arrow_right
+                            </i>
+                        </button>
+                    </div>
                 </div>
+
                 <div class="back-separate">
                     <h1>Completed Event</h1>
                 </div>
-                <div class="event-card">
-                    <%
-                        List<EventDTO> comlist = (List<EventDTO>) request.getAttribute("LIST_EVENT_COMPLETE");
-                        if (comlist != null) {
-                            if (!comlist.isEmpty()) {
-                                for (EventDTO event : comlist) {
+                <div class="carousel-container3">
+                    <div class="carousel-inner3">
+                        <div class="track3">
+                            <div class="card-container">
+                                <div class="event-card">
+                                    <%
+                                        List<EventDTO> comlist = (List<EventDTO>) request.getAttribute("LIST_EVENT_COMPLETE");
+                                        if (comlist != null) {
+                                            if (!comlist.isEmpty()) {
+                                                for (EventDTO event : comlist) {
 
-                    %> 
-                    <div class="event-card-single" >
-                        <img src="<%=event.getImage()%>" alt="Image Event"/>
-                        <div>
-                            <form action="MainController">
-                                <button type="submit" value="ShowEventDetail" name="action"><%=event.getEventName()%></button>
-                                <input type="hidden" name="id" value="<%= event.getEventID()%>"/>
-                                <input type="hidden" name="name" value="<%= event.getEventName()%>"/>
-                                <input type="hidden" name="categoryID" value="<%= event.getCategoryID()%>"/>
-                                <input type="hidden" name="location" value="<%= event.getLocationID()%>"/>
-                                <input type="hidden" name="eventDetail" value="<%= event.getEventDetail()%>"/>
-                                <input type="hidden" name="seat" value="<%= event.getSeat()%>"/>
-                                <input type="hidden" name="startTime" value="<%= event.getStartTime()%>"/>
-                                <input type="hidden" name="endTime" value="<%= event.getEndTime()%>"/>
-                                <input type="hidden" name="creatTime" value="<%= event.getCreateTime()%>"/>
-                                <input type="hidden" name="image" value="<%= event.getImage()%>"/>
-                                <input type="hidden" name="video" value="<%= event.getVideo()%>"/>
-                                <input type="hidden" name="status" value="<%= event.getStatus()%>"/>
-                            </form>
-                            <span>Start: <%=event.getStartTime()%></span>
-                            <span>Ends: <%=event.getEndTime()%></span>
-                            <span>Category: <%=event.getCategoryID()%></span>
+                                    %> 
+                                    <div class="event-card-single" >
+                                        <img src="<%=event.getImage()%>" alt="Image Event"/>
+                                        <div>
+                                            <form action="MainController">
+                                                <button type="submit" value="ShowEventDetail" name="action"><%=event.getEventName()%></button>
+                                                <input type="hidden" name="id" value="<%= event.getEventID()%>"/>
+                                                <input type="hidden" name="name" value="<%= event.getEventName()%>"/>
+                                                <input type="hidden" name="categoryID" value="<%= event.getCategoryID()%>"/>
+                                                <input type="hidden" name="location" value="<%= event.getLocationID()%>"/>
+                                                <textarea style= "display:none" name="eventDetail"><%=event.getEventDetail()%></textarea>
+                                                <input type="hidden" name="seat" value="<%= event.getSeat()%>"/>
+                                                <input type="hidden" name="startTime" value="<%= event.getStartTime()%>"/>
+                                                <input type="hidden" name="endTime" value="<%= event.getEndTime()%>"/>
+                                                <input type="hidden" name="creatTime" value="<%= event.getCreateTime()%>"/>
+                                                <input type="hidden" name="image" value="<%= event.getImage()%>"/>
+                                                <input type="hidden" name="video" value="<%= event.getVideo()%>"/>
+                                                <input type="hidden" name="status" value="<%= event.getStatus()%>"/>
+                                            </form>
+                                            <span>Start: <%=event.getStartTime()%></span>
+                                            <span>Ends: <%=event.getEndTime()%></span>
+                                            <span>Category: <%=event.getCategoryID()%></span>
+                                        </div>
+                                    </div>
+
+                                    <%
+                                                }
+                                            }
+                                        }
+                                    %>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <%
-                                }
-                            }
-                        }
-                    %>
-
+                    <div class="nav">
+                        <button class="prev3">
+                            <i class="material-icons">
+                                keyboard_arrow_left
+                            </i>
+                        </button>
+                        <button class="next3">
+                            <i class="material-icons">
+                                keyboard_arrow_right
+                            </i>
+                        </button>
+                    </div>
                 </div>
             </main>
             <footer>
@@ -295,7 +378,8 @@
                 </div>
             </footer>
         </div>
-        <script src="js/DashboardBtn.js"></script>    
+        <script src="js/DashboardBtn.js"></script> 
+        <script  src="js/slider1.js"></script> 
 
     </body>
 </html>

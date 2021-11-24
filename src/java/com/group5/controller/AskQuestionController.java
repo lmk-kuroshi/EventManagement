@@ -7,6 +7,7 @@ package com.group5.controller;
 
 import com.group5.memtorEvent.MentorEventDAO;
 import com.group5.memtorEvent.MentorEventDTO;
+import com.group5.users.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,7 +34,9 @@ public class AskQuestionController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private final static String ERROR = "error.jsp";
-    private final static String SUCCESS = "askQuestion.jsp";
+    private final static String STUDENT = "askQuestion.jsp";
+    private final static String LEADER = "askQuestionLeader.jsp";
+    private final static String MENTOR = "askQuestionMentor.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -41,6 +45,8 @@ public class AskQuestionController extends HttpServlet {
         try {
             String eventID = request.getParameter("eventID");
             String eventName = request.getParameter("eventName");
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
 
             List<MentorEventDTO> mentorsThisEvent = new ArrayList<>();
             MentorEventDAO dao = new MentorEventDAO();
@@ -50,7 +56,14 @@ public class AskQuestionController extends HttpServlet {
             request.setAttribute("eventID", eventID);
             request.setAttribute("eventName", eventName);
             
-            url = SUCCESS;
+            if (loginUser.getRoleID().equals("STU")) {
+                url = STUDENT;
+            } else if (loginUser.getRoleID().equals("LD")) {
+                url = LEADER;
+            } else if (loginUser.getRoleID().equals("MT")) {
+                url = MENTOR;
+            }
+           
         } catch (Exception e) {
             request.setAttribute("ERROR_MESSAGE", "Error at AskQuestionController!");
         } finally {

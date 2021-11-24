@@ -32,6 +32,10 @@
                 searchUser = "";
             }
         %>
+        <%
+            RoleDAO ro = new RoleDAO();
+            String roleName = ro.getRoleName(loginUser.getRoleID());
+        %>
 
         <div class="sidebar close">
             <div class="logo-details">
@@ -57,6 +61,13 @@
                         </a>
                         <span class="tooltip">Accounts</span>
                     </li>
+<!--                    <li>
+                        <a href="chart.jsp">
+                            <i class='las la-user-circle' ></i>
+                            <span class="links_name">Chart</span>
+                        </a>
+                        <span class="tooltip">Chart</span>
+                    </li>-->
                     <li>
                         <form action="MainController">
                             <a href="LogoutController">
@@ -88,7 +99,7 @@
                     <img src="css/img/2.jpg" width="40px" height="40px" alt="" />
                     <div>
                         <h4><%=loginUser.getName()%></h4>
-                        <small>Admin</small>
+                        <small><%= roleName%></small>
                     </div>
                 </div>
             </header>
@@ -163,10 +174,6 @@
                                 }
                             %>
 
-                            <%
-                                RoleDAO ro = new RoleDAO();
-                                String roleName = ro.getRoleName(user.getRoleID());
-                            %>
                             <td>
 
                                 <select name="roleName" >
@@ -174,7 +181,7 @@
                                     <option value="Student">Student</option>
                                     <option value="Admin">Admin</option>
                                     <option value="Mentor">Mentor</option>
-                                    <option value="Club's leader">Club's leader</option>
+                                    <option value="Club's leader">Leader</option>
                                 </select>
                             </td>
 
