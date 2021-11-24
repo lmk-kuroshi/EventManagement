@@ -139,7 +139,7 @@
                     <div class="follow-align">
                         <form action="MainController">
                             <input type="hidden" name="eventID" value="<%=loginUser.getId()%>"/>
-                            <button class="follow-title" type="submit" name="action" value="ShowFollowEvent">List of events you are following</button>
+                            <button style="cursor: pointer" class="follow-title" type="submit" name="action" value="ShowFollowEvent">List of events you are following</button>
                         </form>
 
                         <%
@@ -196,7 +196,7 @@
                         
                         <form action="MainController">
                             <input type="hidden" name="eventID" value="<%=loginUser.getId()%>"/>
-                            <button class="follow-title" type="submit" name="action" value="ShowRegisterEvent">List of events you have registered</button>
+                            <button style="cursor: pointer" class="follow-title" type="submit" name="action" value="ShowRegisterEvent">List of events you have registered</button>
                         </form>    
                         <%
                             List<RegisterDTO> registerList = (List<RegisterDTO>) request.getAttribute("REGISTER_LIST");

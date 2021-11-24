@@ -24,7 +24,9 @@ import javax.servlet.http.HttpSession;
 public class ShowRegisterEventController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "notification.jsp";
+    private final static String STUDENT = "notification.jsp";
+    private final static String LEADER = "notificationLeader.jsp";
+    private final static String MENTOR = "notificationMentor.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -40,7 +42,13 @@ public class ShowRegisterEventController extends HttpServlet {
                 request.setAttribute("REGISTER_LIST", list);    
             
             
-            url=SUCCESS;
+            if (loginUser.getRoleID().equals("STU")) {
+                url = STUDENT;
+            } else if (loginUser.getRoleID().equals("LD")) {
+                url = LEADER;
+            } else if (loginUser.getRoleID().equals("MT")) {
+                url = MENTOR;
+            }
         } catch(Exception e) {
             request.setAttribute("ERROR_MESSAGE","Error at ShowFollowEventController");
         } finally {
