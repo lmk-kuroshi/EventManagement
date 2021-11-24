@@ -194,6 +194,7 @@
                                                 <button type="submit" value="ShowEventDetail" name="action"><%=event.getEventName()%></button>
                                                 <input type="hidden" name="id" value="<%= event.getEventID()%>"/>
                                                 <input type="hidden" name="name" value="<%= event.getEventName()%>"/>
+                                                <input type="hidden" name="creatorID" value="<%= event.getCreatorID()%>"/>
                                                 <input type="hidden" name="categoryID" value="<%= event.getCategoryID()%>"/>
                                                 <input type="hidden" name="location" value="<%= event.getLocationID()%>"/>
                                                 <textarea style= "display:none" name="eventDetail"><%=event.getEventDetail()%></textarea>
@@ -256,6 +257,7 @@
                                                 <button type="submit" value="ShowEventDetail" name="action"><%=event.getEventName()%></button>
                                                 <input type="hidden" name="id" value="<%= event.getEventID()%>"/>
                                                 <input type="hidden" name="name" value="<%= event.getEventName()%>"/>
+                                                <input type="hidden" name="creatorID" value="<%= event.getCreatorID()%>"/>
                                                 <input type="hidden" name="categoryID" value="<%= event.getCategoryID()%>"/>
                                                 <input type="hidden" name="location" value="<%= event.getLocationID()%>"/>
                                                 <textarea style= "display:none" name="eventDetail"><%=event.getEventDetail()%></textarea>
@@ -318,6 +320,7 @@
                                                 <button type="submit" value="ShowEventDetail" name="action"><%=event.getEventName()%></button>
                                                 <input type="hidden" name="id" value="<%= event.getEventID()%>"/>
                                                 <input type="hidden" name="name" value="<%= event.getEventName()%>"/>
+                                                <input type="hidden" name="creatorID" value="<%= event.getCreatorID()%>"/>
                                                 <input type="hidden" name="categoryID" value="<%= event.getCategoryID()%>"/>
                                                 <input type="hidden" name="location" value="<%= event.getLocationID()%>"/>
                                                 <textarea style= "display:none" name="eventDetail"><%=event.getEventDetail()%></textarea>

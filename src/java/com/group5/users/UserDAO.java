@@ -245,4 +245,42 @@ public class UserDAO {
         }
         return list;
     }
+    
+    public UserDTO getLeader(String leaderID) throws SQLException {
+        Connection connect = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        UserDTO leader = new UserDTO();
+        try {
+            connect = DBUtil.getConnection();
+            if (connect != null) {
+                String sql = "SELECT userID, userEmail, userName, statusID, roleID "
+                        + " FROM tblUser "
+                        + " WHERE userName = ? ";
+                stm = connect.prepareStatement(sql);
+                stm.setString(1, leaderID);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    String userID = rs.getString("userID");
+                    String userName = rs.getString("userName");
+                    String userEmail = rs.getString("userEmail");
+                    String statusID = rs.getString("statusID");
+                    String roleID = rs.getString("roleID");
+                    leader = (new UserDTO(userID, userEmail, statusID, userName, roleID));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (connect != null) {
+                connect.close();
+            }
+        }
+        return leader;
+    }
 }
