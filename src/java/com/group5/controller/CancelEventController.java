@@ -27,7 +27,7 @@ public class CancelEventController extends HttpServlet {
         String url = ERROR;
         try {
             String eventID = request.getParameter("eventID");
-            String notification = request.getParameter("notification");
+            String notification = "Canceled";
             EventDAO dao = new EventDAO();
 
             boolean checkUpdate = dao.cancelEvent(eventID);

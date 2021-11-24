@@ -6,6 +6,8 @@
 package com.group5.event;
 
 import com.group5.follow.FollowerDTO;
+import com.group5.users.UserDAO;
+import com.group5.users.UserDTO;
 import com.group5.utils.DBUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -533,5 +535,49 @@ public class EventDAO {
             }
         }
         return check;
+    }
+    public boolean sendMailJoinEvent(String leaderID, String eventName, String mentorName, String mentorGmail) throws SQLException, ClassNotFoundException, MessagingException {
+       Properties properties = new Properties();
+        System.out.println("Prepare!");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+        
+        String myAccountEmail = "eventnotifygroup5@gmail.com";
+        String password = "eventgroup5";
+        
+        Session session = Session.getInstance(properties, new Authenticator() {
+        
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication(){
+                return new PasswordAuthentication(myAccountEmail, password);
+            }
+                    
+        });
+        UserDTO leader = new UserDTO();
+        UserDAO dao = new UserDAO();
+        leader = dao.getLeader(leaderID);
+        String htmlCode ="Dear " + leader.getName() + ",<br> You have a request from " + mentorName +" (" + mentorGmail + ") to become a mentor of your Event(" + eventName + ").<br>Thank you,<br>Event Management Team.";
+        Message message = prepareMessageJoinEvent(session, myAccountEmail, leader.getEmail(), htmlCode);
+        Transport.send(message);
+        System.out.println("Message sent seccessfully!");
+        return true;
+    }
+    
+    private static Message prepareMessageJoinEvent(Session session, String myAccountEmail, String recepient, String htmlCode){
+        
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(myAccountEmail));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
+            message.setSubject("Notification about your Event");
+            
+            message.setContent(htmlCode ,"text/html");
+            return message;
+        } catch (Exception ex) {
+            Logger.getLogger(EventDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return  null;
     }
 }
