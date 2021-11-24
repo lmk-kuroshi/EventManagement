@@ -111,7 +111,7 @@
                         <span class="tooltip">Attended event</span>
                     </li>
                     <li>
-                        <a href="changeRole.jsp">
+                        <a href="changeRoleMentor.jsp">
                             <i class="las la-scroll"></i>
                             <span class="links_name">Change Role</span>
                         </a>  
