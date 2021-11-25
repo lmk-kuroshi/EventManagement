@@ -692,3 +692,49 @@ main .follow-title{
 .content-table .unfollowBtn-align{
     margin-top: 30%;
 }
+
+.follow-register-button{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
+    margin: 2rem 0 2rem 8rem;
+}
+
+main h1{
+    background: inherit;
+    font-weight: 900;
+    font-size: 38px;
+    color: #ff6600;
+    font-family: 'Acme', sans-serif;
+    margin: 2rem 0;
+}
+
+
+.follow-register-button button{
+    width: 260px;
+    height: auto;
+    border:3px solid var(--main-color);
+    border-radius: 12px;
+    background: var(--main-color);
+    color: white;
+    /*    padding: 10px 25px;*/
+    padding: 8px 18px;
+    font-weight: 900;
+    font-size: 16px;
+    text-align: center;
+}
+
+.follow-register-button button:hover{
+    width: 260px;
+    height: auto;
+    border:3px solid var(--main-color);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--main-color);
+    /*padding: 10px 25px;*/
+    padding: 8px 18px;
+    font-weight: 900;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+}

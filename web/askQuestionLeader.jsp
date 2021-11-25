@@ -93,6 +93,13 @@
                         <span class="tooltip">Notify</span>
                     </li>
                     <li>
+                        <a href="ListQAStudentController">
+                            <i class='las la-question' ></i>
+                            <span class="links_name">Check questions</span>
+                        </a>
+                        <span class="tooltip">Check questions</span>
+                    </li>
+                    <li>
                         <a href="CreateEventController">
                             <i class='las la-calendar-plus' ></i>
                             <span class="links_name">Create Event</span>

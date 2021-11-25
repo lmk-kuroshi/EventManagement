@@ -4,19 +4,22 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : Oct 25, 2021, 3:53:16 PM
+    Created on : Nov 22, 2021, 6:16:52 PM
     Author     : DELL
 */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wgt@300;400;500;600;&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Karla&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 
 :root{
     /*--main-color:#DD2f6E;*/ 
-    /*    --main-color:#1C232C; */
+/*    --main-color:#2f3640; */
+    /*--main-color: #222f3e;*/ 
+    /*--main-color:#34495e;*/
     --main-color: #11101D; 
-    /*    --main-color:#2e86de;*/
     --color-dark: #1D2231;
     --text-grey: #8390A2;
 }
@@ -476,17 +479,7 @@ footer .footer-copyright .logo{
 
 .sidebar .nav-links i.arrow{
     margin-left: 60px;
-    animation: fadeIn 1s;
-    opacity: 1;
-}
-
-@keyframes fadeIn {
-  from {
-  	opacity: 0;
-  }
-  to {
- 	opacity: 1;
-  }
+    transition: all 0.7s ease;
 }
 
 .sidebar .nav-links li.showMenu i.arrow{
@@ -494,7 +487,6 @@ footer .footer-copyright .logo{
 }
 .sidebar.close .nav-links i.arrow{
     display: none;
-    opacity: 0;
 }
 
 .sidebar .nav-links li a .link_name{
@@ -526,7 +518,7 @@ footer .footer-copyright .logo{
     white-space: nowrap;
     opacity: 0.6;
     transition: all 0.3s ease;
-
+    
 }
 .sidebar .nav-links li .sub-menu a:hover{
     opacity: 1;
@@ -576,54 +568,182 @@ footer .footer-copyright .logo{
 }
 
 
-main .account-card{
-    width: 75%;
-    height: 400px;
+.follow-card{
+    height: 80%;
     background: #fff;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    margin: 3rem 0rem 3rem 10rem;
+    margin: 7rem 10rem;
 }
 
-main .account-card-align{
-    padding: 5rem;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 2rem;
-    margin: 1rem 2rem 1rem 2rem;
+.follow-align{
+    padding: 3rem 5rem;
 }
-main .account-card-left{
-    width: 200px;
-    height: 250px;
-    justify-content: space-between;
-    background: #fff;
+
+main .follow-title{
+    border: none;
+    background: inherit;
+    font-weight: 900;
+    font-size: 38px;
+    color: #ff6600;
+    font-family: 'Acme', sans-serif;
+    padding-bottom: 3rem;
+}
+
+
+.content-table {
+    /*    margin-left: auto;
+        margin-right: auto;*/
+    margin: 0;
     padding: 0;
-    border-radius: 2px;
-    color: black;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    width: 40%;
+    /*    min-width: 400px;*/
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    font-family: "Times New Roman", Times, serif;
 }
-main .account-card-left img{
-    margin-top: 1rem;
-    width: 200px;
+
+.content-table thead tr {
+    /*background-color: #009879;*/
+    background-color: var(--main-color);
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+
+}
+
+.content-table th,
+.content-table td {
+    padding: 12px 15px;
+}
+
+.content-table tbody tr {
+    /*border-bottom: 1px solid #dddddd;*/
+    background-color: white;
+}
+
+.content-table tbody tr:nth-of-type(even) {
+    width: 100%;
+    background-color: #f3f3f3;
+}
+
+.content-table tbody tr:last-of-type {
+    border-bottom: 2px solid var(--main-color);
+}
+
+.content-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+main input{
+    border: none;
+    border-bottom: 2px solid var(--main-color);
+    background-color: inherit;
+    height: 2rem;
+    width: 25rem;
+}
+
+.content-table button{
+    width: 130px;
     height: auto;
+    border:3px solid var(--main-color);
+    border-radius: 12px;
+    background: var(--main-color);
+    color: white;
+    /*    padding: 10px 25px;*/
+    padding: 8px 18px;
+    font-weight: 500;
+    font-size: 13px;
+    text-align: center;
 }
 
-main .account-card-right{
-    width: 550px;
-    height: 250px;
-    justify-content: space-between;
+.content-table button:hover{
+    width: 130px;
+    height: auto;
+    border:3px solid var(--main-color);
+    border-radius: 12px;
     background: #fff;
-    padding: 0;
-    border-radius: 2px;
-    color: black;
+    color: var(--main-color);
+    /*padding: 10px 25px;*/
+    padding: 8px 18px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 13px;
+    text-align: center;
 }
-main .account-card-right .account-card-right-align{
-    margin: 3rem 1rem;
+
+.event-name{
+    color: #ff6600;
+    font-family: 'Abril Fatface', cursive;
+    font-size: 32px;
 }
-main .account-card-right .bold-text{
-    font-size: 24px;
+
+.content-table span {
+    font-family: 'Karla', sans-serif;
+    font-size: 16px;
+}
+
+.content-table img{
+    width: 240px;
+    height: 140px;
+}
+
+.content-table .unfollowBtn-align{
+    margin-top: 30%;
+}
+
+h1{
+    font-weight: 900;
+    font-size: 36px;
+    color: #ff6600;
+    font-family: 'Acme', sans-serif;
+    margin-bottom: 1rem;
+}
+
+
+
+main button{
+    width: 240px;
+    height: auto;
+    border:3px solid var(--main-color);
+    border-radius: 12px;
+    background: var(--main-color);
+    color: white;
+    /*    padding: 10px 25px;*/
+    padding: 8px 18px;
     font-weight: 700;
+    font-size: 16px;
+    text-align: center;
 }
-main .account-card-right .normal-text{
-    font-size: 20px;
+
+main button:hover{
+    width: 240px;
+    height: auto;
+    border:3px solid var(--main-color);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--main-color);
+    /*padding: 10px 25px;*/
+    padding: 8px 18px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+}
+
+main h3{
     font-weight: 600;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size:22px;
 }
+
+main h3 span{
+    font-weight: 200;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+
 

@@ -19,7 +19,8 @@ import java.util.List;
  * @author Nghia
  */
 public class QandADAO {
-     public List<QandADTO> getListQuestion() throws SQLException {
+
+    public List<QandADTO> getListQuestion() throws SQLException {
         List<QandADTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -27,22 +28,22 @@ public class QandADAO {
         try {
             conn = DBUtil.getConnection();
             if (conn != null) {
-                String sql = "SELECT questionID, mentorID, studentID, tblQandA.eventID, eventName, questionDetail, reply  " 
-                        +    " FROM tblQandA, tblEvent "                       
-                        +    " WHERE tblQandA.reply IS null "
-                        +    " AND tblQandA.eventID = tblEvent.eventID  " ;
-                       
+                String sql = "SELECT questionID, mentorID, studentID, tblQandA.eventID, eventName, questionDetail, reply  "
+                        + " FROM tblQandA, tblEvent "
+                        + " WHERE tblQandA.reply IS null "
+                        + " AND tblQandA.eventID = tblEvent.eventID  ";
+
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String questionID = rs.getString("questionID");
                     String mentorID = rs.getString("mentorID");
                     String studentID = rs.getString("studentID");
-                    String eventID = rs.getString("eventID"); 
+                    String eventID = rs.getString("eventID");
                     String eventName = rs.getString("eventName");
-                    String questionDetail = rs.getString("questionDetail"); 
+                    String questionDetail = rs.getString("questionDetail");
                     String reply = rs.getString("reply");
-                                       
+
                     list.add(new QandADTO(questionID, mentorID, studentID, eventID, eventName, questionDetail, reply));
                 }
             }
@@ -61,8 +62,8 @@ public class QandADAO {
         }
         return list;
     }
-    
-     public List<QandADTO> getListAnswered() throws SQLException {
+
+    public List<QandADTO> getListAnswered() throws SQLException {
         List<QandADTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -70,22 +71,22 @@ public class QandADAO {
         try {
             conn = DBUtil.getConnection();
             if (conn != null) {
-                String sql = "SELECT questionID, mentorID, studentID, tblQandA.eventID, eventName, questionDetail, reply  " 
-                        +    " FROM tblQandA, tblEvent "                       
-                        +    " WHERE tblQandA.reply IS not null "
-                        +    " AND tblQandA.eventID = tblEvent.eventID  " ;
-                       
+                String sql = "SELECT questionID, mentorID, studentID, tblQandA.eventID, eventName, questionDetail, reply  "
+                        + " FROM tblQandA, tblEvent "
+                        + " WHERE tblQandA.reply IS not null "
+                        + " AND tblQandA.eventID = tblEvent.eventID  ";
+
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String questionID = rs.getString("questionID");
                     String mentorID = rs.getString("mentorID");
                     String studentID = rs.getString("studentID");
-                    String eventID = rs.getString("eventID"); 
+                    String eventID = rs.getString("eventID");
                     String eventName = rs.getString("eventName");
-                    String questionDetail = rs.getString("questionDetail"); 
+                    String questionDetail = rs.getString("questionDetail");
                     String reply = rs.getString("reply");
-                                       
+
                     list.add(new QandADTO(questionID, mentorID, studentID, eventID, eventName, questionDetail, reply));
                 }
             }
@@ -104,21 +105,64 @@ public class QandADAO {
         }
         return list;
     }
+
+    public List<QandADTO> getListAnsweredForStudent() throws SQLException {
+        List<QandADTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtil.getConnection();
+            if (conn != null) {
+                String sql = "SELECT questionID, mentorID, studentID, tblQandA.eventID, eventName, questionDetail, reply  "
+                        + " FROM tblQandA, tblEvent "
+                        + " WHERE tblQandA.eventID = tblEvent.eventID  ";
+
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String questionID = rs.getString("questionID");
+                    String mentorID = rs.getString("mentorID");
+                    String studentID = rs.getString("studentID");
+                    String eventID = rs.getString("eventID");
+                    String eventName = rs.getString("eventName");
+                    String questionDetail = rs.getString("questionDetail");
+                    String reply = rs.getString("reply");
+
+                    list.add(new QandADTO(questionID, mentorID, studentID, eventID, eventName, questionDetail, reply));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
     public boolean setListAnswer(QandADTO qa) throws SQLException, ClassNotFoundException {
         boolean check = false;
         Connection con = null;
         PreparedStatement stm = null;
-        
+
         try {
             con = DBUtil.getConnection();
             if (con != null) {
-                String sql="UPDATE tblQandA "
-                        +" SET reply = ? "
-                        +" WHERE questionID = ? ";
+                String sql = "UPDATE tblQandA "
+                        + " SET reply = ? "
+                        + " WHERE questionID = ? ";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, qa.getReply());
-                stm.setString(2, qa.getQuestionID()); 
-                 
+                stm.setString(2, qa.getQuestionID());
+
                 /*stm.setString(1, qa.getQuestionID());
                 stm.setString(2, qa.getMentorID());
                 stm.setString(3, qa.getStudentID());
@@ -139,18 +183,17 @@ public class QandADAO {
         return check;
     }
 
-    public boolean addQuestion(QandADTO qa) throws SQLException{
+    public boolean addQuestion(QandADTO qa) throws SQLException {
         boolean check = false;
         Connection con = null;
         PreparedStatement stm = null;
-        
+
         try {
             con = DBUtil.getConnection();
             if (con != null) {
-                String sql="INSERT INTO tblQandA(questionID, mentorID, studentID, eventID, questionDetail, reply) VALUES (?,?,?,?,?,?) ";
+                String sql = "INSERT INTO tblQandA(questionID, mentorID, studentID, eventID, questionDetail, reply) VALUES (?,?,?,?,?,?) ";
                 stm = con.prepareStatement(sql);
-               
-                 
+
                 stm.setString(1, qa.getQuestionID());
                 stm.setString(2, qa.getMentorID());
                 stm.setString(3, qa.getStudentID());

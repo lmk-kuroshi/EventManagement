@@ -99,6 +99,7 @@
                             <li><a class="link_name" href="#">Category</a></li>
                             <li><a href="QandAMentorController">Unanswered questions</a></li>
                             <li><a href="EditQAController">Answered questions</a></li>
+                            <li><a href="ListQAStudentController">Check questions</a></li>
                         </ul>
                     </li>
                     <li>
@@ -165,15 +166,16 @@
 
                 <div class="follow-card">
                     <div class="follow-align">
-                        <h1>List of Answered question</h1>
 
-                        <%            List<QandADTO> listAnswered = (List<QandADTO>) request.getAttribute("EDIT_QA_MENTOR");
 
+                        <%
+                            List<QandADTO> listAnswered = (List<QandADTO>) request.getAttribute("EDIT_QA_MENTOR");
                             if (listAnswered != null) {
                                 if (!listAnswered.isEmpty()) {
 
 
                         %>  
+                        <h1>List of Answered question</h1>
                         <table class="content-table" width="90%">
                             <thead>
                                 <tr>
@@ -186,7 +188,6 @@
                             </thead>
                             <tbody>
                                 <%                                    for (QandADTO QAM : listAnswered) {
-                                        if ((QAM.getReply()) != null) {
                                 %>
                                 <tr>
                                     <td></td>
@@ -213,16 +214,18 @@
 
                                 </tr>
                                 <%
-
-                                                }
-                                            }
-
-                                        }
-
                                     }
-
                                 %>
                             </tbody>
+                            <%
+                            } else { %>
+                            <h1>You haven't answered any question</h1>
+                            <%
+
+                                    }
+                                }
+
+                            %>
 
                         </table>
                     </div>

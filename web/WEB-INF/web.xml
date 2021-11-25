@@ -128,6 +128,10 @@
         <servlet-name>ConfirmAskQuestionController</servlet-name>
         <servlet-class>com.group5.controller.ConfirmAskQuestionController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListQAStudentController</servlet-name>
+        <servlet-class>com.group5.controller.ListQAStudentController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginGoogleHandler</servlet-name>
         <url-pattern>/LoginGoogleHandler</url-pattern>
@@ -255,6 +259,10 @@
     <servlet-mapping>
         <servlet-name>ConfirmAskQuestionController</servlet-name>
         <url-pattern>/ConfirmAskQuestionController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListQAStudentController</servlet-name>
+        <url-pattern>/ListQAStudentController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

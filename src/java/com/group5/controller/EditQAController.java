@@ -7,14 +7,17 @@ package com.group5.controller;
 
 import com.group5.event.QandADAO;
 import com.group5.event.QandADTO;
+import com.group5.users.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,11 +33,20 @@ public class EditQAController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
          try {
-            
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             QandADAO dao = new QandADAO();
             List<QandADTO> list = dao.getListAnswered();
             if (!list.isEmpty()) {
-                request.setAttribute("EDIT_QA_MENTOR", list);
+                List<QandADTO> listMentorQA = new ArrayList<QandADTO>();
+                for (QandADTO QAM : list) {
+
+                    if ((QAM.getMentorID()).equals(loginUser.getId())) {
+                        listMentorQA.add(QAM);
+                    }
+
+                }
+                request.setAttribute("EDIT_QA_MENTOR", listMentorQA);
                 url = SUCCESS;
             }
         } catch (Exception e) {

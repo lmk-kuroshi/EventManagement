@@ -22,7 +22,9 @@
         <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--        <link href="css/custom.css" rel="stylesheet">
-                <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">-->
+                <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        fake word to check github2
+        -->
     </head>
     <body>
 
@@ -93,6 +95,13 @@
                             <span class="links_name">Notify</span>
                         </a>
                         <span class="tooltip">Notify</span>
+                    </li>
+                    <li>
+                        <a href="ListQAStudentController">
+                            <i class='las la-question' ></i>
+                            <span class="links_name">Check questions</span>
+                        </a>
+                        <span class="tooltip">Check questions</span>
                     </li>
                     <li>
                         <a href="changeRole.jsp">

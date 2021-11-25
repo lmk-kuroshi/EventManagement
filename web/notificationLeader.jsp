@@ -3,6 +3,7 @@
     Created on : Oct 27, 2021, 5:49:37 PM
     Author     : DELL
 --%>
+<%@page import="com.group5.register.RegisterDTO"%>
 <%@page import="com.group5.role.RoleDAO"%>
 <%@page import="com.group5.category.CategoryDAO"%>
 <%@page import="com.group5.category.CategoryDTO"%>
@@ -85,6 +86,13 @@
                         <span class="tooltip">Notify</span>
                     </li>
                     <li>
+                        <a href="ListQAStudentController">
+                            <i class='las la-question' ></i>
+                            <span class="links_name">Check questions</span>
+                        </a>
+                        <span class="tooltip">Check questions</span>
+                    </li>
+                    <li>
                         <a href="CreateEventController">
                             <i class='las la-calendar-plus' ></i>
                             <span class="links_name">Create Event</span>
@@ -149,16 +157,22 @@
             <main>
                 <div class="follow-card">
                     <div class="follow-align">
-                        <form action="MainController">
-                            <input type="hidden" name="eventID" value="<%=loginUser.getId()%>"/>
-                            <button class="follow-title" type="submit" name="action" value="ShowFollowEvent">List of events you are following</button>
-                        </form>
-
+                        <div class="follow-register-button">
+                            <form action="MainController">
+                                <input type="hidden" name="eventID" value="<%=loginUser.getId()%>"/>
+                                <button type="submit" name="action" value="ShowFollowEvent">Get list of events you are following</button>
+                            </form>
+                            <form action="MainController">
+                                <input type="hidden" name="eventID" value="<%=loginUser.getId()%>"/>
+                                <button type="submit" name="action" value="ShowRegisterEvent">Get list of events you have registered</button>
+                            </form>   
+                        </div>
                         <%
                             List<FollowDTO> followList = (List<FollowDTO>) request.getAttribute("FOLLOW_LIST");
                             if (followList != null) {
                                 if (!followList.isEmpty()) {
-                        %>    
+                        %> 
+                        <h1>List of events you are following</h1>
                         <table class="content-table" width="90%">
                             <thead>
                                 <tr>
@@ -195,13 +209,67 @@
                                 </tr>
                                 <%
 
-                                            }
+                                    }
 
-                                        }
+                                } else {
+                                %>
+                            <h1>You haven't followed any event yet</h1>
+                            <%
+                                    }
+                                }
+
+                            %>
+                            </tbody>
+
+                        </table>
+
+
+                        <%    List<RegisterDTO> registerList = (List<RegisterDTO>) request.getAttribute("REGISTER_LIST");
+                            if (registerList != null) {
+                                if (!registerList.isEmpty()) {
+                        %>
+                        <h1>List of events you have registered</h1>
+                        <table class="content-table" width="90%">
+                            <thead>
+                                <tr>
+                                    <th></th>   
+                                    <th></th>   
+                                    <th></th>   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%
+                                    for (RegisterDTO register : registerList) {
+                                %>
+                                <tr>                                    
+                                    <td>
+                                        <div class="event-name">
+                                            <%=register.getEventName()%>
+                                        </div>
+                                        <!--                                        <br>
+                                                                                <span>Start: </span>
+                                                                                <br>
+                                                                                <span>Ends: </span>-->
+                                    </td>
+                                    <td>
+                                        <div class="event-name">
+                                            <%=register.getRegisterStatus()%>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <%
 
                                     }
 
+                                } else {
                                 %>
+                            <h1>You haven't registered any event yet</h1>
+                            <%
+                                    }
+
+                                }
+
+                            %>
                             </tbody>
 
                         </table>

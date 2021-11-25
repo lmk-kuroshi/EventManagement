@@ -166,7 +166,7 @@
             <main>
                 <div class="follow-card">
                     <div class="follow-align">
-                        <h1>List of Unanswered question</h1>
+
 
                         <%
                             List<QandADTO> listQA = (List<QandADTO>) request.getAttribute("QA_MENTOR");
@@ -174,7 +174,10 @@
                                 if (!listQA.isEmpty()) {
 
 
-                        %>  
+                        %>
+                        <h1>List of Unanswered question</h1>
+
+
                         <table class="content-table" width="90%">
                             <thead>
                                 <tr>
@@ -185,8 +188,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <%                                    for (QandADTO QAM : listQA) {
-                                        if (QAM.getReply() == null) {
+                                <%                            for (QandADTO QAM : listQA) {
                                 %>
                                 <tr>
                                     <td></td>
@@ -207,19 +209,20 @@
                                     </td>
 
                                 </tr>
-                                <%
-
-                                                }
-                                            }
-
-                                        }
-
-                                    }
-
-                                %>
+                                <% } %>
                             </tbody>
 
                         </table>
+                        <%
+
+                        } else { %>
+                        <h1>There are no question for you</h1>
+                        <%
+
+                                }
+                            }
+
+                        %>
                     </div>
                 </div>
 

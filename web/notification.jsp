@@ -94,6 +94,13 @@
                         <span class="tooltip">Change Role</span>
                     </li>
                     <li>
+                        <a href="ListQAStudentController">
+                            <i class='las la-question' ></i>
+                            <span class="links_name">Check questions</span>
+                        </a>
+                        <span class="tooltip">Check questions</span>
+                    </li>
+                    <li>
                         <a href="accountStudent.jsp">
                             <i class='las la-user-circle' ></i>
                             <span class="links_name">Accounts</span>
@@ -137,16 +144,22 @@
             <main>
                 <div class="follow-card">
                     <div class="follow-align">
-                        <form action="MainController">
-                            <input type="hidden" name="eventID" value="<%=loginUser.getId()%>"/>
-                            <button class="follow-title" type="submit" name="action" value="ShowFollowEvent">List of events you are following</button>
-                        </form>
-
+                        <div class="follow-register-button">
+                            <form action="MainController">
+                                <input type="hidden" name="eventID" value="<%=loginUser.getId()%>"/>
+                                <button type="submit" name="action" value="ShowFollowEvent">Get list of events you are following</button>
+                            </form>
+                            <form action="MainController">
+                                <input type="hidden" name="eventID" value="<%=loginUser.getId()%>"/>
+                                <button type="submit" name="action" value="ShowRegisterEvent">Get list of events you have registered</button>
+                            </form>   
+                        </div>
                         <%
                             List<FollowDTO> followList = (List<FollowDTO>) request.getAttribute("FOLLOW_LIST");
                             if (followList != null) {
                                 if (!followList.isEmpty()) {
-                        %>    
+                        %> 
+                        <h1>List of events you are following</h1>
                         <table class="content-table" width="90%">
                             <thead>
                                 <tr>
@@ -183,26 +196,26 @@
                                 </tr>
                                 <%
 
-                                            }
-
-                                        }
-
                                     }
 
+                                } else {
                                 %>
+                            <h1>You haven't followed any event yet</h1>
+                            <%
+                                    }
+                                }
+
+                            %>
                             </tbody>
 
                         </table>
-                        
-                        <form action="MainController">
-                            <input type="hidden" name="eventID" value="<%=loginUser.getId()%>"/>
-                            <button class="follow-title" type="submit" name="action" value="ShowRegisterEvent">List of events you have registered</button>
-                        </form>    
-                        <%
-                            List<RegisterDTO> registerList = (List<RegisterDTO>) request.getAttribute("REGISTER_LIST");
+
+
+                        <%    List<RegisterDTO> registerList = (List<RegisterDTO>) request.getAttribute("REGISTER_LIST");
                             if (registerList != null) {
                                 if (!registerList.isEmpty()) {
                         %>
+                        <h1>List of events you have registered</h1>
                         <table class="content-table" width="90%">
                             <thead>
                                 <tr>
@@ -220,10 +233,10 @@
                                         <div class="event-name">
                                             <%=register.getEventName()%>
                                         </div>
-<!--                                        <br>
-                                        <span>Start: </span>
-                                        <br>
-                                        <span>Ends: </span>-->
+                                        <!--                                        <br>
+                                                                                <span>Start: </span>
+                                                                                <br>
+                                                                                <span>Ends: </span>-->
                                     </td>
                                     <td>
                                         <div class="event-name">
@@ -233,13 +246,17 @@
                                 </tr>
                                 <%
 
-                                            }
-
-                                        }
-
                                     }
 
+                                } else {
                                 %>
+                            <h1>You haven't registered any event yet</h1>
+                            <%
+                                    }
+
+                                }
+
+                            %>
                             </tbody>
 
                         </table>

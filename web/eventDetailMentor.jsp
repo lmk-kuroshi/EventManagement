@@ -97,9 +97,10 @@
                             </a>
                         </div>
                         <ul class="sub-menu">
-                            <li><a class="link_name" href="#">Q&A</a></li>
+                            <li><a class="link_name" href="#">Category</a></li>
                             <li><a href="QandAMentorController">Unanswered questions</a></li>
                             <li><a href="EditQAController">Answered questions</a></li>
+                            <li><a href="ListQAStudentController">Check questions</a></li>
                         </ul>
                     </li>
                     <li>
@@ -118,7 +119,7 @@
                         <span class="tooltip">Change Role</span>
                     </li>
                     <li>
-                        <a href="accountStudent.jsp">
+                        <a href="accountMentor.jsp">
                             <i class='las la-user-circle' ></i>
                             <span class="links_name">Accounts</span>
                         </a>

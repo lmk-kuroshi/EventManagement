@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 public class EditAnswerController extends HttpServlet {
 
     private final static String ERROR = "editAnsweredQA.jsp";
-    private final static String SUCCESS = "mentor.jsp";
+    private final static String SUCCESS = "EditQAController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

@@ -5,13 +5,15 @@
  */
 package com.group5.controller;
 
-import com.group5.register.RegisterDAO;
-import com.group5.register.RegisterDTO;
+import com.group5.event.QandADAO;
+import com.group5.event.QandADTO;
 import com.group5.users.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,38 +21,45 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Minh Khoa
+ * @author DELL
  */
-public class ShowRegisterEventController extends HttpServlet {
+@WebServlet(name = "ListQAStudentController", urlPatterns = {"/ListQAStudentController"})
+public class ListQAStudentController extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
-    private final static String STUDENT = "notification.jsp";
-    private final static String LEADER = "notificationLeader.jsp";
-    private final static String MENTOR = "notificationMentor.jsp";
-    
+    private final static String ERROR = "GetListQuestForStudent.jsp";
+//    private final static String SUCCESS = "GetListQuestForStudent.jsp";
+    private final static String STUDENT = "GetListQuestForStudent.jsp";
+    private final static String LEADER = "GetListQuestForLeader.jsp";
+    private final static String MENTOR = "GetListQuestForMentor.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url=ERROR;
-        try{
+        String url = ERROR;
+        try {
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            
-            RegisterDAO dao = new RegisterDAO();
-            List<RegisterDTO> list = dao.getListRegister(loginUser.getId());
-            
-                request.setAttribute("REGISTER_LIST", list);    
-            
-            
-            if (loginUser.getRoleID().equals("STU")) {
-                url = STUDENT;
-            } else if (loginUser.getRoleID().equals("LD")) {
-                url = LEADER;
-            } else if (loginUser.getRoleID().equals("MT")) {
-                url = MENTOR;
+            QandADAO dao = new QandADAO();
+            List<QandADTO> list = dao.getListAnsweredForStudent();
+            if (!list.isEmpty()) {
+                List<QandADTO> listMentorQA = new ArrayList<QandADTO>();
+                for (QandADTO QAM : list) {
+
+                    if ((QAM.getStudentID()).equals(loginUser.getId())) {
+                        listMentorQA.add(QAM);
+                    }
+                }
+                request.setAttribute("LIST_QA_STUDENT", listMentorQA);
+                if (loginUser.getRoleID().equals("STU")) {
+                    url = STUDENT;
+                } else if (loginUser.getRoleID().equals("LD")) {
+                    url = LEADER;
+                } else if (loginUser.getRoleID().equals("MT")) {
+                    url = MENTOR;
+                }
             }
-        } catch(Exception e) {
-            request.setAttribute("ERROR_MESSAGE","Error at ShowFollowEventController");
+        } catch (Exception e) {
+            log("Error at ListQAStudentController" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
