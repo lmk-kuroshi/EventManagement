@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AnswerQAController extends HttpServlet {
 
     private final static String ERROR = "answerQuestion.jsp";
-    private final static String SUCCESS = "mentor.jsp";
+    private final static String SUCCESS = "QandAMentorController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

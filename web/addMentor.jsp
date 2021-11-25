@@ -100,36 +100,35 @@
                         <span class="tooltip">Notify</span>
                     </li>
                     <li>
-                        <div class="iocn-link">
-                            <a href="#" class="open-submenu">
-                                <i class='las la-question' ></i>
-                                <span class="links_name">Q&A</span>  
-                                <i class='bx bxs-chevron-down arrow' style="margin-left: 92px;"></i>
-                            </a>
-                        </div>
-                        <ul class="sub-menu">
-                            <li><a class="link_name" href="#">Category</a></li>
-                            <li><a href="QandAMentorController">Unanswered questions</a></li>
-                            <li><a href="EditQAController">Answered questions</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="SearchEventMentorAttendController?eventMentorAttended=<%=loginUser.getId()%>">
-                            <input type="hidden" name="eventMentorAttended" value="<%=loginUser.getId()%>"/>
-                            <i class='bx bx-calendar-check'></i>
-                            <span class="links_name">Attended event</span>
+                        <a href="ListQAStudentController">
+                            <i class='las la-question' ></i>
+                            <span class="links_name">Check questions</span>
                         </a>
-                        <span class="tooltip">Attended event</span>
+                        <span class="tooltip">Check questions</span>
                     </li>
                     <li>
-                        <a href="changeRoleMentor.jsp">
+                        <a href="CreateEventController">
+                            <i class='las la-calendar-plus' ></i>
+                            <span class="links_name">Create Event</span>
+                        </a>
+                        <span class="tooltip">Create Event</span>
+                    </li>
+                    <li>
+                        <a href="ShowListEditEventController">
+                            <i class='bx bx-show'></i>
+                            <span class="links_name">Show List Edit Event</span>
+                        </a>
+                        <span class="tooltip">Show List Edit Event</span>
+                    </li>
+                    <li>
+                        <a href="changeRoleLeader.jsp">
                             <i class="las la-scroll"></i>
                             <span class="links_name">Change Role</span>
                         </a>  
                         <span class="tooltip">Change Role</span>
                     </li>
                     <li>
-                        <a href="accountMentor.jsp">
+                        <a href="accountLeader.jsp">
                             <i class='las la-user-circle' ></i>
                             <span class="links_name">Accounts</span>
                         </a>

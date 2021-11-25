@@ -1,15 +1,15 @@
 <%-- 
-    Document   : notification
-    Created on : Oct 13, 2021, 6:16:47 PM
-    Author     : Minh Khoa
+    Document   : GetListQuestForStudent
+    Created on : Nov 25, 2021, 10:48:37 AM
+    Author     : DELL
 --%>
 
-<%@page import="com.group5.register.RegisterDTO"%>
 <%@page import="com.group5.role.RoleDAO"%>
+<%@page import="com.group5.event.QandADTO"%>
 <%@page import="com.group5.category.CategoryDAO"%>
 <%@page import="com.group5.category.CategoryDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="com.group5.follow.FollowDTO"%>
+<%@page import="com.group5.event.EventDTO"%>
 <%@page import="com.group5.users.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,22 +17,24 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link href="css/notificationStyle.css" rel="stylesheet" />
+        <link href="css/ListQuestionStyle.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
         <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     </head>
     <body>
         <%
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+
             String search = request.getParameter("search");
             if (search == null) {
                 search = "";
             }
-        %>
+        %>  
         <%
             RoleDAO ro = new RoleDAO();
             String roleName = ro.getRoleName(loginUser.getRoleID());
         %>
+
         <%
             List<CategoryDTO> categoryList = (List<CategoryDTO>) request.getAttribute("LIST_CATEGORY");
             CategoryDAO catedao = new CategoryDAO();
@@ -87,37 +89,21 @@
                         <span class="tooltip">Notify</span>
                     </li>
                     <li>
-                        <div class="iocn-link">
-                            <a href="#" class="open-submenu">
-                                <i class='las la-question' ></i>
-                                <span class="links_name">Q&A</span>  
-                                <i class='bx bxs-chevron-down arrow' style="margin-left: 92px;"></i>
-                            </a>
-                        </div>
-                        <ul class="sub-menu">
-                            <li><a class="link_name" href="#">Category</a></li>
-                            <li><a href="QandAMentorController">Unanswered questions</a></li>
-                            <li><a href="EditQAController">Answered questions</a></li>
-                            <li><a href="ListQAStudentController">Check questions</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="SearchEventMentorAttendController?eventMentorAttended=<%=loginUser.getId()%>">
-                            <input type="hidden" name="eventMentorAttended" value="<%=loginUser.getId()%>"/>
-                            <i class='bx bx-calendar-check'></i>
-                            <span class="links_name">Attended event</span>
+                        <a href="ListQAStudentController">
+                            <i class='las la-question' ></i>
+                            <span class="links_name">Check questions</span>
                         </a>
-                        <span class="tooltip">Attended event</span>
+                        <span class="tooltip">Check questions</span>
                     </li>
                     <li>
-                        <a href="changeRoleMentor.jsp">
+                        <a href="changeRole.jsp">
                             <i class="las la-scroll"></i>
                             <span class="links_name">Change Role</span>
                         </a>  
                         <span class="tooltip">Change Role</span>
                     </li>
                     <li>
-                        <a href="accountMentor.jsp">
+                        <a href="accountStudent.jsp">
                             <i class='las la-user-circle' ></i>
                             <span class="links_name">Accounts</span>
                         </a>
@@ -144,9 +130,9 @@
                 </div>
                 <div class="search-wrapper">
                     <form action="MainController">
-                        <button class="las la-search" type="submit" value="Search" name="action"></button>
+                        <input type="hidden" name="editQAMentor"/>
+                        <button class="las la-search" type="submit" value="Answered" name="action"></button>
                         <input type="text" name="search" value="<%= search%>" placeholder="Search here"/>
-
                     </form>
                 </div>
                 <div class="user-wrapper">
@@ -157,128 +143,90 @@
                     </div>
                 </div>
             </header>
+
             <main>
+
+
+
+
                 <div class="follow-card">
                     <div class="follow-align">
-                        <div class="follow-register-button">
-                            <form action="MainController">
-                                <input type="hidden" name="eventID" value="<%=loginUser.getId()%>"/>
-                                <button type="submit" name="action" value="ShowFollowEvent">Get list of events you are following</button>
-                            </form>
-                            <form action="MainController">
-                                <input type="hidden" name="eventID" value="<%=loginUser.getId()%>"/>
-                                <button type="submit" name="action" value="ShowRegisterEvent">Get list of events you have registered</button>
-                            </form>   
-                        </div>
-                        <%
-                            List<FollowDTO> followList = (List<FollowDTO>) request.getAttribute("FOLLOW_LIST");
-                            if (followList != null) {
-                                if (!followList.isEmpty()) {
-                        %> 
-                        <h1>List of events you are following</h1>
+
+
+                        <%            List<QandADTO> listAnswered = (List<QandADTO>) request.getAttribute("LIST_QA_STUDENT");
+
+                            if (listAnswered != null) {
+                                if (!listAnswered.isEmpty()) {
+
+
+                        %>  
+                        <h1>List of question you submitted</h1>
                         <table class="content-table" width="90%">
                             <thead>
                                 <tr>
-                                    <th></th>   
-                                    <th></th>   
-                                    <th></th>   
+                                    <th></th>
+                                    <th>Event Name</th>   
+                                    <th>Your question</th>    
+                                    <th>Answer</th> 
                                 </tr>
                             </thead>
                             <tbody>
-                                <%
-                                    for (FollowDTO follow : followList) {
+                                <%                                    
+                                    for (QandADTO QAM : listAnswered) {
+
                                 %>
                                 <tr>
-                                    <td>
-                                        <img src="<%=follow.getEventImage()%>" alt="Image Event" width="180px" height="auto"/>
-                                    </td>
+                                    <td></td>
                                     <td>
                                         <div class="event-name">
-                                            <%=follow.getEventName()%>
+                                            <%=QAM.getEventName()%>
                                         </div>
-                                        <br>
-                                        <span>Start: <%=follow.getStartTime()%></span>
-                                        <br>
-                                        <span>Ends: <%=follow.getEndTime()%></span>
                                     </td>
                                     <td>
-                                        <div class="unfollowBtn-align">
-                                            <form action="MainController">
-                                                <input type="hidden" name="eventID" value="<%=follow.getEventID()%>"/>
-                                                <button type="submit" name="action" value="FollowOrUnfollow">Unfollow</button>
-                                            </form>
-                                        </div>
+                                        <span>
+                                            <%=QAM.getQuestionDetail()%>
+                                        </span>
                                     </td>
+                                    <td>
+                                        <span>
+                                            <%
+                                                if (QAM.getReply() == null || QAM.getReply().equals("")) {
+                                            %>Your question haven't been answered yet <%
+                                            } else {%>
+                                            <%= QAM.getReply()%>
+                                            <%}%>
+                                        </span>
+                                    </td>
+
                                 </tr>
                                 <%
-
                                     }
-
-                                } else {
                                 %>
-                            <h1>You haven't followed any event yet</h1>
+                            </tbody>
                             <%
+                            } else { %>
+                            <h1>You haven't asked any question yet</h1>
+                            <%
+
                                     }
                                 }
 
                             %>
-                            </tbody>
-
-                        </table>
-
-
-                        <%    List<RegisterDTO> registerList = (List<RegisterDTO>) request.getAttribute("REGISTER_LIST");
-                            if (registerList != null) {
-                                if (!registerList.isEmpty()) {
-                        %>
-                        <h1>List of events you have registered</h1>
-                        <table class="content-table" width="90%">
-                            <thead>
-                                <tr>
-                                    <th></th>   
-                                    <th></th>   
-                                    <th></th>   
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <%
-                                    for (RegisterDTO register : registerList) {
-                                %>
-                                <tr>                                    
-                                    <td>
-                                        <div class="event-name">
-                                            <%=register.getEventName()%>
-                                        </div>
-                                        <!--                                        <br>
-                                                                                <span>Start: </span>
-                                                                                <br>
-                                                                                <span>Ends: </span>-->
-                                    </td>
-                                    <td>
-                                        <div class="event-name">
-                                            <%=register.getRegisterStatus()%>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <%
-
-                                    }
-
-                                } else {
-                                %>
-                            <h1>You haven't registered any event yet</h1>
-                            <%
-                                    }
-
-                                }
-
-                            %>
-                            </tbody>
-
                         </table>
                     </div>
                 </div>
-            </main>       
+
+
+                <%            String message = (String) request.getAttribute("SEARCH_EVENT_MESSAGE");
+                    if (message == null) {
+                        message = "";
+                    }
+                %>
+                <%= message%> <br>       
+
+
+
+            </main>
             <footer>
                 <div class="footer-align">
                     <div class="footer-copyright">
@@ -299,8 +247,8 @@
                 </div>
             </footer>
         </div>
+        <script src="js/DashboardBtn.js"></script>    
 
-        <script src="js/DashboardBtn.js"></script>
     </body>
 </html>
 

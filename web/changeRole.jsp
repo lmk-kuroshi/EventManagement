@@ -89,6 +89,13 @@
                         <span class="tooltip">Notify</span>
                     </li>
                     <li>
+                        <a href="ListQAStudentController">
+                            <i class='las la-question' ></i>
+                            <span class="links_name">Check questions</span>
+                        </a>
+                        <span class="tooltip">Check questions</span>
+                    </li>
+                    <li>
                         <a href="changeRole.jsp">
                             <i class="las la-scroll"></i>
                             <span class="links_name">Change Role</span>
@@ -146,6 +153,7 @@
                             <input type="hidden" name="gmail" value="<%=loginUser.getEmail()%>"/>
                             <br>
                             <h2>Write clearly: <span>Infomation about role you want to be become, reason,...</span></h2><br>
+                            <h2>Role available: <span>Mentor, Leader, Admin.</span></h2><br>
                             <br><input class="textbox" size="25%" height="50" name="reason" value="<%=reason%> "placeholder="Infomation about role you want to be become, reason,..."/><br>          
                             <button type="submit" name="action" value="Confirm Resquest">Confirm Resquest</button><br>
 

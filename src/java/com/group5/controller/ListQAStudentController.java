@@ -21,13 +21,16 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Nghia
+ * @author DELL
  */
-@WebServlet(name = "QandAMentorController", urlPatterns = {"/QandAMentorController"})
-public class QandAMentorController extends HttpServlet {
+@WebServlet(name = "ListQAStudentController", urlPatterns = {"/ListQAStudentController"})
+public class ListQAStudentController extends HttpServlet {
 
-    private final static String ERROR = "mentor.jsp";
-    private final static String SUCCESS = "listQA.jsp";
+    private final static String ERROR = "GetListQuestForStudent.jsp";
+//    private final static String SUCCESS = "GetListQuestForStudent.jsp";
+    private final static String STUDENT = "GetListQuestForStudent.jsp";
+    private final static String LEADER = "GetListQuestForLeader.jsp";
+    private final static String MENTOR = "GetListQuestForMentor.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -37,21 +40,26 @@ public class QandAMentorController extends HttpServlet {
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             QandADAO dao = new QandADAO();
-            List<QandADTO> list = dao.getListQuestion();
+            List<QandADTO> list = dao.getListAnsweredForStudent();
             if (!list.isEmpty()) {
                 List<QandADTO> listMentorQA = new ArrayList<QandADTO>();
                 for (QandADTO QAM : list) {
 
-                    if ((QAM.getMentorID()).equals(loginUser.getId())) {
+                    if ((QAM.getStudentID()).equals(loginUser.getId())) {
                         listMentorQA.add(QAM);
                     }
-
                 }
-                request.setAttribute("QA_MENTOR", listMentorQA);
-                url = SUCCESS;
+                request.setAttribute("LIST_QA_STUDENT", listMentorQA);
+                if (loginUser.getRoleID().equals("STU")) {
+                    url = STUDENT;
+                } else if (loginUser.getRoleID().equals("LD")) {
+                    url = LEADER;
+                } else if (loginUser.getRoleID().equals("MT")) {
+                    url = MENTOR;
+                }
             }
         } catch (Exception e) {
-            log("Error at QandAMentorController" + e.toString());
+            log("Error at ListQAStudentController" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

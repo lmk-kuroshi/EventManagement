@@ -97,9 +97,10 @@
                             </a>
                         </div>
                         <ul class="sub-menu">
-                            <li><a class="link_name" href="#">Q&A</a></li>
+                            <li><a class="link_name" href="#">Category</a></li>
                             <li><a href="QandAMentorController">Unanswered questions</a></li>
                             <li><a href="EditQAController">Answered questions</a></li>
+                            <li><a href="ListQAStudentController">Check questions</a></li>
                         </ul>
                     </li>
                     <li>
@@ -168,6 +169,7 @@
                             <input type="hidden" name="gmail" value="<%=loginUser.getEmail()%>"/>
                             <br>
                             <h2>Write clearly: <span>Infomation about role you want to be become, reason,...</span></h2><br>
+                            <h2>Role available: <span>Student, Leader, Admin.</span></h2><br>
                             <br><input class="textbox" size="25%" height="50" name="reason" value="<%=reason%> "placeholder="Infomation about role you want to be become, reason,..."/><br>          
                             <button type="submit" name="action" value="Confirm Resquest">Confirm Resquest</button><br>
 
