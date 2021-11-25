@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
 public class JoinAnEventController extends HttpServlet {
 
     private final static String ERROR = "eventDetailMentor.jsp";
-    private final static String SUCCESS = "mentor.jsp";
+    private final static String SUCCESS = "SearchController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

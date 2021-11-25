@@ -48,8 +48,9 @@ public class QandAMentorController extends HttpServlet {
 
                 }
                 request.setAttribute("QA_MENTOR", listMentorQA);
-                url = SUCCESS;
+                
             }
+            url = SUCCESS;
         } catch (Exception e) {
             log("Error at QandAMentorController" + e.toString());
         } finally {

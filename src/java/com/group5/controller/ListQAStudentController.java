@@ -44,20 +44,20 @@ public class ListQAStudentController extends HttpServlet {
             if (!list.isEmpty()) {
                 List<QandADTO> listMentorQA = new ArrayList<QandADTO>();
                 for (QandADTO QAM : list) {
-
                     if ((QAM.getStudentID()).equals(loginUser.getId())) {
                         listMentorQA.add(QAM);
                     }
                 }
                 request.setAttribute("LIST_QA_STUDENT", listMentorQA);
-                if (loginUser.getRoleID().equals("STU")) {
+                
+            }
+            if (loginUser.getRoleID().equals("STU")) {
                     url = STUDENT;
                 } else if (loginUser.getRoleID().equals("LD")) {
                     url = LEADER;
                 } else if (loginUser.getRoleID().equals("MT")) {
                     url = MENTOR;
                 }
-            }
         } catch (Exception e) {
             log("Error at ListQAStudentController" + e.toString());
         } finally {

@@ -215,11 +215,11 @@
                         </table>
                         <%
 
+                            }
                         } else { %>
                         <h1>There are no question for you</h1>
                         <%
 
-                                }
                             }
 
                         %>

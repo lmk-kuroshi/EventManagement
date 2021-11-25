@@ -97,7 +97,7 @@
                             </a>
                         </div>
                         <ul class="sub-menu">
-                            <li><a class="link_name" href="#">Category</a></li>
+                            <li><a class="link_name" href="#">Q&A</a></li>
                             <li><a href="QandAMentorController">Unanswered questions</a></li>
                             <li><a href="EditQAController">Answered questions</a></li>
                             <li><a href="ListQAStudentController">Check questions</a></li>
@@ -187,8 +187,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <%                                    
-                                    for (QandADTO QAM : listAnswered) {
+                                <%                                    for (QandADTO QAM : listAnswered) {
 
                                 %>
                                 <tr>
@@ -220,13 +219,11 @@
                                 %>
                             </tbody>
                             <%
+                                }
                             } else { %>
                             <h1>You haven't asked any question yet</h1>
                             <%
-
-                                    }
                                 }
-
                             %>
                         </table>
                     </div>
