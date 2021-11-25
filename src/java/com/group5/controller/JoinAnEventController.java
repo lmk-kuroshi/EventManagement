@@ -6,16 +6,10 @@
 package com.group5.controller;
 
 import com.group5.event.EventDAO;
-import com.group5.event.EventDTO;
-import com.group5.event.FollowupDAO;
-import com.group5.event.FollowupDTO;
-import com.group5.users.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.Calendar;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,37 +17,39 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Minh Khoa
+ * @author ASUS
  */
-public class AddFollowupController extends HttpServlet {
+@WebServlet(name = "JoinAnEventController", urlPatterns = {"/JoinAnEventController"})
+public class JoinAnEventController extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "leader.jsp";
+    private final static String ERROR = "eventDetailMentor.jsp";
+    private final static String SUCCESS = "mentor.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        HttpSession session = request.getSession();
+        boolean check = false;
         try {
-            String eventID = request.getParameter("eventID");
-            String followupDetail = request.getParameter("followupDetail");
-            String followupImage = request.getParameter("followupImage");
-            String followupVideo = request.getParameter("followupVideo");
-            String notification = "added new Follow-Up";
+            String leaderID = request.getParameter("leaderID");
+            String eventName = request.getParameter("eventName");
+            String mentorName = request.getParameter("name");
+            String MentorGmail = request.getParameter("gmail");
 
-            String followupID = "FL-" + System.currentTimeMillis();
-
-            FollowupDTO followup = new FollowupDTO(followupID, eventID, followupDetail, followupImage, followupVideo);
-            FollowupDAO dao = new FollowupDAO();
-            EventDAO daos = new EventDAO();
-            boolean checkInsert = dao.addFollowup(followup);
-            if (checkInsert) {
+            EventDAO dao = new EventDAO();
+            check = dao.sendMailJoinEvent(leaderID, eventName, mentorName, MentorGmail);
+            if (check == true) {
                 url = SUCCESS;
-                checkInsert = daos.sendMailNotification(notification, eventID);
+                String message = "Sent seccessfully. Please wait!";
+                request.setAttribute("STUDENT_MESSAGE", message);
+
+            } else {
+                session.setAttribute("ERROR_MESSAGE", "Error at ChangeRoleController");
             }
 
         } catch (Exception e) {
-            request.setAttribute("ERROR_MESSAGE", "Error at AddFollowupController");
+            log("Error at JoinAnEventController" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

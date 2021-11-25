@@ -31,7 +31,7 @@ public class EditFollowupController extends HttpServlet {
         String url = ERROR;
         try {
             String eventID = request.getParameter("eventID");
-            String notification = request.getParameter("notification");
+            String notification = "updated Follow-Up";
             FollowupDAO dao = new FollowupDAO();
             List<FollowupDTO> list = dao.getListFollowup(eventID);
             EventDAO daos = new EventDAO();

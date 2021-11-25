@@ -3,7 +3,7 @@
     Created on : Sep 20, 2021, 1:13:21 PM
     Author     : Minh Khoa
 --%>
-
+<%@page import="constants.Constants"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,8 +19,10 @@
                     <h2><img class="logo" src="css/img/logo.png"> <span>Event</span></h2>
                 </div>
                 <ul>
-                    <li><a class="active" href="https://accounts.google.com/o/oauth2/auth?scope=profile%20email&redirect_uri=http://localhost:8080/EventManagement/LoginGoogleHandler&response_type=code
-                           &client_id=428640701768-fgq8e77is2ufa6l6q758mpp9262gls0e.apps.googleusercontent.com&approval_prompt=force">
+                    <!--<li><a class="active" href="https://accounts.google.com/o/oauth2/auth?scope=profile%20email&redirect_uri=http://localhost:8080/EventManagement/LoginGoogleHandler&response_type=code
+                                               &client_id=428640701768-fgq8e77is2ufa6l6q758mpp9262gls0e.apps.googleusercontent.com&approval_prompt=force">-->
+                    <li><a class="active" href="https://accounts.google.com/o/oauth2/auth?scope=profile%20email&redirect_uri=<%=Constants.GOOGLE_REDIRECT_URI%>&response_type=code
+                           &client_id=<%=Constants.GOOGLE_CLIENT_ID%>&approval_prompt=force">   
                             <img class src="css/img/logo-gg-new.png">
                             Sign in with @fpt.edu.vn</a></li>
                 </ul>

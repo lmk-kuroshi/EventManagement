@@ -55,6 +55,7 @@ public class MainController extends HttpServlet {
     private static final String CONFIRM_ADD_MENTOR = "ConfirmAddMentorController";
     private static final String CONFIRM_REMOVE_MENTOR = "ConfirmRemoveMentorController";
     private static final String REGISTER = "RegisterController";
+    private static final String JOINEVENT = "JoinAnEventController";
     private static final String SHOW_REGISTER = "ShowRegisterEventController";
     private static final String ASK_QUESTION = "AskQuestionController";
     private static final String CONFIRM_ASK_QUESTION = "ConfirmAskQuestionController";
@@ -138,7 +139,10 @@ public class MainController extends HttpServlet {
                 url = CONFIRM_REMOVE_MENTOR;
             } else if ("Register".equals(action)) {
                 url = REGISTER;
-            } else if ("ShowRegisterEvent".equals(action)) {
+            }else if ("Join Event".equals(action)) {
+                url = JOINEVENT;
+            }
+            else if ("ShowRegisterEvent".equals(action)) {
                 url = SHOW_REGISTER;
             } else if ("AskQuestion".equals(action)) {
                 url = ASK_QUESTION;

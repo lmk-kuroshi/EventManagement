@@ -199,8 +199,13 @@
                                 </div>
                                 <div class="event-detail-register">
                                     <form action="MainController">
-                                        <input type="hidden" name="eventID" value="<%=event.getEventID()%>"/>
-                                        <button type="submit" name="action" value="Register">Register</button>
+                                        <%String a = event.getCreatorID();
+                                          String b = event.getEventName();%>
+                                        <input type="hidden" name="leaderID" value="<%=event.getCreatorID()%>"/>
+                                        <input type="hidden" name="eventName" value="<%=event.getEventName()%>"/>
+                                        <input type="hidden" name="name" value="<%=loginUser.getName()%>"/>
+                                        <input type="hidden" name="gmail" value="<%=loginUser.getEmail()%>"/>
+                                        <button type="submit" name="action" value="Join Event">Join Event</button>
                                     </form>
                                 </div>
                                 <div class="event-detail-followup">
