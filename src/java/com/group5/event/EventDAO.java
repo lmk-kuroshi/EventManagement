@@ -405,11 +405,12 @@ public class EventDAO {
                     
         });
         String htmlCode ="Dear Admin,<br>I am " + nameRegister + "<br> I write this mail to present the contend:<br>" + reason + "." + "<br>Thank you,<br>" + nameRegister;
-        Message message = prepareMessage(session, myAccountEmail, "killua365d6h@gmail.com", htmlCode);//knguyen9047@gmail.com
+        Message message = prepareMessage(session, myAccountEmail, "nguyentnkse150353@fpt.edu.vn", htmlCode);//knguyen9047@gmail.com
         Transport.send(message);
         System.out.println("Message sent seccessfully!");
         return true;
     }
+    
     
     private static Message prepareMessage(Session session, String myAccountEmail, String recepient, String htmlCode){
         
@@ -417,7 +418,7 @@ public class EventDAO {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(myAccountEmail));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
-            message.setSubject("Request to change role");
+            message.setSubject("Request to Admin");
             
             message.setContent(htmlCode ,"text/html");
             return message;

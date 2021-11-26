@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  */
 public class DeleteUserController extends HttpServlet {
 
-    private static final String ERROR = "admin.jsp";
+    private static final String ERROR = "SearchUserController";
     private static final String SUCCESS = "SearchUserController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

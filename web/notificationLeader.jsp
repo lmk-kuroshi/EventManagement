@@ -211,11 +211,7 @@
 
                                     }
 
-                                } else {
-                                %>
-                            <h1>You haven't followed any event yet</h1>
-                            <%
-                                    }
+                                }
                                 }
 
                             %>
@@ -259,15 +255,10 @@
                                 </tr>
                                 <%
 
+                                        }
                                     }
+                                } 
 
-                                } else {
-                                %>
-                            <h1>You haven't registered any event yet</h1>
-                            <%
-                                    }
-
-                                }
 
                             %>
                             </tbody>

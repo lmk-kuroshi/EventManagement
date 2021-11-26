@@ -30,7 +30,8 @@ public class LoginController extends HttpServlet {
     private static final String LEADER_PAGE = "SearchController";
     private static final String ADMIN_PAGE = "SearchUserController";
     private static final String MENTOR_PAGE = "SearchController";
-    
+    private static final String UNBAN_PAGE = "unban.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -59,18 +60,31 @@ public class LoginController extends HttpServlet {
                 user = dao.checkLoginSpecial(checkID);
                 
             }
-            if(user.getRoleID().equals("STU")){
-                url = STUDENT_PAGE;
+            if (user.getStatus().equals("DACT")) {
+                url = UNBAN_PAGE;
+            } else {
+                if (user.getRoleID().equals("STU")) {
+                    url = STUDENT_PAGE;
+                }
+                if ("MT".equals(user.getRoleID())) {
+                    url = MENTOR_PAGE;
+                } else if (user.getRoleID().equals("AD")) {
+                    url = ADMIN_PAGE;
+                } else if (user.getRoleID().equals("LD")) {
+                    url = LEADER_PAGE;}
             }
-            if ("MT".equals(user.getRoleID())) {
-             url = MENTOR_PAGE;
-            }
-            else if(user.getRoleID().equals("AD")){
-                url = ADMIN_PAGE;
-            }
-            else if (user.getRoleID().equals("LD")) {
-                url = LEADER_PAGE;
-            }
+//            if(user.getRoleID().equals("STU")){
+//                url = STUDENT_PAGE;
+//            }
+//            if ("MT".equals(user.getRoleID())) {
+//             url = MENTOR_PAGE;
+//            }
+//            else if(user.getRoleID().equals("AD")){
+//                url = ADMIN_PAGE;
+//            }
+//            else if (user.getRoleID().equals("LD")) {
+//                url = LEADER_PAGE;
+//            }
             session.setAttribute("LOGIN_USER", user);
         } catch (Exception e) {
             log("Error at LoginController" + e.toString());

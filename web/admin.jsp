@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Admin Page</title>
         <link href="css/adminStyle.css" rel="stylesheet" >
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
         <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -35,6 +35,7 @@
         <%
             RoleDAO ro = new RoleDAO();
             String roleName = ro.getRoleName(loginUser.getRoleID());
+            
         %>
 
         <div class="sidebar close">
@@ -52,7 +53,7 @@
                             <span class="links_name">Users</span>
                         </a>
 
-                        <span class="tooltip">Trending</span>
+                        <span class="tooltip">Users</span>
                     </li>
                     <li>
                         <a href="accountAdmin.jsp">
@@ -174,14 +175,18 @@
                                 }
                             %>
 
+                            <%
+                                String roleUser = ro.getRoleName(user.getRoleID());
+                            %>
+
                             <td>
 
                                 <select name="roleName" >
-                                    <option><%= roleName%></option>
+                                    <option><%= roleUser%></option>
                                     <option value="Student">Student</option>
                                     <option value="Admin">Admin</option>
                                     <option value="Mentor">Mentor</option>
-                                    <option value="Club's leader">Leader</option>
+                                    <option value="Leader">Leader</option>
                                 </select>
                             </td>
 

@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login JSP Page</title>
+        <title>Login Page</title>
         <link href="css/loginStyle.css" rel="stylesheet" >
     </head>
     <body>

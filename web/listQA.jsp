@@ -104,6 +104,7 @@
                             <li><a class="link_name" href="#">Category</a></li>
                             <li><a href="QandAMentorController">Unanswered questions</a></li>
                             <li><a href="EditQAController">Answered questions</a></li>
+                            <li><a href="ListQAStudentController">Check questions</a></li>
                         </ul>
                     </li>
                     <li>

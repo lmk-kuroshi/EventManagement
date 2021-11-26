@@ -59,6 +59,7 @@ public class MainController extends HttpServlet {
     private static final String SHOW_REGISTER = "ShowRegisterEventController";
     private static final String ASK_QUESTION = "AskQuestionController";
     private static final String CONFIRM_ASK_QUESTION = "ConfirmAskQuestionController";
+    private static final String CONFIRM_UNBAN = "ConfirmUnbanRequestController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -133,16 +134,17 @@ public class MainController extends HttpServlet {
                 }
             } else if ("AddMentor".equals(action)) {
                 url = ADD_MENTOR;
+            }else if ("ConfirmResquestUnban".equals(action)) {
+                url = CONFIRM_UNBAN;    
             } else if ("ConfirmAddMentor".equals(action)) {
                 url = CONFIRM_ADD_MENTOR;
             } else if ("ConfirmRemoveMentor".equals(action)) {
                 url = CONFIRM_REMOVE_MENTOR;
             } else if ("Register".equals(action)) {
                 url = REGISTER;
-            }else if ("Join Event".equals(action)) {
+            } else if ("Join Event".equals(action)) {
                 url = JOINEVENT;
-            }
-            else if ("ShowRegisterEvent".equals(action)) {
+            } else if ("ShowRegisterEvent".equals(action)) {
                 url = SHOW_REGISTER;
             } else if ("AskQuestion".equals(action)) {
                 url = ASK_QUESTION;

@@ -16,7 +16,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Notification Page</title>
         <link href="css/notificationStyle.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
         <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -198,13 +198,8 @@
 
                                     }
 
-                                } else {
-                                %>
-                            <h1>You haven't followed any event yet</h1>
-                            <%
-                                    }
+                                } 
                                 }
-
                             %>
                             </tbody>
 
@@ -248,12 +243,7 @@
 
                                     }
 
-                                } else {
-                                %>
-                            <h1>You haven't registered any event yet</h1>
-                            <%
-                                    }
-
+                                } 
                                 }
 
                             %>

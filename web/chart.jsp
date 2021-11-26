@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Chart Page</title>
     </head>
     <body>
         <div id="curve_chart" style="width: 900px; height: 500px" ></div>

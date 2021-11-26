@@ -165,7 +165,9 @@
             </header>
 
             <main>
-                <%
+                               <div class="create-event-card">
+                    <div class="create-event-align">
+                         <%
 
                     List<FollowupDTO> list = (List<FollowupDTO>) request.getAttribute("FOLLOWUP_LIST");
                     if (list != null) {
@@ -183,8 +185,7 @@
                 <%
                     EventDTO event = (EventDTO) request.getAttribute("EVENT_EDIT");
                 %>
-                <div class="create-event-card">
-                    <div class="create-event-align">
+
                         <h1>Edit Followup Detail</h1><br>
                         <!--<h1 class="event-name"><%=eventName%></h1><br><br>-->
                         <form action="MainController"> 
@@ -212,7 +213,21 @@
                             <span>Followup Detail: </span><br><br>
                             <textarea id="editor<%=i%>" name="followupDetail"><%=followup.getFollowupDetail()%></textarea><br>
                         </form>
+                        <script>
+                            ClassicEditor
+                                    .create(document.querySelector('#editor<%=i++%>'), {
 
+                                        toolbar: ['Heading', '|', 'bold', 'italic', 'link', '|', 'numberedList', 'bulletedList', 'outdent', 'indent', '|', 'undo', 'redo']
+                                    })
+                                    .catch(error => {
+                                        console.log(error);
+                                    });
+                        </script>
+                        <%
+                                    }
+                                }
+                            }
+                        %>
                     </div>
                 </div>
             </main>
@@ -239,20 +254,7 @@
         <script src="js/DashboardBtn.js"></script>
 
 
-        <script>
-            ClassicEditor
-                    .create(document.querySelector('#editor<%=i++%>'), {
 
-                        toolbar: ['Heading', '|', 'bold', 'italic', 'link', '|', 'numberedList', 'bulletedList', 'outdent', 'indent', '|', 'undo', 'redo']
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-        </script>
-        <%
-                    }
-                }
-            }
-        %>
+
     </body>
 </html>

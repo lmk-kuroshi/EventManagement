@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
 public class ConfirmAskQuestionController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "askQuestion.jsp";
+    private static final String SUCCESS = "ListQAStudentController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

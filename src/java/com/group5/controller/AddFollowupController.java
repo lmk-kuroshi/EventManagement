@@ -28,7 +28,7 @@ import javax.servlet.http.HttpSession;
 public class AddFollowupController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "leader.jsp";
+    private static final String SUCCESS = "SearchController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
